@@ -5,6 +5,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 	protected function _initAutoload()
 	{
+		$options    = $this->getOption('resources');
+		$basePath = $options['path']['basePath'];
+		defined('BASE_PATH')
+				|| define('BASE_PATH', $basePath);
 		require_once 'Zend/Loader/Autoloader.php';
 		$moduleLoader = new Zend_Application_Module_Autoloader(array(
 	                        'namespace'             => '',

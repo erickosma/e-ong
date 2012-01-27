@@ -8,8 +8,7 @@ class Zend_View_Helper_MyJavaScript extends Zend_View_Helper_HeadScript{
 		$scripts = array();
 		foreach ($this as $item) {
 			if ($item->type == 'text/javascript' ){
-				print_r($item->attributes['src']);exit;
-				$scripts[$item->src][] = $item->attributes->src;
+				$scripts[$item->src][] = $item->attributes['src'];
 			} else {
 				$items[] = $this->itemToString($item);
 			}
@@ -17,9 +16,9 @@ class Zend_View_Helper_MyJavaScript extends Zend_View_Helper_HeadScript{
 		foreach ($scripts as $src=>$js) {
 			$item = new stdClass();
 			$item->type = 'text/javascript';
-			$newname = 'js_' . md5('vcss'  . implode(',', $styles) ) . '.js';
-			$this->process($styles, $newname);
-			$item->src = $this->getMinUrl() . '/' . $newname;
+			$newname = 'js_' . md5('vcss'  . implode(',', $js) ) . '.js';
+			$this->process($js, $newname);
+			$item->attributes['src'] = $this->getMinUrl() . '/' . $newname;
 			$items[] = $this->itemToString($item);
 		}
 		return  implode($this->_escape($this->getSeparator()), $items);
@@ -27,16 +26,15 @@ class Zend_View_Helper_MyJavaScript extends Zend_View_Helper_HeadScript{
 
 	protected function process($files, $name)
 	{
-		$cacheFile = BASE_PATH . $this->getMinUrl() . '/' . $name;
-		echo $cacheFile;
+		$cacheFile = APPLICATION_PATH."/../" . $this->getMinUrl() . '/' . $name;
 		$data = filemtime($cacheFile)+3600;
 		if (file_exists($cacheFile)  && ($data < time())) {
 			return;
 		}
 		$cache='';
 		foreach ($files as $v) {
-			$cache .= file_get_contents(BASE_PATH . $v );
-          }
+			$cache .= file_get_contents(APPLICATION_PATH."/../" . $v );
+		  }
     		$fp = @fopen($cacheFile, "wb");
           if ($fp) {
               fwrite($fp, $cache);
@@ -45,7 +43,7 @@ class Zend_View_Helper_MyJavaScript extends Zend_View_Helper_HeadScript{
       }
       
       public function getMinUrl() {
-          return '/public/tmp';
+          return 'public/tmp';
       }
       
       

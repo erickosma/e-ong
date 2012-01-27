@@ -28,14 +28,14 @@ class Zend_View_Helper_MyStyle extends Zend_View_Helper_HeadLink {
 
 	protected function process($files, $name)
 	{
-		$cacheFile = BASE_PATH . $this->getMinUrl() . '/' . $name;
+		$cacheFile = APPLICATION_PATH."/../" . $this->getMinUrl() . '/' . $name;
 		$data = filemtime($cacheFile)+3600;
 		if (file_exists($cacheFile)  && ($data < time())) {
 			return;
 		}
 		$cache='';
 		foreach ($files as $v) {
-			$cache .= file_get_contents(BASE_PATH . $v );
+			$cache .= file_get_contents(APPLICATION_PATH."/../" . $v );
           }
     		$fp = @fopen($cacheFile, "wb");
           if ($fp) {
@@ -45,7 +45,7 @@ class Zend_View_Helper_MyStyle extends Zend_View_Helper_HeadLink {
       }
       
       public function getMinUrl() {
-          return '/public/tmp';
+          return 'public/tmp';
       }
       
       
