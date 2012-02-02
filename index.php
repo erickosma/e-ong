@@ -6,11 +6,13 @@ defined('APPLICATION_PATH')
 
 // Define application environment
 defined('APPLICATION_ENV')
-    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
+    || define('APPLICATION_ENV', (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'development'));
 
 
-defined('BASE_PATH')
-	|| define('BASE_PATH', "/home/www/e_ong/");
+defined('BASE_URL')
+	|| define('BASE_URL', 'http://'.$_SERVER["SERVER_NAME"]);
+
+
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(

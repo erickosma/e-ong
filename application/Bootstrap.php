@@ -7,8 +7,26 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	{
 		require_once 'Zend/Loader/Autoloader.php';
 		$moduleLoader = new Zend_Application_Module_Autoloader(array(
-	                        'namespace'             => '',
-	                        'basePath'              => APPLICATION_PATH));
+							'basePath'      => APPLICATION_PATH,
+		    				'namespace'     => '' ));
+/*		$resourceLoader = new Zend_Loader_Autoloader_Resource(array(
+		    'basePath'      => APPLICATION_PATH,
+		    'namespace'     => '',
+		    'resourceTypes' => array(
+		        'acl' => array(
+			            'path'      => 'acls/',
+			            'namespace' => 'Acl',
+				),
+		        'form' => array(
+			            'path'      => 'forms/',
+		    	        'namespace' => 'Form',
+				),
+		        'model' => array(
+			            'path'      => 'models/',
+			            'namespace' => 'Model',
+				),
+			)
+		));*/
 		$autoloader = Zend_Loader_Autoloader::getInstance();
 		$autoloader->setFallbackAutoloader(true);
 		return $autoloader;

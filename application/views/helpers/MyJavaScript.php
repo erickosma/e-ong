@@ -43,7 +43,8 @@ class Zend_View_Helper_MyJavaScript extends Zend_View_Helper_HeadScript{
       }
       
       public function getMinUrl() {
-          return 'public/tmp';
+		
+      	return  BASE_URL.'/public/tmp';
       }
       
       

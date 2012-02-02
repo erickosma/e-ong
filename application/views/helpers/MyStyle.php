@@ -45,7 +45,7 @@ class Zend_View_Helper_MyStyle extends Zend_View_Helper_HeadLink {
       }
       
       public function getMinUrl() {
-          return 'public/tmp';
+          return BASE_URL.'/public/tmp';
       }
       
       
