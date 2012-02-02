@@ -71,6 +71,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 
 	}
+	
+	protected function _initAcl()
+	{
+		$aclSetup = new Aplication_Acl_Setup();
+	}
 
 }
 

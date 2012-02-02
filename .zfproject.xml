@@ -11,7 +11,9 @@
         <controllerFile controllerName="Index">
           <actionMethod actionName="index"/>
         </controllerFile>
-        <controllerFile controllerName="Error"/>
+        <controllerFile controllerName="Error">
+          <actionMethod actionName="forbidden"/>
+        </controllerFile>
         <controllerFile controllerName="Cadastro">
           <actionMethod actionName="index"/>
         </controllerFile>
@@ -19,6 +21,10 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="login"/>
           <actionMethod actionName="logout"/>
+        </controllerFile>
+        <controllerFile controllerName="Perfil">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="add"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory>
@@ -46,6 +52,15 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Auth">
             <viewScriptFile forActionName="logout"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Perfil">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Perfil">
+            <viewScriptFile forActionName="add"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Error">
+            <viewScriptFile forActionName="forbidden"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
