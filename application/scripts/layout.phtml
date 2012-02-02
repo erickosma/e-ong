@@ -1,0 +1,22 @@
+<?php 
+// Controlador Geral do CEVIU
+echo $this->doctype();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head> 
+<?php 	
+	echo $this->headMeta();
+	echo $this->MyJavaScript();
+	echo   $this->MyStyle(); //echo $this->headLink();
+	echo $this->headTitle();
+?>
+	<meta name="description" content="<?php echo $this->description?>" />
+	<meta name="keywords" content="<?php echo $this->keywords?>" />
+</head>
+<body>
+			<div class="divtopo" >   <?php echo $this->date(date("Y-m-d H:I"), Zend_Date::DATETIME_LONG)  ?>     topo</div>
+			<div class="conteudo"><?php echo $this->layout()->content; ?></div>
+       		<div class="rodape"> rodape</div>
+</body>
+</html>
