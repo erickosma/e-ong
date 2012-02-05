@@ -1,0 +1,41 @@
+.zend_form{
+	margin-left: auto;margin-right: auto; width: 300px;
+}
+
+.zend_form dt{
+	float: left;
+	margin-right: 10px;
+	margin-bottom:10px;
+	font-family: Tahoma, Arial, Helvetica, Sans-serif;
+	font-size: 18px;
+	width: 100px;
+	height: 25px;
+}
+
+.zend_form div{
+	margin-bottom:10px;
+}
+
+
+.titile_form{
+	margin-left: auto;margin-right: auto; width: 350px;
+}
+
+.campo{
+	
+}
+.campo input{
+	height: 25px;
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 1px solid #CCCCC0;
+    font-size: 14px;
+}
+.errors{
+	font-size: 14px;
+	color:red;
+}
+.errors li{
+	list-style: none;
+}
