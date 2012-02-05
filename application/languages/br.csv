@@ -1,0 +1,7 @@
+Please Register;"Preencha o formulário abaixo para se cadastrar"
+isEmpty;"Campo vazio!"
+emailAddressInvalid;"Este não é um nome de endereço válido!"
+missingValue;"Valor incorreto. Digite novamente."
+badCaptcha;"alor incorreto. Digite novamente."
+missingID;"Está faltando valores. Digite novamente."
+StringLength;"Menos de 4 caracteres"
