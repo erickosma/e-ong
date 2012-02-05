@@ -8,25 +8,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		require_once 'Zend/Loader/Autoloader.php';
 		$moduleLoader = new Zend_Application_Module_Autoloader(array(
 							'basePath'      => APPLICATION_PATH,
-		    				'namespace'     => '' ));
-/*		$resourceLoader = new Zend_Loader_Autoloader_Resource(array(
-		    'basePath'      => APPLICATION_PATH,
-		    'namespace'     => '',
-		    'resourceTypes' => array(
-		        'acl' => array(
-			            'path'      => 'acls/',
-			            'namespace' => 'Acl',
-				),
-		        'form' => array(
-			            'path'      => 'forms/',
-		    	        'namespace' => 'Form',
-				),
-		        'model' => array(
-			            'path'      => 'models/',
-			            'namespace' => 'Model',
-				),
-			)
-		));*/
+		    				'namespace'     => 'Application' ));
 		$autoloader = Zend_Loader_Autoloader::getInstance();
 		$autoloader->setFallbackAutoloader(true);
 		return $autoloader;
@@ -72,10 +54,34 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 	}
 	
+	/**
+	*
+	* Initiate translation package in the portal register in the variable Zend_Translate and load
+	* the archive.
+	*
+	* @access protected
+	* @return null
+	*/
+	protected function _initLanguage()
+	{
+		try
+		{
+			$translate = new Zend_Translate('csv',APPLICATION_PATH .'/languages/en.csv','en' );
+			$translate->addTranslation( APPLICATION_PATH .'/languages/br.csv', 'br');
+			Zend_Registry::set('Zend_Translate', $translate);
+		}
+		catch (Exception $e)
+		{
+			echo $e->getMessage();
+		}
+	}
+	
+	
 	protected function _initAcl()
 	{
-		$aclSetup = new Aplication_Acl_Setup();
+		//$aclSetup = new Aplication_Acl_Setup();
 	}
+	
 
 }
 

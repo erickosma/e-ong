@@ -1,13 +1,12 @@
 <?php
-include (APPLICATION_PATH."/forms/Login.php");
 class AuthController extends Zend_Controller_Action
 {
 
 	public function init()
 	{
 		$this->view->headScript()->appendFile('public/js/index/index.js');
-    	$this->view->headLink()->appendStylesheet('public/css/index/index.css')
-    							->appendStylesheet('public/css/geral.css');
+    	$this->view->headLink()->appendStylesheet('public/css/geral.css')
+    							->appendStylesheet('public/css/forms.css');
     	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntários');	/* Initialize action controller here */
     	$this->view->headTitle('Login');
     	$this->view->description = "Busca por vonluntarios busca por ong";
@@ -25,11 +24,13 @@ class AuthController extends Zend_Controller_Action
 	public function loginAction()
 	{
 		// action body
+		//menssagem de erro
 		$this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
 		$this->view->messages = $this->_flashMessenger->getMessages();
 		$form = new Application_Form_Login();
 		$this->view->form = $form;
 		//Verifica se existem dados de POST
+	
 		if ( $this->getRequest()->isPost() ) {
 			$data = $this->getRequest()->getPost();
 			//Formulário corretamente preenchido?

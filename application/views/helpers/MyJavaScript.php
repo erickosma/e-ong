@@ -26,10 +26,13 @@ class Zend_View_Helper_MyJavaScript extends Zend_View_Helper_HeadScript{
 
 	protected function process($files, $name)
 	{
-		$cacheFile = APPLICATION_PATH."/../" . $this->getMinUrl() . '/' . $name;
+		$cacheFile = $this->getDir() . '/' . $name;
 		$data = filemtime($cacheFile)+3600;
-		if (file_exists($cacheFile)  && ($data < time())) {
-			return;
+		if (file_exists($cacheFile) ) {
+			$data = filemtime($cacheFile)+3600;
+			if(($data < time())){
+				return;
+			}
 		}
 		$cache='';
 		foreach ($files as $v) {
@@ -47,6 +50,8 @@ class Zend_View_Helper_MyJavaScript extends Zend_View_Helper_HeadScript{
       	return  BASE_URL.'/public/tmp';
       }
       
-      
+      public function getDir(){
+      	return APPLICATION_PATH."/../public/tmp";
+      }
       
   }

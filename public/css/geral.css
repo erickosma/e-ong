@@ -1,6 +1,8 @@
 body{
 	font-size: 14px;
 	background-color: #F0F0F0;
+	font-family: Tahoma, Arial, Helvetica, Sans-serif;
+	
 }
 
 .divtopo{
@@ -42,3 +44,5 @@ body{
 .conteudo{
 	margin-left: auto;margin-right: auto; width: 900px;
 }
+
+
