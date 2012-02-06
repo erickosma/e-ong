@@ -44,5 +44,30 @@ body{
 .conteudo{
 	margin-left: auto;margin-right: auto; width: 900px;
 }
+.forbidden {
+	font-size: 20px;
+}
+.forbidden  .ops{
+	font-size: 42px;
+	font-weight: bold;
+}
 
+.forbidden .ops font{
+	font-size: 62px;
+	font-weight: bold;
+}
 
+.menu_topo{
+	margin-top: 20px;
+	text-align: right;
+	margin-right: 20px;
+}
+.menu_topo li{
+	float: left;
+	list-style: none;
+	width: 70px;
+}
+.menu_topo menu{
+	margin-left: 80%;
+	width: 300px;
+}

@@ -2,6 +2,9 @@
 	margin-left: auto;margin-right: auto; width: 300px;
 }
 
+.zend_form div{
+	margin-bottom:10px;
+}
 .zend_form dt{
 	float: left;
 	margin-right: 10px;
@@ -10,10 +13,6 @@
 	font-size: 18px;
 	width: 100px;
 	height: 25px;
-}
-
-.zend_form div{
-	margin-bottom:10px;
 }
 
 
