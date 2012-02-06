@@ -54,7 +54,16 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 	}
 	
-	/**
+	/**$usuario = Zend_Auth::getInstance()->getIdentity();
+    	
+    	if($usuario->isAllowed($usuario->getRoleId(), $this->_name, 'index'))
+    	{
+    		echo "adsfsdfasdf";
+    	} else {
+    		//throw new Exception($user->getRole());
+    		$this->_helper->redirector('error', 'error');
+    	}
+    	
 	*
 	* Initiate translation package in the portal register in the variable Zend_Translate and load
 	* the archive.
@@ -79,7 +88,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	
 	protected function _initAcl()
 	{
-		//$aclSetup = new Aplication_Acl_Setup();
+		$aclSetup = new Application_Acl_Setup();
 	}
 	
 

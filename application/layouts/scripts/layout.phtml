@@ -15,7 +15,9 @@ echo $this->doctype();
 	<meta name="keywords" content="<?php echo $this->keywords?>" />
 </head>
 <body>
-			<div class="divtopo" >   <?php echo $this->date(date("Y-m-d H:I"), Zend_Date::DATETIME_LONG)  ?>     topo</div>
+			<div class="divtopo" >   
+					<?=$this->menu("menu_topo");?>
+			</div>
 			<div class="conteudo"><?php echo $this->layout()->content; ?></div>
        		<div class="rodape"> rodape</div>
 </body>

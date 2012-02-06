@@ -56,6 +56,7 @@ class ErrorController extends Zend_Controller_Action
     public function forbiddenAction()
     {
         // action body
+    	$this->view->headLink()->appendStylesheet('public/css/geral.css');	 
     }
 
 

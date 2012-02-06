@@ -14,10 +14,14 @@ class IndexController extends Zend_Controller_Action
     	$this->view->keywords = "ong,profissionais,voluntarios,procura";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
     	                                   'text/html; charset=ISO-8859-1');
+    	
+    	
     }
 
     public function indexAction()
     {
+    	
+    	
     	$date     = new Zend_Date();
     	$currency = new Zend_Currency();
     	

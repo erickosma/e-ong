@@ -1,0 +1,34 @@
+<div id="menu" class="menu_topo">
+<menu> 
+	<li>
+	<?php 
+		if(isset($this->usuario))
+		{
+			
+			 echo $this->usuario->getUserName();
+	?>
+	</li>
+	<li>
+		<a href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'logout', 'module' => 'default'), '', true); ?>">
+			Logout
+		</a>
+	</li>
+	<?php
+		}
+	    else{
+	?>
+	<li>
+		<a href="<?php echo $this->url(array('controller' => 'cadastro', 'action' => 'index', 'module' => 'default'), '', true); ?>">
+			Cadastre-se
+		</a>
+	</li>
+	
+	<li>
+		<a href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'login', 'module' => 'default'), '', true); ?>">
+	    	Login
+		</a>
+	</li>
+	
+	<?php 	}?>
+</menu>
+</div>
