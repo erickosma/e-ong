@@ -4,8 +4,10 @@ class AuthController extends Zend_Controller_Action
 
     public function init()
     {
-		$this->view->headScript()->appendFile('public/js/index/index.js');
-    	$this->view->headLink()->appendStylesheet('public/css/geral.css')
+    	$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
+    	
+    	
+		$this->view->headLink()->appendStylesheet('public/css/geral.css')
     							->appendStylesheet('public/css/forms.css');
     	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntários');	/* Initialize action controller here */
     	$this->view->headTitle('Login');
@@ -13,6 +15,8 @@ class AuthController extends Zend_Controller_Action
     	$this->view->keywords = "ong,profissionais,voluntarios,procura";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
     	                                   'text/html; charset=ISO-8859-1');
+    	$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
+    	
     }
 
     public function indexAction()

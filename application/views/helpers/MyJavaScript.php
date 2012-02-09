@@ -15,7 +15,7 @@ class Zend_View_Helper_MyJavaScript extends Zend_View_Helper_HeadScript{
 		}
 		foreach ($scripts as $src=>$js) {
 			$item = new stdClass();
-			$item->typre = 'text/javascript';
+			$item->type = 'text/javascript';
 			$newname = 'js_' . md5('vcss'  . implode(',', $js) ) . '.js';
 			$this->process($js, $newname);
 			$item->attributes['src'] = $this->getMinUrl() . '/' . $newname;

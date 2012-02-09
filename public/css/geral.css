@@ -30,7 +30,8 @@ body{
 	margin-left: auto;margin-right: auto; width: 900px;
 	height: 150px;
 	border: 1px solid #CCCCCC;
-	
+	position:relative;
+	z-index:1;
 	-webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
@@ -43,6 +44,7 @@ body{
 }
 .conteudo{
 	margin-left: auto;margin-right: auto; width: 900px;
+	background-color: #FCFFFC; 
 }
 .forbidden {
 	font-size: 20px;

@@ -1,0 +1,18 @@
+.cadastroPrincipal{
+	font-family: courier, 'courier new', monospace;
+font-size: 50px;
+font-weight: bold;
+letter-spacing: 4.6pt;
+word-spacing: -9.4pt;
+padding: 20px;margin-top: 10px;
+position: relative;
+z-index: 9;
+height: 200px;
+}
+
+.profissional{
+	text-shadow:  2px 2px #006030, 2px 2px #AAAAAA, 3px 3px #FCFCFC, 4px 4px #BBBBBB; float: left; width:450px; margin-left: 40px;margin-right: 100px; margin-top: 50px;
+}
+.ong{
+	text-shadow:  2px 2px #300000, 2px 2px #AAAAAA, 3px 3px #FCFCFC, 4px 4px #BBBBBB;  margin-top: 50px;
+}

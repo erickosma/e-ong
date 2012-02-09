@@ -37,21 +37,28 @@ class Application_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 		$controller = "";
 		$action     = "";
 		$module     = "";
-		if($request->getControllerName() == "index" ){
+	/*	if($request->getControllerName() == "index" ){
 			$controller = $request->getControllerName();
 			$action     = $request->getActionName();
 			$module     = $request->getModuleName();
 		}
 		else if ( !$this->_auth->hasIdentity() ) {
-			$controller = $this->_notLoggedRoute['controller'];
-			$action     = $this->_notLoggedRoute['action'];
-			$module     = $this->_notLoggedRoute['module'];
-		} else if (!$this->_isAuthorized($request->getControllerName(),
-			$request->getActionName()) ) {
-			$controller = $this->_forbiddenRoute['controller'];
-			$action     = $this->_forbiddenRoute['action'];
-			$module     = $this->_forbiddenRoute['module'];
-		} else {
+			
+		}*/
+		 if (!$this->_isAuthorized($request->getControllerName(),$request->getActionName())  ) {
+		 	if(!$this->_auth->hasIdentity()){
+		 		$controller = $this->_notLoggedRoute['controller'];
+		 		$action     = $this->_notLoggedRoute['action'];
+		 		$module     = $this->_notLoggedRoute['module'];
+		 	}
+		 	else{
+		 		$controller = $this->_forbiddenRoute['controller'];
+		 		$action     = $this->_forbiddenRoute['action'];
+		 		$module     = $this->_forbiddenRoute['module'];
+		 	}
+	 	} 
+		
+		else {
 			$controller = $request->getControllerName();
 			$action     = $request->getActionName();
 			$module     = $request->getModuleName();

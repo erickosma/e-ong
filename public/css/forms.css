@@ -3,7 +3,7 @@
 }
 
 .zend_form div{
-	margin-bottom:10px;
+	
 }
 .zend_form dt{
 	float: left;
@@ -11,25 +11,49 @@
 	margin-bottom:10px;
 	font-family: Tahoma, Arial, Helvetica, Sans-serif;
 	font-size: 18px;
-	width: 100px;
-	height: 25px;
+	width: 150px;
+	height: 35px;
 }
 
 
 .titile_form{
 	margin-left: auto;margin-right: auto; width: 350px;
 }
-
-.campo{
-	
+.campoFim{
+	width: 550px;
+	height: 70px;
+	border-bottom: 1px solid #AAAAAA;
+	margin-bottom: 30px;	
 }
-.campo input{
-	height: 25px;
+.campoFim input{
+	height: 35px;
 	-webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    border: 1px solid #CCCCC0;
+    border: 3px solid #CCCCC0;
     font-size: 14px;
+    width: 200px;
+    font-size: 16px;
+}
+.campo{
+	width: 550px;
+	margin-bottom: 10px;	
+}
+.campo input{
+	height: 35px;
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 3px solid #CCCCC0;
+    font-size: 14px;
+    width: 200px;
+    font-size: 16px;
+}
+.btRadio{
+	width: 500px;
+	font-size: 18px;
+	height: 35px;
+	margin-bottom: 10px;	
 }
 .errors{
 	font-size: 14px;

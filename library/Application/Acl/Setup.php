@@ -39,16 +39,10 @@ class Application_Acl_Setup
 
 	protected function _setupPrivileges()
 	{
-		$this->_acl->allow( 'guest', 'auth', array('index', 'login') )
-					->allow( 'guest', 'index', array('index') )
-					->allow( 'guest', 'cadastro', array('index', 'save'))
-					->allow( 'guest', 'index', array('index') )
-					->allow( 'guest', 'error', array('error', 'forbidden') );
 		$this->_acl->allow(null, 'auth', array('index', 'login') )
-			->allow(null, 'cadastro', array('index', 'save'))
-			->allow( null, 'index', array('index') );
-		
-		$this->_acl->allow( 'user', 'cadastro', array('index', 'save') )
+					->allow(null, 'cadastro', array('index', 'save','profissional','ong'))
+					->allow( null, 'index', array('index') );
+		$this->_acl->allow( 'user', 'cadastro', array('index', 'save','profissional','ong') )
 					->allow( 'user', 'auth', 'logout' )
 					->allow( 'user', 'perfil', array('index', 'save', 'editar', 'update', 'imagem'));
 		$this->_acl->allow( 'admin', 'admin' );

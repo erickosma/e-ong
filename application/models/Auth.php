@@ -88,7 +88,7 @@ class Application_Model_Auth
         		return true;
         	} 
         }
-        throw new Exception('Nome de usuário ou senha inválida');
+        throw new Exception('<div id="erroLogin">Nome de usuário ou senha inválida</div>');
     }
 }
 
