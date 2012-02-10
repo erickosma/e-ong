@@ -18,6 +18,11 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="profissional"/>
           <actionMethod actionName="ong"/>
+          <actionMethod actionName="cidades"/>
+          <actionMethod actionName="validaCpf"/>
+          <actionMethod actionName="validaCnpj"/>
+          <actionMethod actionName="validaEmail"/>
+          <actionMethod actionName="validaUserName"/>
         </controllerFile>
         <controllerFile controllerName="Auth">
           <actionMethod actionName="index"/>
@@ -41,6 +46,11 @@
       <modelsDirectory>
         <modelFile modelName="Usuario"/>
         <modelFile modelName="Auth"/>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="SysCidade"/>
+          <dbTableFile dbTableName="SysEstado"/>
+          <dbTableFile dbTableName="Usuario"/>
+        </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <viewsDirectory>
@@ -83,6 +93,21 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Cadastro">
             <viewScriptFile forActionName="ong"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cadastro">
+            <viewScriptFile forActionName="cidades"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cadastro">
+            <viewScriptFile forActionName="validaCpf"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cadastro">
+            <viewScriptFile forActionName="validaCnpj"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cadastro">
+            <viewScriptFile forActionName="validaEmail"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cadastro">
+            <viewScriptFile forActionName="validaUserName"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

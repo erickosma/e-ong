@@ -1,3 +1,0 @@
-function load(){
-	var a;
-}

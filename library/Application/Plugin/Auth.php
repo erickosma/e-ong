@@ -26,12 +26,24 @@ class Application_Plugin_Auth extends Zend_Controller_Plugin_Abstract
         'module'     => 'default'
 	);
 
+	
+	/**
+	 * Comtroller com permição abertos
+	 * 
+	 * @var unknown_type
+	 */
+	protected $_opemController = array( "index",
+        								"cadastro",
+        								"auth",
+        								"error"
+	);
 	public function __construct()
 	{
 		$this->_auth = Zend_Auth::getInstance();
 		$this->_acl = Zend_Registry::get('acl');
 	}
 
+	
 	public function preDispatch(Zend_Controller_Request_Abstract $request)
 	{
 		$controller = "";
@@ -72,8 +84,15 @@ class Application_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 	{
 		$this->_acl = Zend_Registry::get('acl');
 		$user = $this->_auth->getIdentity();
+		
+		if(in_array($controller, $this->_opemController))
+		{
+			return true;
+		}
 		if ( !$this->_acl->has( $controller ) || !$this->_acl->isAllowed( $user, $controller, $action ) )
-		return false;
+		{
+			return false;
+		}
 		return true;
 	}
 	

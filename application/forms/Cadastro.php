@@ -11,6 +11,12 @@ class Application_Form_Cadastro extends Zend_Form
 					'table' => 'usuario', 
 					'field' => 'cpf_cnpj' 
     			));
+    	
+    	$validacaoEmail = new Zend_Validate_Db_NoRecordExists(
+    	array(
+    						'table' => 'usuario_login', 
+    						'field' => 'email' 
+    	));
         /* Form Elements & Other Definitions Here ... */
     	$this->setName('profissional');
 		$nome = new Zend_Form_Element_Text('nome');
@@ -60,6 +66,8 @@ class Application_Form_Cadastro extends Zend_Form
 		$email->setLabel('email:')
 			->setRequired(true)
 			->addFilter('StripTags')
+			->addValidator($validacaoEmail)
+		//	->setValue("admin@a")
 			->addDecorator('HtmlTag',
 			array('tag'=>'div', 'class'=>'campoFim'))
 			->addValidator("StringLength",false,array(4, 50 , 'messages'=> 'StringLength'))
@@ -78,28 +86,80 @@ class Application_Form_Cadastro extends Zend_Form
 						array('tag'=>'div', 'class'=>'campo'));
 		
 		
-		$cpf = new Zend_Form_Element_Text('cpfcli');
-		$cpf->setLabel('CPF/CNPJ:')
+		$cpf = new Zend_Form_Element_Text('cpf');
+		$cpf->setLabel('CPF:')
 			->setRequired(true)
-			->setAttrib('size', 25)
-			->setAttrib('alt', 'cpf-cnpj')
+			->setAttrib('alt', 'cpf')
 			->addFilter('StripTags')
 			->addValidator('Cpf')
 			->addFilter('StringTrim')
 			->addValidator('NotEmpty')
 			->addValidator($validacaoCpf)
 			->addDecorator('HtmlTag',
-						array('tag'=>'div', 'class'=>'campo'));
+						array('tag'=>'div', 'class'=>'campoFim'));
    		
-		$endereco = new Zend_Form_Element_Text('login');
-		$endereco->setLabel('endereco:')
+		//endereço
+		$endereco = new Zend_Form_Element_Text('endereco');
+		$endereco->setLabel('Endereço:')
 			->setRequired(true)
 			->addFilter('StripTags')
 			->addDecorator('HtmlTag',
 			array('tag'=>'div', 'class'=>'campo'))
 			->addValidator("StringLength",false,array(4, 50 , 'messages'=> 'StringLength'))
 			->addValidator('NotEmpty');
-
+		$numero = new Zend_Form_Element_Text('numero');
+		$numero->setLabel('Nº:')
+				->setAttrib('size', 5)
+				->addDecorator('HtmlTag',
+		array('tag'=>'div', 'class'=>'campo'));
+		
+		
+		$complemento = new Zend_Form_Element_Text('complemento');
+		$complemento->setLabel('Complemento:')
+				->addFilter('StripTags')
+				->addDecorator('HtmlTag',
+				array('tag'=>'div', 'class'=>'campo'));
+		$bairro = new Zend_Form_Element_Text('bairro');
+		$bairro->setLabel('Bairro:')
+				->addFilter('StripTags')
+				->addDecorator('HtmlTag',
+				array('tag'=>'div', 'class'=>'campo'));
+		
+		$cep= new Zend_Form_Element_Text('bairro');
+		$cep->setLabel('Bairro:')
+				->addFilter('StripTags')
+				->addDecorator('HtmlTag',
+				array('tag'=>'div', 'class'=>'campo'));
+		
+		
+		$db_estado=new Application_Model_DbTable_SysEstado();
+		 
+		$state_array = $db_estado->fetchAll()->toArray();
+		$arr[0]= "Escolha estado";
+		foreach ($state_array as $est) {
+			$arr[]=$est["nome"];
+		}
+		unset($arr[29]);
+		$state = new Zend_Form_Element_Select("estado");
+		$state->setLabel('Estado:')
+				->setName("estado")
+				->addMultiOptions($arr)
+				->setRequired(true)
+				->addFilter('StripTags')
+				->addDecorator('HtmlTag',
+							array('tag'=>'div', 'class'=>'campo'));
+		
+		$cities = new Zend_Form_Element_Select("cidade");
+		$cities->setLabel('Cidade:')
+				->setName("cidade")
+				->setOptions(array('RegisterInArrayValidator' => false))
+				->setRequired(true)
+				->addMultiOptions(array(
+								'0'	=> 'Escolha estado'))
+				->addFilter('StripTags')
+				->addDecorator('HtmlTag',
+							array('tag'=>'div', 'class'=>'campo'));
+		
 		$submit = new Zend_Form_Element_Submit('submit');
 		$submit->setLabel('Logar')
 		->setAttrib('id', 'submitbutton');
@@ -110,12 +170,15 @@ class Application_Form_Cadastro extends Zend_Form
 		//decoracao
 		$this->setDecorators(array(
 					    	'FormElements',
-		array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
-		array('Description', array('placement' => 'prepend')),
+							array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+							array('Description', array('placement' => 'prepend')),
 					    	'Form'));
 		$this->addElements(array($nome,$sobreNome,$login, 
 								$passworf,$confirmPassworf,$email,
-								$radio, $dataNacimento,$cpf,$submit));
+								$radio, $dataNacimento,$cpf,
+								$endereco,$numero,$complemento,
+								$bairro,$cep,$state,$cities,
+								$submit));
 		$translate = Zend_Registry::get('Zend_Translate');
 		$this->setTranslator($translate);
 		$translate->setLocale('br');

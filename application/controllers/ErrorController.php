@@ -23,6 +23,8 @@ class ErrorController extends Zend_Controller_Action
                 break;
             default:
                 // application error
+            	$this->saveLog($errors);
+            	 
                 $this->getResponse()->setHttpResponseCode(500);
                 $priority = Zend_Log::CRIT;
                 $this->view->message = 'Application error';
@@ -58,7 +60,17 @@ class ErrorController extends Zend_Controller_Action
         // action body
     	$this->view->headLink()->appendStylesheet('public/css/geral.css');	 
     }
-
+    protected function saveLog($errors){
+    	 
+    	$logger = new Zend_Log();
+    	$writer = new Zend_Log_Writer_Stream('application/tmp/erro/error.xml');
+    	$formatter = new Zend_Log_Formatter_Simple('%timestamp% (%priorityName%) %priority% %class%: %message%'.PHP_EOL );
+    	$writer->setFormatter($formatter);
+    	$logger->addWriter($writer);
+    	$exception = $errors->exception;
+    	$logger->debug("<msgError>".$exception->getMessage() . "</msgError>  \r\n".
+                                "<line>".$exception->getTraceAsString()."</line>");
+    }
 
 }
 
