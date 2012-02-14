@@ -76,9 +76,13 @@ function validaCPF(cpf) {
 }
 
 
-function bordaInput(id){
-		$(id).css('border','3px solid #A53A3A');
+function bordaInputError(id){
+	$("#status").remove();
+	$(id).css('border','3px solid #A53A3A');
+	$(id).after('<span id="status"> <img src="'+urlImg+'/public/images/geral/erro.jpg" width=15px; height=15px; /></span>');
 }
-function removebordaInput(id){
+function removebordaInputError(id){
+	$("#status").remove();
 	$(id).css('border','3px solid #CCCCCC');
+	$(id).after('<span id="status"> <img src="'+urlImg+'/public/images/geral/confirm.jpg" width=15px; height=15px; /></span>');
 }
