@@ -50,6 +50,7 @@
           <dbTableFile dbTableName="SysCidade"/>
           <dbTableFile dbTableName="SysEstado"/>
           <dbTableFile dbTableName="Usuario"/>
+          <dbTableFile dbTableName="UsuarioLogin"/>
         </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
