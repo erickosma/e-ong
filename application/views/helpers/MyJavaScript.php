@@ -38,7 +38,8 @@ class Zend_View_Helper_MyJavaScript extends Zend_View_Helper_HeadScript{
 		foreach ($files as $v) {
 			$cache .= file_get_contents(APPLICATION_PATH."/../" . $v );
 		  }
-    		$fp = @fopen($cacheFile, "wb");
+		  
+		  $fp = @fopen($cacheFile, "wb");
           if ($fp) {
               fwrite($fp, $cache);
               fclose($fp);

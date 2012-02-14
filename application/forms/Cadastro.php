@@ -161,8 +161,8 @@ class Application_Form_Cadastro extends Zend_Form
 							array('tag'=>'div', 'class'=>'campo'));
 		
 		$submit = new Zend_Form_Element_Submit('submit');
-		$submit->setLabel('Logar')
-		->setAttrib('id', 'submitbutton');
+		$submit->setLabel('Cadastrar')
+			->setAttrib('id', 'submitbutton');
 		
 		
 		
