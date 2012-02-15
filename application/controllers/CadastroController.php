@@ -3,8 +3,8 @@
 class CadastroController extends Zend_Controller_Action
 {
 
-	public function init()
-	{
+    public function init()
+    {
 		$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
 		$this->view->headLink()->appendStylesheet('public/css/geral.css')
 		->appendStylesheet('public/css/forms.css')
@@ -15,19 +15,19 @@ class CadastroController extends Zend_Controller_Action
 		->appendFile('public/js/jquery/js/valida.js')
 		->appendFile('public/js/jquery/js/jquery.mask.js')
 		->appendFile('public/js/cadastro/cadastro.js');
-	}
+    }
 
-	public function indexAction()
-	{
+    public function indexAction()
+    {
 		$this->view->headTitle('Cadasro- Escolha o seu ');
 		$this->view->description = "Cadastro de profissional e ong";
 		$this->view->keywords = "cadastro,ong,profissionais,voluntarios,procura";
 		$this->view->headMeta()->appendHttpEquiv('Content-Type',
   												'text/html; charset=ISO-8859-1');
-	}
+    }
 
-	public function profissionalAction()
-	{
+    public function profissionalAction()
+    {
 		$this->view->headTitle('Cadasro - profissional ');
 		$this->view->description = "Cadastro de profissional ";
 		$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
@@ -35,19 +35,19 @@ class CadastroController extends Zend_Controller_Action
   												'text/html; charset=ISO-8859-1');
 		$form = new Application_Form_Cadastro();
 		$this->view->form = $form;
-	}
+    }
 
-	public function ongAction()
-	{
+    public function ongAction()
+    {
 		$this->view->headTitle('Cadasro - Ong ');
 		$this->view->description = "Cadastro de  ong";
 		$this->view->keywords = "cadastro,ong,voluntarios,procura";
 		$this->view->headMeta()->appendHttpEquiv('Content-Type',
   												'text/html; charset=ISO-8859-1');
-	}
+    }
 
-	public function cidadesAction()
-	{
+    public function cidadesAction()
+    {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender();
 		header( 'Cache-Control: no-cache' );
@@ -73,10 +73,10 @@ class CadastroController extends Zend_Controller_Action
 			$i++;
 		}
 		echo $this->view->json($cidades);
-	}
+    }
 
-	public function validaCpfAction()
-	{
+    public function validaCpfAction()
+    {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender();
 		header( 'Cache-Control: no-cache' );
@@ -100,15 +100,15 @@ class CadastroController extends Zend_Controller_Action
 			$validcpf=1;
 		}
 		echo $this->view->json($validcpf);
-	}
+    }
 
-	public function validaCnpjAction()
-	{
+    public function validaCnpjAction()
+    {
 		// action body
-	}
+    }
 
-	public function validaEmailAction()
-	{
+    public function validaEmailAction()
+    {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender();
 		header( 'Cache-Control: no-cache' );
@@ -137,10 +137,11 @@ class CadastroController extends Zend_Controller_Action
 				echo $this->view->json(0);
 			}
 		}
-	}
+  	  
+    }
 
-	public function validaUserNameAction()
-	{
+    public function validaUserNameAction()
+    {
 		$this->_helper->layout->disableLayout();
 		$this->_helper->viewRenderer->setNoRender();
 		header( 'Cache-Control: no-cache' );
@@ -163,10 +164,115 @@ class CadastroController extends Zend_Controller_Action
 				echo $this->view->json(0);
 			}
 		}
-	}
+    	
+    }
+
+    public function processProfissionalAction()
+    {
+    
+    }
+
+    public function newProfissionalAction()
+    {
+    	$this->_helper->layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	header( 'Cache-Control: no-cache' );
+    	header( 'Content-type: application/json; charset="ISO-8859-1"', true );
+    	$request = $this->getRequest();
+    	if ( $request->isPost() ) 
+    	{
+    		try {
+    			/*
+    			 * Array usuario
+    			 * Insere um novo usuario
+    			 */
+    			$user= new Application_Model_DbTable_Usuario();
+    			$userLogin = new Application_Model_DbTable_UsuarioLogin();
+				$usuarioProfissional = new Application_Model_DbTable_UsuarioProfissional();
+				if($userLogin->checkEmail($request->getParam('email'))   )
+    			{   
+    				if($userLogin->checkUnique('login', $request->getParam('login')) ){		
+    					if($user->checkUnique('cpf_cnpj', $request->getParam('cpf'))){	
+			    			$data  = array(
+							        'nome'   	=> $request->getParam('nome'),
+						        	'sobrenome' => $request->getParam('sobrenome'),
+						        	'cpf_cnpj' 	=> $request->getParam('cpf'),
+						        	'tipo'		=> '2',
+						        	'status'	=> '1',
+						        	'create_at' => date("Y-m-d H:i:s")
+			    		     );
+			    			$userId= $user->insert($data);
+			    			$data  = array(
+									'id_usuario'   	=> $userId,
+									'login'   	=> $request->getParam('login'),
+									'email' => $request->getParam('email'),
+									'senha' 	=> sha1($request->getParam('senha'))
+			    			);
+			    			$userLogin->insert($data);
+			    			
+			    			$arrdate=  explode('/', $request->getParam('dataNacimento'));
+			    			$date=$arrdate[2]."-".$arrdate[1]."-".$arrdate[0];
+			    			$data  = array(
+									'id_usuario'   		=> $userId,
+									'sexo'   			=> $request->getParam('sexo'),
+									'data_nascimento'	 => $date,
+									'endereco' 			=> $request->getParam('endereco')." N° ".$request->getParam('numero') ,
+			    					'complemento' 		=> $request->getParam('complemento'),
+					    			'bairro' 			=> $request->getParam('bairro'),
+					    			'cep' 				=> $request->getParam('cep'),
+					    			'id_cidade' 		=> $request->getParam('cidade'),
+				    				'id_pais' 			=> '76',
+					    			'objetivos' 		=> 'NULL',
+					    			'horario_disp' 		=> 'NULL',
+					    			'endereco_confidencial' 	=> '1',
+					    			'email_confidencial' 		=> '1',
+					    			'telefone_confidencial' 	=> '1',
+					    			'notificacoes_email' 		=> '1'
+							);
+			    			$usuarioProfissional->insert($data);
+		
+			    			$login = $request->getParam('login');
+			    			$senha = $request->getParam('senha');
+			    			
+			    			try {
+			    				 Application_Model_Auth::login($login, $senha);
+			    			} catch (Exception $e) {
+			    				echo $e->getMessage();
+			    			}
+			    			echo $this->view->json(2);
+			    		}
+    					else{
+    					echo $this->view->json(5);
+    					}
+    				}//fim cpf
+    				else{
+    					echo $this->view->json(4);
+    				}//fim login
+    			}//fim email
+    			else{
+    				echo $this->view->json(3);
+    			}
+    		} 
+    		catch (Exception $e) 
+    		{
+    			echo $e->getMessage();
+    		}
+    	}
+    }
+
+    public function newOngAction()
+    {
+        // action body
+    }
 
 
 }
+
+
+
+
+
+
 
 
 

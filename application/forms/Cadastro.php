@@ -5,20 +5,9 @@ class Application_Form_Cadastro extends Zend_Form
 
     public function init()
     {
-    	
-    	$validacaoCpf = new Zend_Validate_Db_NoRecordExists(
-    			array(
-					'table' => 'usuario', 
-					'field' => 'cpf_cnpj' 
-    			));
-    	
-    	$validacaoEmail = new Zend_Validate_Db_NoRecordExists(
-    	array(
-    						'table' => 'usuario_login', 
-    						'field' => 'email' 
-    	));
         /* Form Elements & Other Definitions Here ... */
     	$this->setName('profissional');
+    	$this->setAction("new-profissional");
 		$nome = new Zend_Form_Element_Text('nome');
 		$nome->setLabel("Nome")
 			->setRequired(true)
@@ -66,7 +55,6 @@ class Application_Form_Cadastro extends Zend_Form
 		$email->setLabel('email:')
 			->setRequired(true)
 			->addFilter('StripTags')
-			->addValidator($validacaoEmail)
 		//	->setValue("admin@a")
 			->addDecorator('HtmlTag',
 			array('tag'=>'div', 'class'=>'campoFim'))
@@ -94,7 +82,6 @@ class Application_Form_Cadastro extends Zend_Form
 			->addValidator('Cpf')
 			->addFilter('StringTrim')
 			->addValidator('NotEmpty')
-			->addValidator($validacaoCpf)
 			->addDecorator('HtmlTag',
 						array('tag'=>'div', 'class'=>'campoFim'));
    		
@@ -140,6 +127,7 @@ class Application_Form_Cadastro extends Zend_Form
 			$arr[]=$est["nome"];
 		}
 		unset($arr[29]);
+		unset($arr[28]);
 		$state = new Zend_Form_Element_Select("estado");
 		$state->setLabel('Estado:')
 				->setName("estado")

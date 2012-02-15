@@ -22,6 +22,7 @@ echo $this->doctype();
 			</div>
 			<div class="conteudo"><?php echo $this->layout()->content; ?></div>
        		<div class="rodape"> rodape</div>
-<?php 	echo $this->MyJavaScript();?>
+       		<div id="loading"><img src="<?php echo BASE_URL;?>/public/images/geral/loading.gif" alt="" /> </div>
+       		<?php 	echo $this->MyJavaScript();?>
 </body>
 </html>
