@@ -20,9 +20,9 @@ $(document).ready(function() {
     	'Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set',
     	'Out','Nov','Dez'
     	],
-    	nextText: 'Próximo',
-    	prevText: 'Anterior'
-    	
+    	yearRange: '1970:2012' ,
+		changeMonth: true,
+		changeYear: true
     });  
     $("#cpf").mask("999.999.999-99");
     $("#profissional").validate({
@@ -38,8 +38,7 @@ $(document).ready(function() {
 	     	 	login: {
 	         	 	required: true,
 	         	 	minlength: 4
-	         	    }
-	     	 	 },	
+	         	    },
 	     	 	 senha: {
 	                 required: true
 	             },
@@ -55,6 +54,7 @@ $(document).ready(function() {
 	                    required: true,
 	                    date: true
 	                },
+                cpf: {cpf: true}
           },
           messages: {
         	  nome: {required: tagImgErro,
@@ -79,9 +79,60 @@ $(document).ready(function() {
 	                 required: tagImgErro,
 	                 date: tagImgErro
 	             },
-          }
-          ,submitHandler:function(form) {
-        	  processform("#profissional");
+	             cpf: { cnpj: tagImgErro,
+	            	 required: tagImgErro}
+          },
+          
+          submitHandler:function(form,e) {
+        		  var $button =  $('input[type=submit]', form).attr('disabled', 'disabled');
+	              var params = $(form.elements).serialize();
+	              var self = form;
+	              $.ajax({
+	                  // Usando metodo Post
+	                  type: 'POST',
+	                  // this.action pega o script para onde vai ser enviado os dados
+	                  url: form.action,
+	                  // os dados que pegamos com a função serialize()
+	                  data: params,
+	                  // Antes de enviar
+	                  beforeSend: function(){
+	                      // mostro a div loading
+	                      $('#loading').show();
+	                  },
+	                  success: function(txt){
+	                      // Ativo o botão usando a função attr()
+	                	  if(txt == '1' || txt == '2'){
+	                      	$('#loading').hide();
+	                         window.location='/perfil/welcome';
+	                      }
+	                      else if(txt == '3' ){
+	                    	  $("#loading").css('background', '#D3D0D0'); 
+	                      	  $('#loading').html("Jé existe um usuario com este email!");
+	                      	  $('#loading').delay(1500).fadeOut(5000);
+	                      	  bordaInputError("#email");
+	                      }
+	                      else if(txt == '4' ){
+	                    	  $("#loading").css('background', '#D3D0D0'); 
+	                      	  $('#loading').html("Jé existe um usuario com este login!");
+	                      	  $('#loading').delay(1500).fadeOut(5000);
+	                      	  bordaInputError("#login");
+	                      }
+	                      else if(txt == '5' ){
+	                    	  $("#loading").css('background', '#D3D0D0'); 
+	                    	  $('#loading').html("Jé existe um usuario com este cpf!");
+		                      $('#loading').delay(1500).fadeOut(5000);
+	                      	  bordaInputError("#cpf");
+	                      }
+	                	  $('input[type=submit]', form).attr('disabled', false);
+		                    
+	                  },
+	                  // Se acontecer algum erro é executada essa função
+	                  error: function(txt){
+	                   	$("#loading").css('background', 'red'); 
+	                      $('#loading').html(txt);
+	                  }
+	              })
+	              return false;
           }
 	 });
     
@@ -171,7 +222,7 @@ $("#email").blur(function(){
 	
 });
 
-$("#cpf").keyup(function(){
+$("#cpf").blur(function(){
 	var cpf = $("#cpf").val();
 	var und = cpf.indexOf("_"); //listando underline's da string, que vêm no mask do campo
 	if(cpf != 0)
@@ -195,49 +246,25 @@ $("#cpf").keyup(function(){
 });
 
 
-function processform(id){
- 	$(id).submit(function() {
-        /**
-        Crio a variável $button
-        attr(): set a propriedade de um atributo, nesse exemplo foi desativado o botão com a tag button
-        */
-        var $button = $('submit',this).attr('disabled',true);
-        /**
-       Criada a variável params
-        serialize(): pega os dados inseridos no formulário
-        */
-        var params = $(this.elements).serialize();
-
-        var self = this;
-        $.ajax({
-            // Usando metodo Post
-            type: 'POST',
-            // this.action pega o script para onde vai ser enviado os dados
-            url: this.action,
-            // os dados que pegamos com a função serialize()
-            data: params,
-            // Antes de enviar
-            beforeSend: function(){
-                // mostro a div loading
-                $('#loading').show();
-                // html(): equivalente ao innerHTML
-                $('#loading').html("Aguarde...");
-            },
-            success: function(txt){
-                // Ativo o botão usando a função attr()
-                $button.attr('disabled',false);
-
-                // Escrevo a mensagem
-                $('#loading').html(txt);
-                // Limpo o formulário
-                self.reset();
-            },
-            // Se acontecer algum erro é executada essa função
-            error: function(txt){
-            	$("#result").css('background', 'red'); 
-                $('#result').html(txt);
-            }
-        })
-        return false;
-    });
-}
+$("#cpf").keyup(function(){
+	var cpf = $("#cpf").val();
+	var und = cpf.indexOf("_"); //listando underline's da string, que vêm no mask do campo
+	if(cpf != 0)
+	{
+		if(cpf.length == 14 && und == -1)
+		{
+			if( !validaCPF( $("#cpf").val() ) || $("").val==0 )
+			{
+				bordaInputError("#cpf");
+			}
+			else
+			{
+				removebordaInputError("#cpf");
+			}
+		}
+		else if (und != -1)
+		{
+			removebordaInputError("#cpf");
+		}
+	}
+});
