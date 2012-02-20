@@ -8,7 +8,7 @@ body{
 .divtopo{
 	margin-top:-10px;
 	margin-left: auto;margin-right: auto; width: 900px;
-	height: 150px;
+	height: 100px;
 	border: 1px solid #CCCCCC;
 	
 	-webkit-border-radius: 10px;
@@ -28,7 +28,7 @@ body{
 
 .rodape{
 	margin-left: auto;margin-right: auto; width: 900px;
-	height: 150px;
+	height: 100px;
 	border: 1px solid #CCCCCC;
 	position:relative;
 	z-index:1;
@@ -58,20 +58,43 @@ body{
 	font-size: 62px;
 	font-weight: bold;
 }
-
 .menu_topo{
-	margin-top: 20px;
-	text-align: right;
-	margin-right: 20px;
+	width: 450px;
+	margin-left: 45%;
+	margin-top: 10px;
 }
-.menu_topo li{
+
+
+.menu_topo ul {
+	padding:0px;
+	margin:0px;
 	float: left;
-	list-style: none;
-	width: 70px;
+	width: 100%;
+	background-color:#EEEFEE;
+	list-style:none;
+	font: Tahoma;
+	height: 30px;
+	border: 2px solid #C0CFC0;
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
 }
-.menu_topo menu{
-	margin-left: 80%;
-	width: 300px;
+
+.menu_topo ul li { display: inline; }
+
+.menu_topo ul li a {
+	background-color:#EEEFEE;
+	color: #333;
+	text-decoration: none;
+	border-bottom:1px solid #EDEDED;
+	padding: 2px 10px;
+	float:left;
+	
+}
+
+.menu_topo ul li a:hover {
+	color: #6D6D6D;
+	border-bottom:1px solid #003A00;
 }
 #loading{
 	top:0px;

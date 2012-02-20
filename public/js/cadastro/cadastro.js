@@ -24,117 +24,148 @@ $(document).ready(function() {
 		changeMonth: true,
 		changeYear: true
     });  
-    $("#cpf").mask("999.999.999-99");
-    $("#profissional").validate({
-    	 rules: {
-             	nome: {
-	            	 	required: true,
-	            	 	minlength: 3
-	        	 	},
-	    	 	sobrenome: {
-	             	 	required: true,
-	             	 	minlength: 3
-	         	 	},
-	     	 	login: {
-	         	 	required: true,
-	         	 	minlength: 4
-	         	    },
-	     	 	 senha: {
-	                 required: true
-	             },
-	             confirm_senha:{
-	                 required: true,
-	                 equalTo: "#senha"
-	             },
-	             email: {
-	                    required: true,
-	                    email: true
-	                },
-                 dataNacimento: {
-	                    required: true,
-	                    date: true
-	                },
-                cpf: {cpf: true}
-          },
-          messages: {
-        	  nome: {required: tagImgErro,
-        		  	 minlength: tagImgErro
-    		  	 },
-    		  	sobrenome: {required: tagImgErro,
-        		  	 minlength: tagImgErro
-    		  	 },
-    		  	login: {required: tagImgErro,
-    		  		minlength: tagImgErro
-   		  	 	},
-    		  	senha: {required: tagImgErro
-        		 },
-    		  	confirm_senha: {required: tagImgErro,
-    		  					equalTo: tagImgErro
-   		  	 	},
-	   		  	 email: {
-	                 required: tagImgErro,
-	                 email: tagImgErro
-	             },
-	             dataNacimento: {
-	                 required: tagImgErro,
-	                 date: tagImgErro
-	             },
-	             cpf: { cnpj: tagImgErro,
-	            	 required: tagImgErro}
-          },
-          
-          submitHandler:function(form,e) {
-        		  var $button =  $('input[type=submit]', form).attr('disabled', 'disabled');
-	              var params = $(form.elements).serialize();
-	              var self = form;
-	              $.ajax({
-	                  // Usando metodo Post
-	                  type: 'POST',
-	                  // this.action pega o script para onde vai ser enviado os dados
-	                  url: form.action,
-	                  // os dados que pegamos com a função serialize()
-	                  data: params,
-	                  // Antes de enviar
-	                  beforeSend: function(){
-	                      // mostro a div loading
-	                      $('#loading').show();
-	                  },
-	                  success: function(txt){
-	                      // Ativo o botão usando a função attr()
-	                	  if(txt == '1' || txt == '2'){
-	                      	$('#loading').hide();
-	                         window.location='/perfil/welcome';
-	                      }
-	                      else if(txt == '3' ){
-	                    	  $("#loading").css('background', '#D3D0D0'); 
-	                      	  $('#loading').html("Jé existe um usuario com este email!");
-	                      	  $('#loading').delay(1500).fadeOut(5000);
-	                      	  bordaInputError("#email");
-	                      }
-	                      else if(txt == '4' ){
-	                    	  $("#loading").css('background', '#D3D0D0'); 
-	                      	  $('#loading').html("Jé existe um usuario com este login!");
-	                      	  $('#loading').delay(1500).fadeOut(5000);
-	                      	  bordaInputError("#login");
-	                      }
-	                      else if(txt == '5' ){
-	                    	  $("#loading").css('background', '#D3D0D0'); 
-	                    	  $('#loading').html("Jé existe um usuario com este cpf!");
-		                      $('#loading').delay(1500).fadeOut(5000);
-	                      	  bordaInputError("#cpf");
-	                      }
-	                	  $('input[type=submit]', form).attr('disabled', false);
-		                    
-	                  },
-	                  // Se acontecer algum erro é executada essa função
-	                  error: function(txt){
-	                   	$("#loading").css('background', 'red'); 
-	                      $('#loading').html(txt);
-	                  }
-	              })
-	              return false;
-          }
-	 });
+	if(verificaCampoCpfCnpj()){
+		   $("#cnpj").mask("99.999.999/9999-99");  
+		   $("#ong").validate({
+		    	 rules: {
+		             	nome: {
+			            	 	required: true,
+			            	 	minlength: 3
+			        	 	},
+			    	 	sobrenome: {
+			             	 	required: true,
+			             	 	minlength: 3
+			         	 	},
+			     	 	login: {
+			         	 	required: true,
+			         	 	minlength: 4
+			         	    },
+			     	 	 senha: {
+			                 required: true
+			             },
+			             confirm_senha:{
+			                 required: true,
+			                 equalTo: "#senha"
+			             },
+			             email: {
+			                    required: true,
+			                    email: true
+			                },
+		                numero: {
+		                	 number: true
+			                },
+		                cnpj: {cnpj: true}
+		          },
+		          messages: {
+		        	  nome: {required: tagImgErro,
+		        		  	 minlength: tagImgErro
+		    		  	 },
+		    		  	sobrenome: {required: tagImgErro,
+		        		  	 minlength: tagImgErro
+		    		  	 },
+		    		  	login: {required: tagImgErro,
+		    		  		minlength: tagImgErro
+		   		  	 	},
+		    		  	senha: {required: tagImgErro
+		        		 },
+		    		  	confirm_senha: {required: tagImgErro,
+		    		  					equalTo: tagImgErro
+		   		  	 	},
+			   		  	 email: {
+			                 required: tagImgErro,
+			                 email: tagImgErro
+			             },
+			             dataNacimento: {
+			                 required: tagImgErro,
+			                 date: tagImgErro
+			             },
+			             numero: {
+			            	 number:tagImgErro
+			             },
+			             cnpj: { cnpj: tagImgErro,
+			            	 required: tagImgErro}
+		          },
+		          
+		          submitHandler:function(form) {
+		        	  submitFormCadastro(form);
+		          }
+			 });
+	}
+	else{
+		$("#cpf").mask("999.999.999-99");
+		  $("#profissional").validate({
+		    	 rules: {
+		             	nome: {
+			            	 	required: true,
+			            	 	minlength: 3
+			        	 	},
+			    	 	sobrenome: {
+			             	 	required: true,
+			             	 	minlength: 3
+			         	 	},
+			     	 	login: {
+			         	 	required: true,
+			         	 	minlength: 4
+			         	    },
+			     	 	 senha: {
+			                 required: true
+			             },
+			             confirm_senha:{
+			                 required: true,
+			                 equalTo: "#senha"
+			             },
+			             email: {
+			                    required: true,
+			                    email: true
+			                },
+		                 dataNacimento: {
+			                    required: true,
+			                    date: true
+			                },
+			                numero: {
+			                	 number: true
+				                },
+		                cpf: {cpf: true}
+		          },
+		          messages: {
+		        	  nome: {required: tagImgErro,
+		        		  	 minlength: tagImgErro
+		    		  	 },
+		    		  	sobrenome: {required: tagImgErro,
+		        		  	 minlength: tagImgErro
+		    		  	 },
+		    		  	login: {required: tagImgErro,
+		    		  		minlength: tagImgErro
+		   		  	 	},
+		    		  	senha: {required: tagImgErro
+		        		 },
+		    		  	confirm_senha: {required: tagImgErro,
+		    		  					equalTo: tagImgErro
+		   		  	 	},
+			   		  	 email: {
+			                 required: tagImgErro,
+			                 email: tagImgErro
+			             },
+			             dataNacimento: {
+			                 required: tagImgErro,
+			                 date: tagImgErro
+			             },
+			             numero: {
+			            	 number:tagImgErro
+			             },
+			             cpf: { cnpj: tagImgErro,
+			            	 required: tagImgErro}
+		          },
+		          
+		          submitHandler:function(form) {
+		        	  submitFormCadastro(form);
+		          }
+			 });
+	}
+  
+    
+ 
+  
     
 });
 $(function(){
@@ -245,6 +276,29 @@ $("#cpf").blur(function(){
 	}
 });
 
+$("#cnpj").blur(function(){
+	var cnpj = $("#cnpj").val();
+	var und = cnpj.indexOf("_"); //listando underline's da string, que vêm no mask do campo
+	if(cnpj != 0)
+	{
+		if(cnpj.length == 18 && und == -1)
+		{
+			if( !validaCNPJ( $("#cnpj").val() ) )
+			{
+				bordaInputError("#cnpj");
+			}
+			else
+			{
+				removebordaInputError("#cnpj");
+			}
+		}
+		else if (und != -1)
+		{
+			removebordaInputError("#cnpj");
+		}
+	}
+});
+
 
 $("#cpf").keyup(function(){
 	var cpf = $("#cpf").val();
@@ -268,3 +322,86 @@ $("#cpf").keyup(function(){
 		}
 	}
 });
+$("#cnpj").keyup(function(){
+	var cnpj = $("#cnpj").val();
+	var und = cnpj.indexOf("_"); //listando underline's da string, que vêm no mask do campo
+	if(cnpj != 0)
+	{
+		if(cnpj.length == 18 && und == -1)
+		{
+			if( !validaCNPJ( $("#cnpj").val() ) )
+			{
+				bordaInputError("#cnpj");
+			}
+			else
+			{
+				removebordaInputError("#cnpj");
+			}
+		}
+		else if (und != -1)
+		{
+			removebordaInputError("#cnpj");
+		}
+	}
+});
+
+function verificaCampoCpfCnpj(){
+	if($("#campo_oculto").val() == "1"){
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+function submitFormCadastro(form){
+	  var $button =  $('input[type=submit]', form).attr('disabled', 'disabled');
+      var params = $(form.elements).serialize();
+      var self = form;
+      $.ajax({
+          // Usando metodo Post
+          type: 'POST',
+          // this.action pega o script para onde vai ser enviado os dados
+          url: form.action,
+          // os dados que pegamos com a função serialize()
+          data: params,
+          // Antes de enviar
+          beforeSend: function(){
+              // mostro a div loading
+              $('#loading').show();
+          },
+          success: function(txt){
+              // Ativo o botão usando a função attr()
+        	  if(txt == '1' || txt == '2'){
+              	$('#loading').hide();
+                 window.location='/perfil/welcome';
+              }
+              else if(txt == '3' ){
+            	  $("#loading").css('background', '#D3D0D0'); 
+              	  $('#loading').html("Jé existe um usuario com este email!");
+              	  $('#loading').delay(1500).fadeOut(5000);
+              	  bordaInputError("#email");
+              }
+              else if(txt == '4' ){
+            	  $("#loading").css('background', '#D3D0D0'); 
+              	  $('#loading').html("Jé existe um usuario com este login!");
+              	  $('#loading').delay(1500).fadeOut(5000);
+              	  bordaInputError("#login");
+              }
+              else if(txt == '5' ){
+            	  $("#loading").css('background', '#D3D0D0'); 
+            	  $('#loading').html("Jé existe um usuario com este cpf!");
+                  $('#loading').delay(1500).fadeOut(5000);
+              	  bordaInputError("#cpf");
+              }
+        	  $('input[type=submit]', form).attr('disabled', false);
+                
+          },
+          // Se acontecer algum erro é executada essa função
+          error: function(txt){
+           	$("#loading").css('background', 'red'); 
+              $('#loading').html(txt);
+          }
+      })
+      return false;
+}
