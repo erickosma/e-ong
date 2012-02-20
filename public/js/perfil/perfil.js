@@ -9,3 +9,10 @@ $(function() {
 		}
 	});
 });
+
+
+
+$("#tabs a").click(function () {
+	document.title = $(this).html();
+});
+
