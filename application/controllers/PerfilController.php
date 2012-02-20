@@ -21,7 +21,11 @@ class PerfilController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
+       	$this->view->headTitle('Perfil');
+    	$this->view->description = "Perfil ";
+    	$this->view->headMeta()->appendHttpEquiv('Content-Type',
+    	  												'text/html; charset=ISO-8859-1');
+ 
     }
 
     public function addAction()
@@ -36,18 +40,61 @@ class PerfilController extends Zend_Controller_Action
 
     public function ongAction()
     {
-    	$this->_helper->layout->disableLayout();
     	 
         // action body
     }
 
     public function profissionalAction()
     {
+    	$this->view->headTitle('Perfil profissional');
+    	$this->view->description = "Perfil profissional";
+    	$this->view->headMeta()->appendHttpEquiv('Content-Type',
+    	    	  												'text/html; charset=ISO-8859-1');
+    	
+        // action body
+    }
+
+    public function dadosPessoaisOngAction()
+    {
+    	$this->_helper->layout->disableLayout();
+    	
+    	// action body
+    }
+
+    public function dadosPessoaisProfissionalAction()
+    {
+    	$this->_helper->layout->disableLayout();
+    	$this->view->headTitle('Perfil profissional ');
+    	$this->view->description = "Cadastro de profissional ";
+    	$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
+    	$this->view->headMeta()->appendHttpEquiv('Content-Type',
+    	  												'text/html; charset=ISO-8859-1');
+    	/*if(isset($values))
+    	{
+    		$form->setDefault('nome',$values->first_name);
+    		$form->setDefault('sobrenome',$values->last_name);
+    		$form->setDefault('country',$values->country);
+    		$form->setDefault('state',$values->state);
+    		$form->setDefault('cities',$values->city);
+    	}*/
+    /*	$authNamespace = new Zend_Session_Namespace('Zend_Auth');
+    	$user_data = new User_Data();
+    	$data = $user_data->find($authNamespace->user->freelancer_id);
+    	$this->view->form = $this->getUpdateProfForm($data[0]);
+    	*/
+    	
+    	$form = new Application_Form_Cadastro();
+    	$this->view->form = $form;
+    	
         // action body
     }
 
 
 }
+
+
+
+
 
 
 
