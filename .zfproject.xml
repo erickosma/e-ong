@@ -23,6 +23,9 @@
           <actionMethod actionName="validaCnpj"/>
           <actionMethod actionName="validaEmail"/>
           <actionMethod actionName="validaUserName"/>
+          <actionMethod actionName="processProfissional"/>
+          <actionMethod actionName="newProfissional"/>
+          <actionMethod actionName="newOng"/>
         </controllerFile>
         <controllerFile controllerName="Auth">
           <actionMethod actionName="index"/>
@@ -33,6 +36,9 @@
         <controllerFile controllerName="Perfil">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
+          <actionMethod actionName="welcome"/>
+          <actionMethod actionName="ong"/>
+          <actionMethod actionName="profissional"/>
         </controllerFile>
         <controllerFile controllerName="Admin">
           <actionMethod actionName="index"/>
@@ -41,6 +47,7 @@
       <formsDirectory>
         <formFile formName="Login"/>
         <formFile formName="Cadastro"/>
+        <formFile formName="CadastroOng"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
@@ -51,6 +58,8 @@
           <dbTableFile dbTableName="SysEstado"/>
           <dbTableFile dbTableName="Usuario"/>
           <dbTableFile dbTableName="UsuarioLogin"/>
+          <dbTableFile dbTableName="UsuarioProfissional"/>
+          <dbTableFile dbTableName="UsuarioOng"/>
         </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
@@ -109,6 +118,24 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Cadastro">
             <viewScriptFile forActionName="validaUserName"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cadastro">
+            <viewScriptFile forActionName="processProfissional"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cadastro">
+            <viewScriptFile forActionName="newProfissional"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Cadastro">
+            <viewScriptFile forActionName="newOng"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Perfil">
+            <viewScriptFile forActionName="welcome"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Perfil">
+            <viewScriptFile forActionName="ong"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Perfil">
+            <viewScriptFile forActionName="profissional"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

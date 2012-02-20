@@ -44,6 +44,8 @@ class CadastroController extends Zend_Controller_Action
 		$this->view->keywords = "cadastro,ong,voluntarios,procura";
 		$this->view->headMeta()->appendHttpEquiv('Content-Type',
   												'text/html; charset=ISO-8859-1');
+		$form = new Application_Form_CadastroOng();
+		$this->view->form = $form;
     }
 
     public function cidadesAction()
@@ -262,7 +264,89 @@ class CadastroController extends Zend_Controller_Action
 
     public function newOngAction()
     {
-        // action body
+        $this->_helper->layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	header( 'Cache-Control: no-cache' );
+    	header( 'Content-type: application/json; charset="ISO-8859-1"', true );
+    	$request = $this->getRequest();
+    	if ( $request->isPost() ) 
+    	{
+    		try {
+    			/*
+    			 * Array usuario
+    			 * Insere um novo usuario
+    			 */
+    			$user= new Application_Model_DbTable_Usuario();
+    			$userLogin = new Application_Model_DbTable_UsuarioLogin();
+				$usuarioOng = new Application_Model_DbTable_UsuarioOng();
+				if($userLogin->checkEmail($request->getParam('email'))   )
+    			{   
+    				if($userLogin->checkUnique('login', $request->getParam('login')) ){		
+    					if($user->checkUnique('cpf_cnpj', $request->getParam('cnpj'))){	
+			    			$data  = array(
+							        'nome'   	=> $request->getParam('nome'),
+						        	'sobrenome' => $request->getParam('sobrenome'),
+						        	'cpf_cnpj' 	=> $request->getParam('cnpj'),
+						        	'tipo'		=> '1',
+						        	'status'	=> '1',
+						        	'create_at' => date("Y-m-d H:i:s")
+			    		     );
+			    			$userId= $user->insert($data);
+			    			$data  = array(
+									'id_usuario'   	=> $userId,
+									'login'   	=> $request->getParam('login'),
+									'email' => $request->getParam('email'),
+									'senha' 	=> sha1($request->getParam('senha'))
+			    			);
+			    			$userLogin->insert($data);
+			    			
+			    			$data  = array(
+									'id_usuario'   		=> $userId,
+									'nome_fantasia'   	=> $request->getParam('fantasia'),
+									'razo_social'	 => $request->getParam('razao'),
+									'desc_ong' 			=> 'NULL',
+			    					'site' 				=> 'NULL',
+				    				'endereco' 			=> $request->getParam('endereco')." N° ".$request->getParam('numero') ,
+			    					'complemento' 		=> $request->getParam('complemento'),
+					    			'bairro' 			=> $request->getParam('bairro'),
+					    			'cep' 				=> 'NULL',
+					    			'id_cidade' 		=> $request->getParam('cidade'),
+				    				'id_pais' 			=> '76',
+					    			'endereco_confidencial' 	=> '1',
+					    			'email_confidencial' 		=> '1',
+					    			'telefone_confidencial' 	=> '1',
+					    			'notificacoes_email' 		=> '1'
+							);
+			    			$usuarioOng->insert($data);
+		
+			    			$login = $request->getParam('login');
+			    			$senha = $request->getParam('senha');
+			    			
+			    			try {
+			    				 Application_Model_Auth::login($login, $senha);
+			    			} catch (Exception $e) {
+			    				echo $e->getMessage();
+			    			}
+			    			echo $this->view->json(2);
+			    		}
+    					else{
+    					echo $this->view->json(5);
+    					}
+    				}//fim cpf
+    				else{
+    					echo $this->view->json(4);
+    				}//fim login
+    			}//fim email
+    			else{
+    				echo $this->view->json(3);
+    			}
+    		} 
+    		catch (Exception $e) 
+    		{
+    			echo $e->getMessage();
+    		}
+    	}
+    
     }
 
 

@@ -30,6 +30,7 @@ class Application_Model_Auth
             $usuario->setFullName( $info->nome );
             $usuario->setUserName( $info->login );
             $usuario->setEmail($info->email);
+            $usuario->setTipo($info->tipo);
             switch ($info->tipo){
             	case '0':
         		    $usuario->setRoleId("admin");
@@ -45,7 +46,7 @@ class Application_Model_Auth
             $storage->write($usuario);
             $authNamespace = new Zend_Session_Namespace('Zend_Auth');
             $authNamespace->user = $usuario;
-            	
+            
             return true;
         }
         else{
@@ -72,6 +73,7 @@ class Application_Model_Auth
         		$usuario->setFullName( $info->nome );
         		$usuario->setUserName( $info->login );
         		$usuario->setEmail($info->email);
+        		$usuario->setTipo($info->tipo);
         		switch ($info->tipo){
         			case '0':
         				$usuario->setRoleId("admin");

@@ -1,13 +1,24 @@
 <div id="menu" class="menu_topo">
-<menu> 
-	<li>
+<ul> 
+	<li><a> Achar profissional</a></li>
+	<li><a>Achar ong</a></li>
 	<?php 
 		if(isset($this->usuario))
 		{
-			
-			 echo $this->usuario->getUserName();
 	?>
-	</li>
+	<li>
+		<?php //if profissional 
+			if($this->usuario->getTipo() == 1){
+				echo '<a href="'.$this->url(array('controller' => 'perfil', 'action' => 'ong', 'module' => 'default'), '', true).' ">';
+				echo $this->usuario->getUserName();
+				echo "</a>";
+			}
+			else{
+				echo '<a href="'.$this->url(array('controller' => 'perfil', 'action' => 'profissional', 'module' => 'default'), '', true).' ">';
+				echo $this->usuario->getUserName();
+				echo "</a>";
+			 }?>
+		 </li>
 	<li>
 		<a href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'logout', 'module' => 'default'), '', true); ?>">
 			Logout
@@ -30,5 +41,5 @@
 	</li>
 	
 	<?php 	}?>
-</menu>
+</ul>
 </div>
