@@ -17,6 +17,10 @@ class PerfilController extends Zend_Controller_Action
 			->appendFile('public/js/cadastro/cadastro.js')
 			->appendFile('public/js/perfil/perfil.js');
     	/* Initialize action controller here */
+		$userData = new Application_Model_DbTable_Usuario();
+		$usuario = Zend_Auth::getInstance()->getIdentity();
+		$data=$userData->loadAllDataUser($usuario->getId());
+		print_r($data);exit;
     }
 
     public function indexAction()
@@ -69,14 +73,19 @@ class PerfilController extends Zend_Controller_Action
     	$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
     	  												'text/html; charset=ISO-8859-1');
-    	/*if(isset($values))
+   
+    	$userData = new Application_Model_DbTable_Usuario();
+    	$usuario = Zend_Auth::getInstance()->getIdentity();
+    	$data=$userData->loadAllDataUser($usuario->getId());
+    
+    	if(isset($values))
     	{
     		$form->setDefault('nome',$values->first_name);
     		$form->setDefault('sobrenome',$values->last_name);
     		$form->setDefault('country',$values->country);
     		$form->setDefault('state',$values->state);
     		$form->setDefault('cities',$values->city);
-    	}*/
+    	}
     /*	$authNamespace = new Zend_Session_Namespace('Zend_Auth');
     	$user_data = new User_Data();
     	$data = $user_data->find($authNamespace->user->freelancer_id);
