@@ -17,10 +17,7 @@ class PerfilController extends Zend_Controller_Action
 			->appendFile('public/js/cadastro/cadastro.js')
 			->appendFile('public/js/perfil/perfil.js');
     	/* Initialize action controller here */
-		$userData = new Application_Model_DbTable_Usuario();
-		$usuario = Zend_Auth::getInstance()->getIdentity();
-		$data=$userData->loadAllDataUser($usuario->getId());
-		print_r($data);exit;
+	
     }
 
     public function indexAction()
@@ -75,27 +72,34 @@ class PerfilController extends Zend_Controller_Action
     	  												'text/html; charset=ISO-8859-1');
    
     	$userData = new Application_Model_DbTable_Usuario();
-    	$usuario = Zend_Auth::getInstance()->getIdentity();
-    	$data=$userData->loadAllDataUser($usuario->getId());
-    
-    	if(isset($values))
+		$usuario = Zend_Auth::getInstance()->getIdentity();
+		$data=$userData->loadAllDataUser($usuario->getId());
+		$form = new Application_Form_Cadastro();
+		if(isset($data))
     	{
-    		$form->setDefault('nome',$values->first_name);
-    		$form->setDefault('sobrenome',$values->last_name);
-    		$form->setDefault('country',$values->country);
-    		$form->setDefault('state',$values->state);
-    		$form->setDefault('cities',$values->city);
+    		$form->setDefault('nome',$data->nome);
+    		$form->setDefault('sobrenome',$data->sobrenome);
+    		$form->setDefault('login',$data->login);
+    		$form->campoOculto("login");
+    		$form->campoOculto('senha');
+    		$form->campoOculto('confirm_senha');
+    		$form->setDefault('email',$data->email);
+    		$form->lockField('email');
+    		$form->setDefault('cpf',$data->cpf_cnpj);
+    		$form->lockField('cpf');
+    		$nasc=explode("-",$data->usuario_profissional->data_nascimento);
+    		$form->setDefault('dataNacimento',$nasc[2]."/".$nasc[1]."/".$nasc[0]);
+    		$arrayEnd=explode("Nº", $data->usuario_profissional->endereco);
+    		$form->setDefault('sexo',$data->usuario_profissional->sexo);
+    		$form->setDefault('endereco',$arrayEnd[0]);
+    		$form->setDefault('numero',$arrayEnd[1]);
+    		$form->setDefault('complemento',$data->usuario_profissional->complemento);
+    		$form->setDefault('bairro',$data->usuario_profissional->bairro);
+    		$form->setDefault('estado',$data->cidade_estado->estado);
+    		$form->loadCidades($data->cidade_estado->estado);
+    		$form->setDefault('cidade',$data->cidade_estado->chave);
     	}
-    /*	$authNamespace = new Zend_Session_Namespace('Zend_Auth');
-    	$user_data = new User_Data();
-    	$data = $user_data->find($authNamespace->user->freelancer_id);
-    	$this->view->form = $this->getUpdateProfForm($data[0]);
-    	*/
-    	
-    	$form = new Application_Form_Cadastro();
     	$this->view->form = $form;
-    	
-        // action body
     }
 
 

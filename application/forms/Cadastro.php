@@ -138,7 +138,7 @@ class Application_Form_Cadastro extends Zend_Form
 							array('tag'=>'div', 'class'=>'campo'));
 		
 		$cities = new Zend_Form_Element_Select("cidade");
-		$cities->setLabel('Cidade:')
+			$cities->setLabel('Cidade:')
 				->setName("cidade")
 				->setOptions(array('RegisterInArrayValidator' => false))
 				->setRequired(true)
@@ -167,12 +167,37 @@ class Application_Form_Cadastro extends Zend_Form
 								$endereco,$numero,$complemento,
 								$bairro,$cep,$state,$cities,
 								$submit));
+		
 		$translate = Zend_Registry::get('Zend_Translate');
 		$this->setTranslator($translate);
 		$translate->setLocale('br');
 		
     }
-
-
+	
+	public function lockField($field){       
+        $elem = $this->getElement($field);       
+        $elem->setAttrib('disabled', true);
+        $elem->setAttrib('readonly',true);
+    }
+    
+    public function campoOculto($field){       
+        $elem = $this->getElement($field);
+        $elem->addDecorator('HtmlTag',
+    		array('tag'=>'div', 'style'=>'display:none;'));
+        $elem->removeDecorator('label');
+    }
+    
+    
+    public function loadCidades($estado,$field="cidade"){
+    	$citiesdb = new Application_Model_DbTable_SysCidade();
+    	$rows=$citiesdb->loadCidadeByestado($estado);
+    	$arr[0]= "Escolha cidade";
+    	foreach ($rows as $est) {
+    		$arr[$est["chave"]]=$est["nome"];
+    	}
+    	$elem = $this->getElement($field);
+    	$elem->addMultiOptions($arr);
+    
+    }
 }
 

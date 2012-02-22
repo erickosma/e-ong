@@ -29,33 +29,40 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
     					->where("u.id_usuario =?",$id);
     	$articleRecord= $this->fetchRow($select);
     	$data=$articleRecord->toArray();
-    	
     	if($data["tipo"] == 1){
     		$profissional = new Application_Model_DbTable_UsuarioProfissional();
 			$select=	$profissional->select() 
 		    		    			 ->where('id_usuario = ?', $data["id_usuario"] );
     		$rows = $profissional->fetchRow($select);		
-    		$data["usuario_profissional]"]=$rows->toArray();
+    		$data["usuario_profissional"]=$this->arrayToObject($rows->toArray());
+    		$cidade = new Application_Model_DbTable_SysCidade();
+    		$data["cidade_estado"]=$cidade->loadCidadeEstado($data["usuario_profissional"]->id_cidade);
     	}
     	else if($data["tipo"] == 2){
     		$ong = new Application_Model_DbTable_UsuarioOng();
     		$select=	$ong->select()
     						->where('id_usuario = ?', $data["id_usuario"] );
     		$rows = $ong->fetchRow($select);
-    		$data["usuario_ong"]=$rows->toArray();
+    		$data["usuario_ong"]=$this->arrayToObject($rows->toArray());
+        	$cidade = new Application_Model_DbTable_SysCidade();
+    		$data["cidade_estado"]=$cidade->loadCidadeEstado($data["usuario_ong"]->id_cidade);
+  		
     	}
     	else{
     		$profissional = new Application_Model_DbTable_UsuarioProfissional();
 			$select=	$profissional->select() 
 		    		    			 ->where('id_usuario = ?', $data["id_usuario"] );
     		$rows = $profissional->fetchRow($select);		
-    		$data["usuario_profissional]"]=$this->arrayToObject($rows->toArray());
+    		$data["usuario_profissional"]=$this->arrayToObject($rows->toArray());
     		
     		$ong = new Application_Model_DbTable_UsuarioOng();
     		$select=	$ong->select()
     						->where('id_usuario = ?', $data["id_usuario"] );
     		$rows = $ong->fetchRow($select);
     		$data["usuario_ong"]=$this->arrayToObject($rows->toArray());
+    		
+    		$cidade = new Application_Model_DbTable_SysCidade();
+    		$data["cidade_estado"]=$cidade->loadCidadeEstado($data["usuario_ong"]->id_cidade);
     	}
     	return $this->arrayToObject($data);
     }
@@ -72,5 +79,7 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
     	}
     	return false;
     }
+    
+
 }
 
