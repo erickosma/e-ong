@@ -92,5 +92,21 @@ class Application_Model_Auth
         }
         throw new Exception('<div id="erroLogin">Nome de usuário ou senha inválida</div>');
     }
+    
+    public static function completo($id=null,$tipo=null){
+    	if(is_null($id)){
+    		$usuario = Zend_Auth::getInstance()->getIdentity();
+    		$id= $usuario->getId();
+    		$tipo=$usuario->getTipo();
+    	}
+    	if($tipo == 1){
+    		$ong= new Application_Model_DbTable_UsuarioOng();
+    		return $ong->cadastroCompleto($id);
+    	}
+    	else{
+    		$profissional = new Application_Model_DbTable_UsuarioProfissional();
+    		return $profissional->cadastroCompleto($id);
+    	}
+    }
 }
 

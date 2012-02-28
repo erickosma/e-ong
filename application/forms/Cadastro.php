@@ -197,7 +197,31 @@ class Application_Form_Cadastro extends Zend_Form
     	}
     	$elem = $this->getElement($field);
     	$elem->addMultiOptions($arr);
+    }
     
+    public function formObjetivos(){
+    	$obj= new Zend_Form_Element_Textarea('objetivo');
+    	$obj->setLabel('Objetivo:')
+		    	->addFilter('StripTags')
+    			->setAttrib('rows', 2)
+    			->setAttrib('cols', 30)
+		    	->addDecorator('HtmlTag',
+						array('tag'=>'div', 'class'=>'campoTextArea')				
+    					);
+    	$this->addElements(array($obj));
+    }
+    
+    public function formHorarioDisp(){
+    	$cities = new Zend_Form_Element_Select("cidade");
+    	$cities->setLabel('Cidade:')
+    	->setName("cidade")
+    	->setOptions(array('RegisterInArrayValidator' => false))
+    	->setRequired(true)
+    	->addMultiOptions(array(
+    									'0'	=> 'Escolha estado'))
+    	->addFilter('StripTags')
+    	->addDecorator('HtmlTag',
+    	array('tag'=>'div', 'class'=>'campo'));
     }
 }
 

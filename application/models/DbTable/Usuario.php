@@ -1,5 +1,5 @@
 <?php
-
+// 'created_on'      => new Zend_Db_Expr('CURDATE()'),
 class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
 {
 	protected $_schema ="ong";
@@ -48,7 +48,7 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
     		$data["cidade_estado"]=$cidade->loadCidadeEstado($data["usuario_ong"]->id_cidade);
   		
     	}
-    	else{
+    	else if($data["tipo"] == 0){
     		$profissional = new Application_Model_DbTable_UsuarioProfissional();
 			$select=	$profissional->select() 
 		    		    			 ->where('id_usuario = ?', $data["id_usuario"] );

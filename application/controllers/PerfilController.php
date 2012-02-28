@@ -51,8 +51,13 @@ class PerfilController extends Zend_Controller_Action
     	$this->view->description = "Perfil profissional";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
     	    	  												'text/html; charset=ISO-8859-1');
-    	
-        // action body
+    	if(Application_Model_Auth::completo()){
+    		$this->view->completaDados = "";
+    	}
+    	else{
+    		$this->view->completaDados = "Complete seu cadastro!";
+    	}
+    	// action body
     }
 
     public function dadosPessoaisOngAction()
@@ -72,9 +77,17 @@ class PerfilController extends Zend_Controller_Action
     	  												'text/html; charset=ISO-8859-1');
    
     	$userData = new Application_Model_DbTable_Usuario();
-		$usuario = Zend_Auth::getInstance()->getIdentity();
+    	$form = new Application_Form_Cadastro();
+    	
+    	$usuario = Zend_Auth::getInstance()->getIdentity();
 		$data=$userData->loadAllDataUser($usuario->getId());
-		$form = new Application_Form_Cadastro();
+		if(Application_Model_Auth::completo($usuario->getId(), $usuario->getTipo())){
+			$this->view->completaDados = "";
+		}
+		else{
+			$this->view->completaDados = "Complete seu cadastro!";	
+		}
+	
 		if(isset($data))
     	{
     		$form->setDefault('nome',$data->nome);
@@ -98,6 +111,8 @@ class PerfilController extends Zend_Controller_Action
     		$form->setDefault('estado',$data->cidade_estado->estado);
     		$form->loadCidades($data->cidade_estado->estado);
     		$form->setDefault('cidade',$data->cidade_estado->chave);
+    		$form->campoOculto('submit');
+    		$form->formObjetivos();
     	}
     	$this->view->form = $form;
     }

@@ -8,6 +8,7 @@ class Application_Model_Usuario implements Zend_Acl_Role_Interface
     private $_email; 
     private $id;
     private $_tipo;
+    private $dadosCompletos;
  
     public function getUserName()
     {
@@ -64,5 +65,14 @@ class Application_Model_Usuario implements Zend_Acl_Role_Interface
     public function getTipo() {
     	return $this->_tipo;
     }
+    
+    public function setDadosCompletos($dadosCompletos) {
+    	$this->dadosCompletos = $dadosCompletos;
+    }
+    
+    public function getDadosCompletos() {
+    	return $this->dadosCompletos;
+    }
+    
 }
 
