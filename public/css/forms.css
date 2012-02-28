@@ -19,6 +19,43 @@
 .titile_form{
 	margin-left: auto;margin-right: auto; width: 350px;
 }
+.campoInicio{
+	width: 550px;
+	height: 70px;
+	border-top: 1px solid #AAAAAA;
+	margin-top: 50px;	
+}
+
+.campoInicio input{
+	height: 35px;
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 3px solid #CCCCC0;
+    font-size: 14px;
+    font-size: 16px;
+}
+
+.campoTextArea{
+	width: 490px;
+	height: 150px;
+	border-top: 1px solid #AAAAAA;
+	padding-top: 10px;
+	margin-top: 40px;
+}
+
+.campoTextArea textarea{
+	-webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: 3px solid #CCCCC0;
+    font-size: 14px;
+  
+}
+
+#objetivo-label{
+	padding-top: 40px;
+}
 .campoFim{
 	width: 550px;
 	height: 70px;
