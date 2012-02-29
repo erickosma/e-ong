@@ -1,6 +1,11 @@
 <br /><br />
 <div id="view-content">
 	<h1>
-		Bem vindo
+		Bem vindo <?php echo $this->Usuario->getFullName();?>
 	</h1>
+	<?php if($this->Usuario->getTipo == 1){?>
+	<a href="ong">Perfil</a>
+	<?php }else{?>
+	<a href="profissional">Perfil</a>
+	<?php }?>
 </div>

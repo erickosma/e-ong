@@ -37,6 +37,9 @@ class PerfilController extends Zend_Controller_Action
     public function welcomeAction()
     {
         // action body
+        $this->view->Usuario=Zend_Auth::getInstance()->getIdentity();
+	
+        
     }
 
     public function ongAction()
@@ -75,7 +78,8 @@ class PerfilController extends Zend_Controller_Action
     	$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
     	  												'text/html; charset=ISO-8859-1');
-   
+    	$db_estado=new Application_Model_DbTable_SysEstado();
+    		
     	$userData = new Application_Model_DbTable_Usuario();
     	$form = new Application_Form_Cadastro();
     	
@@ -102,7 +106,7 @@ class PerfilController extends Zend_Controller_Action
     		$form->lockField('cpf');
     		$nasc=explode("-",$data->usuario_profissional->data_nascimento);
     		$form->setDefault('dataNacimento',$nasc[2]."/".$nasc[1]."/".$nasc[0]);
-    		$arrayEnd=explode("Nº", $data->usuario_profissional->endereco);
+    		$arrayEnd=explode("N?", $data->usuario_profissional->endereco);
     		$form->setDefault('sexo',$data->usuario_profissional->sexo);
     		$form->setDefault('endereco',$arrayEnd[0]);
     		$form->setDefault('numero',$arrayEnd[1]);
@@ -110,7 +114,7 @@ class PerfilController extends Zend_Controller_Action
     		$form->setDefault('bairro',$data->usuario_profissional->bairro);
     		$form->setDefault('estado',$data->cidade_estado->estado);
     		$form->loadCidades($data->cidade_estado->estado);
-    		$form->setDefault('cidade',$data->cidade_estado->chave);
+    		$form->setDefault('cidade', $data->cidade_estado->chave);
     		$form->campoOculto('submit');
     		$form->formObjetivos();
     	}

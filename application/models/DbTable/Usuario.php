@@ -29,16 +29,17 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
     					->where("u.id_usuario =?",$id);
     	$articleRecord= $this->fetchRow($select);
     	$data=$articleRecord->toArray();
-    	if($data["tipo"] == 1){
-    		$profissional = new Application_Model_DbTable_UsuarioProfissional();
+    	
+    	if($data["tipo"] == 2){
+      		$profissional = new Application_Model_DbTable_UsuarioProfissional();
 			$select=	$profissional->select() 
 		    		    			 ->where('id_usuario = ?', $data["id_usuario"] );
-    		$rows = $profissional->fetchRow($select);		
+    		$rows = $profissional->fetchRow($select);	
     		$data["usuario_profissional"]=$this->arrayToObject($rows->toArray());
     		$cidade = new Application_Model_DbTable_SysCidade();
     		$data["cidade_estado"]=$cidade->loadCidadeEstado($data["usuario_profissional"]->id_cidade);
     	}
-    	else if($data["tipo"] == 2){
+    	else if($data["tipo"] == 1){
     		$ong = new Application_Model_DbTable_UsuarioOng();
     		$select=	$ong->select()
     						->where('id_usuario = ?', $data["id_usuario"] );
