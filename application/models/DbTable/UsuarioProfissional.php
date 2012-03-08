@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_DbTable_UsuarioProfissional extends Zend_Db_Table_Abstract
+class Application_Model_DbTable_UsuarioProfissional extends Application_Model_DbTable_Usuario
 {
 
     protected $_name = 'usuario_profissional';

@@ -87,6 +87,8 @@ class Application_Model_Auth
         		}
         		$storage = $auth->getStorage();
         		$storage->write($usuario);
+        		$authNamespace = new Zend_Session_Namespace('Zend_Auth');
+        		$authNamespace->user = $usuario;
         		return true;
         	} 
         }
