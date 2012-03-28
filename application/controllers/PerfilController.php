@@ -17,6 +17,9 @@ class PerfilController extends Zend_Controller_Action
 			->appendFile('public/js/cadastro/cadastro.js')
 			->appendFile('public/js/perfil/perfil.js');
     	/* Initialize action controller here */
+		$this->view->headMeta()->appendHttpEquiv('Content-Type',
+		    	  												'text/html; charset=ISO-8859-1');
+		
 	
     }
 
@@ -52,8 +55,6 @@ class PerfilController extends Zend_Controller_Action
     {
     	$this->view->headTitle('Perfil profissional');
     	$this->view->description = "Perfil profissional";
-    	$this->view->headMeta()->appendHttpEquiv('Content-Type',
-    	    	  												'text/html; charset=ISO-8859-1');
     	if(Application_Model_Auth::completo()){
     		$this->view->completaDados = "";
     	}
@@ -76,8 +77,6 @@ class PerfilController extends Zend_Controller_Action
     	$this->view->headTitle('Perfil profissional ');
     	$this->view->description = "Cadastro de profissional ";
     	$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
-    	$this->view->headMeta()->appendHttpEquiv('Content-Type',
-    	  												'text/html; charset=ISO-8859-1');
     	$db_estado=new Application_Model_DbTable_SysEstado();
     		
     	$userData = new Application_Model_DbTable_Usuario();
@@ -121,8 +120,16 @@ class PerfilController extends Zend_Controller_Action
     	$this->view->form = $form;
     }
 
+    public function imagemAction()
+    {
+        $this->_helper->layout->disableLayout();
+    	$this->view->headTitle('Perfil profissional');
+    }
+
 
 }
+
+
 
 
 
