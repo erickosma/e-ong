@@ -39,6 +39,9 @@
           <actionMethod actionName="welcome"/>
           <actionMethod actionName="ong"/>
           <actionMethod actionName="profissional"/>
+          <actionMethod actionName="dadosPessoaisOng"/>
+          <actionMethod actionName="dadosPessoaisProfissional"/>
+          <actionMethod actionName="imagem"/>
         </controllerFile>
         <controllerFile controllerName="Admin">
           <actionMethod actionName="index"/>
@@ -136,6 +139,15 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Perfil">
             <viewScriptFile forActionName="profissional"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Perfil">
+            <viewScriptFile forActionName="dadosPessoaisOng"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Perfil">
+            <viewScriptFile forActionName="dadosPessoaisProfissional"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Perfil">
+            <viewScriptFile forActionName="imagem"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
