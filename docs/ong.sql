@@ -6038,6 +6038,7 @@ INSERT INTO `sys_estado` (`chave`, `nome`, `sigla`) VALUES
 
 -- --------------------------------------------------------
 
+
 --
 -- Estrutura da tabela `telefone`
 --
@@ -6143,14 +6144,18 @@ CREATE TABLE IF NOT EXISTS `usuario_ong` (
   `id_usuario` mediumint(7) unsigned zerofill NOT NULL,
   `nome_fantasia` varchar(50) NOT NULL,
   `razo_social` varchar(50) NOT NULL,
-  `desc_ong` text NOT NULL,
+  `desc_ong` text,
   `site` varchar(200) DEFAULT NULL,
-  `emdereÃ§o` varchar(80) NOT NULL,
-  `completo` varchar(50) DEFAULT NULL,
+  `endereco` varchar(80) NOT NULL,
+  `complemento` varchar(50) DEFAULT NULL,
   `bairro` varchar(50) NOT NULL,
   `cep` varchar(14) NOT NULL,
-  `id_cidade` mediumint(7) unsigned zerofill NOT NULL,
-  `pais` mediumint(7) unsigned zerofill NOT NULL,
+  `id_cidade` mediumint(7) unsigned NOT NULL,
+  `id_pais` mediumint(7) unsigned NOT NULL,
+  `endereco_confidencial` smallint(1) NOT NULL DEFAULT '1',
+  `email_confidencial` smallint(1) NOT NULL DEFAULT '1',
+  `telefone_confidencial` smallint(1) NOT NULL DEFAULT '1',
+  `notificacoes_email` smallint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_usuario_ong`),
   KEY `id_usuario` (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -6165,15 +6170,15 @@ CREATE TABLE IF NOT EXISTS `usuario_profissional` (
   `id_usuario_profissional` mediumint(7) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `id_usuario` mediumint(7) unsigned zerofill NOT NULL,
   `sexo` smallint(1) NOT NULL,
-  `data_nascimento` datetime NOT NULL,
+  `data_nascimento` date NOT NULL,
   `endereco` varchar(100) NOT NULL,
   `complemento` varchar(30) DEFAULT NULL,
-  `bairro` varchar(40) NOT NULL,
-  `cep` varchar(10) NOT NULL,
-  `id_cidade` mediumint(7) NOT NULL,
-  `id_pais` mediumint(7) NOT NULL,
+  `bairro` varchar(40) DEFAULT NULL,
+  `cep` varchar(10) DEFAULT NULL,
+  `id_cidade` mediumint(7) unsigned NOT NULL,
+  `id_pais` mediumint(7) unsigned NOT NULL,
   `objetivos` text,
-  `horario_disp` varchar(50) NOT NULL,
+  `horario_disp` varchar(300) DEFAULT NULL,
   `endereco_confidencial` smallint(1) NOT NULL DEFAULT '1',
   `email_confidencial` smallint(1) NOT NULL DEFAULT '1',
   `telefone_confidencial` smallint(1) NOT NULL DEFAULT '1',
@@ -6181,7 +6186,6 @@ CREATE TABLE IF NOT EXISTS `usuario_profissional` (
   PRIMARY KEY (`id_usuario_profissional`),
   KEY `id_usuario` (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
 --
 -- RestriÃ§Ãµes para as tabelas dumpadas
 --
@@ -6220,3 +6224,17 @@ ALTER TABLE `usuario_profissional`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+
+--
+-- alterações manuais 
+--
+ALTER TABLE  `usuario` CHANGE  `cpf_cnpj`  `cpf_cnpj` VARCHAR( 14 ) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL
+
+
+
+--
+-- criar o oportunidade
+--
+
