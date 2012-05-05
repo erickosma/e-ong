@@ -35,7 +35,8 @@ class Application_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 	protected $_opemController = array( "index",
         								"cadastro",
         								"auth",
-        								"error"
+        								"error",
+        								"buscar"
 	);
 	public function __construct()
 	{
