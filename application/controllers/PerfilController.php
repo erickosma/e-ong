@@ -59,9 +59,9 @@ class PerfilController extends Zend_Controller_Action
     		$this->view->completaDados = "";
     	}
     	else{
-    		$this->view->completaDados = "Complete seu cadastro!";
+    		$this->view->completaDtados = "Complete seu cadastro!";
     	}
-    	// action body
+    	// action bodyeaa
     }
 
     public function dadosPessoaisOngAction()
@@ -126,8 +126,38 @@ class PerfilController extends Zend_Controller_Action
     	$this->view->headTitle('Perfil profissional');
     }
 
+    public function mensagemAction()
+    {
+    	
+        // action body
+    	$this->_helper->layout->disableLayout();
+    	$this->view->headTitle('Perfil profissional');
+    }
+
+    public function emailAction()
+    {
+        $this->_helper->layout->disableLayout();
+    	$this->view->headTitle('Perfil profissional');
+    	$usuario = Zend_Auth::getInstance()->getIdentity();
+    	$this->view->usuario = $usuario;
+    	$this->view->email = $usuario->getEmail();
+    	 
+    }
+
+    public function dadosAction()
+    {
+        $this->_helper->layout->disableLayout();
+    	$this->view->headTitle('Perfil profissional');
+    }
+
 
 }
+
+
+
+
+
+
 
 
 

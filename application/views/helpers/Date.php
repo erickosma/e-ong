@@ -46,12 +46,12 @@ class Zend_View_Helper_Date extends Zend_View_Helper_Abstract
 	public function timeAgo($time,$format="date")
 	{
 	
-		$periods = array("second", "minute", "hour", "day", "week", "month", "year", "decade");
+		$periods = array("segundo", "minuto", "hora", "dia", "semana", "mes", "ano", "decade");
 		$lengths = array("60","60","24","7","4.35","12","10");
 
 		$now = time();
 
-		$difference     = $now - $time;
+		$difference     = $now - strtotime($time);
 		$tense         = "ago";
 
 		for($j = 0; $difference >= $lengths[$j] && $j < count($lengths)-1; $j++)

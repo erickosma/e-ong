@@ -1,7 +1,16 @@
 <div id="menu" class="menu_topo">
 <ul> 
-	<li><a> Achar profissional</a></li>
-	<li><a>Achar ong</a></li>
+	<li>
+		<a href="<?php echo $this->url(array('controller' => 'buscar', 'action' => 'profissionais', 'module' => 'default'), '', true); ?>">
+			 Achar profissional
+		 </a>
+	 </li>
+	<li>
+		<a href="<?php echo $this->url(array('controller' => 'buscar', 'action' => 'ong', 'module' => 'default'), '', true); ?>">
+			Achar ong
+		</a>
+	</li>
+		
 	<?php 
 		if(isset($this->usuario))
 		{

@@ -64,14 +64,15 @@ class ErrorController extends Zend_Controller_Action
     	 
     	$logger = new Zend_Log();
     	$writer = new Zend_Log_Writer_Stream('application/tmp/erro/error.xml');
-    	$formatter = new Zend_Log_Formatter_Simple('%timestamp% (%priorityName%) %priority% %class%: %message%'.PHP_EOL );
+    	$formatter = new Zend_Log_Formatter_Xml();
     	$writer->setFormatter($formatter);
     	$logger->addWriter($writer);
     	$exception = $errors->exception;
-    	$logger->debug("<msgError>".$exception->getMessage() . "</msgError>  \r\n".
-                                "<line>".$exception->getTraceAsString()."</line>");
-    }
+    	$exception->getTraceAsString();
+    	$logger->debug($exception->getMessage()."\r\n");
+      }
 
+    
 }
 
 

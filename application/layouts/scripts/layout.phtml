@@ -11,17 +11,22 @@ echo $this->doctype();
 	echo $this->headTitle();
 	
 ?>
-
-<link rel="stylesheet" href="<?php echo BASE_URL;?>/public/js/jquery/css/ui-lightness/jquery-ui-1.8.17.custom.css" type="text/css" media="screen" />
+<link href='http://fonts.googleapis.com/css?family=Berkshire+Swash' rel='stylesheet' type='text/css'><link rel="stylesheet" href="<?php echo BASE_URL;?>/public/js/jquery/css/ui-lightness/jquery-ui-1.8.17.custom.css" type="text/css" media="screen" />
 	<meta name="description" content="<?php echo $this->description?>" />
 	<meta name="keywords" content="<?php echo $this->keywords?>" />
 </head>
 <body>
-			<div class="divtopo" >   
+			<div class="divtopo" > 
+				<div style="margin-left:30px;  width: 200px; float: left;">	
+					<div class="logo" style="font-family: 'Berkshire Swash', cursive;    font-size: 50px;" >Ação </div>
+					<div class="logo" style=" font-family: 'Berkshire Swash', cursive;    font-size: 40px; margin-left: 60px; margin-top: -20px;" >Paralela</div>
+				</div>
 					<?=$this->menu("menu_topo");?>
 			</div>
 			<div class="conteudo"><?php echo $this->layout()->content; ?></div>
-       		<div class="rodape"> rodape</div>
+       		<div class="rodape"> 
+       			<?=$this->menu("rodape");?>
+       		</div>
        		<div id="loading"><img src="<?php echo BASE_URL;?>/public/images/geral/loading.gif" alt="" /> </div>
        		<?php 	echo $this->MyJavaScript();?>
 </body>
