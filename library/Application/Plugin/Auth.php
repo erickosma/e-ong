@@ -36,6 +36,7 @@ class Application_Plugin_Auth extends Zend_Controller_Plugin_Abstract
         								"cadastro",
         								"auth",
         								"error",
+										"google8d01cca23d27e8d8.html",
         								"buscar"
 	);
 	public function __construct()
