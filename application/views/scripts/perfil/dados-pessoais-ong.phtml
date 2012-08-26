@@ -1,5 +1,5 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Perfil</b> and script/action name <b>dadosPessoaisOng</b></p>
-
-</div>
+<div class="completaDados"><?php echo $this->completaDados;?></div>
+<h3 class="titile_form">Dados pessoais </h3>
+<?php echo $this->form; ?>
+<?php echo ( sizeof( $this->messages ) > 0 ) ? $this->messages[0] : ""; ?>
+<br><br><br><br><br>

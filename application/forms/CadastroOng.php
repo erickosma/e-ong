@@ -131,7 +131,7 @@ class Application_Form_CadastroOng extends Zend_Form
 		$state_array = $db_estado->fetchAll()->toArray();
 		$arr[0]= "Escolha estado";
 		foreach ($state_array as $est) {
-			$arr[]=$est["nome"];
+			$arr[]=utf8_decode($est["nome"]);
 		}
 		unset($arr[29]);
 		unset($arr[28]);
@@ -173,9 +173,8 @@ class Application_Form_CadastroOng extends Zend_Form
 					    	'Form'));
 		$this->addElements(array($nome,$sobreNome,$login, 
 								$passworf,$confirmPassworf,$email,
-								 $fantasia,$razao,$cpf,
-								$endereco,$numero,$complemento,
-								$bairro,$cep,$state,$cities,$capoOculto,
+								 $fantasia,$razao,
+								$state,$cities,$capoOculto,
 								$submit));
 		$translate = Zend_Registry::get('Zend_Translate');
 		$this->setTranslator($translate);
@@ -183,6 +182,32 @@ class Application_Form_CadastroOng extends Zend_Form
 
     }
 
+    
+    public function lockField($field){
+    	$elem = $this->getElement($field);
+    	$elem->setAttrib('disabled', true);
+    	$elem->setAttrib('readonly',true);
+    }
+    
+    public function campoOculto($field){
+    	$elem = $this->getElement($field);
+    	$elem->addDecorator('HtmlTag',
+    			array('tag'=>'div', 'style'=>'display:none;'));
+    	$elem->removeDecorator('label');
+    }
+    
+    
+    public function loadCidades($estado,$field="cidade"){
+    	$citiesdb = new Application_Model_DbTable_SysCidade();
+    	$rows=$citiesdb->loadCidadeByestado($estado);
+    	$arr[0]= "Escolha cidade";
+    	foreach ($rows as $est) {
+    		$arr[$est["chave"]]=$est["nome"];
+    	}
+    	$elem = $this->getElement($field);
+    	$elem->addMultiOptions($arr);
+    }
+     
 
 }
 

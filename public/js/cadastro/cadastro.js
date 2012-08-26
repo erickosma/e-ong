@@ -1,7 +1,7 @@
 var urlImg ="http://"+window.location.host;
 var tagImgErro='<span id="status"> <img src="'+urlImg+'/public/images/geral/erro.jpg" width=15px; height=15px; /></span>';  
 $(document).ready(function() {
-	$("#dataNacimento").datepicker({
+	/*$("#dataNacimento").datepicker({
     	dateFormat: 'dd/mm/yy',
     	dayNames: [
     	'Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'
@@ -23,9 +23,9 @@ $(document).ready(function() {
     	yearRange: '1970:2012' ,
 		changeMonth: true,
 		changeYear: true
-    });  
+    });*/  
 	if(verificaCampoCpfCnpj()){
-		   $("#cnpj").mask("99.999.999/9999-99");  
+		  // $("#cnpj").mask("99.999.999/9999-99");  
 		   $("#ong").validate({
 		    	 rules: {
 		             	nome: {
@@ -50,11 +50,7 @@ $(document).ready(function() {
 			             email: {
 			                    required: true,
 			                    email: true
-			                },
-		                numero: {
-		                	 number: true
-			                },
-		                cnpj: {cnpj: true}
+			                }
 		          },
 		          messages: {
 		        	  nome: {required: tagImgErro,
@@ -74,16 +70,7 @@ $(document).ready(function() {
 			   		  	 email: {
 			                 required: tagImgErro,
 			                 email: tagImgErro
-			             },
-			             dataNacimento: {
-			                 required: tagImgErro,
-			                 date: tagImgErro
-			             },
-			             numero: {
-			            	 number:tagImgErro
-			             },
-			             cnpj: { cnpj: tagImgErro,
-			            	 required: tagImgErro}
+			             }
 		          },
 		          
 		          submitHandler:function(form) {
@@ -92,7 +79,7 @@ $(document).ready(function() {
 			 });
 	}
 	else{
-		$("#cpf").mask("999.999.999-99");
+		//$("#cpf").mask("999.999.999-99");
 		  $("#profissional").validate({
 		    	 rules: {
 		             	nome: {
@@ -117,16 +104,8 @@ $(document).ready(function() {
 			             email: {
 			                    required: true,
 			                    email: true
-			                },
-		                 dataNacimento: {
-			                    required: true,
-			                    date: true
-			                },
-			                numero: {
-			                	 number: true
-				                },
-		                cpf: {cpf: true}
-		          },
+			                }
+			      },
 		          messages: {
 		        	  nome: {required: tagImgErro,
 		        		  	 minlength: tagImgErro
@@ -145,16 +124,7 @@ $(document).ready(function() {
 			   		  	 email: {
 			                 required: tagImgErro,
 			                 email: tagImgErro
-			             },
-			             dataNacimento: {
-			                 required: tagImgErro,
-			                 date: tagImgErro
-			             },
-			             numero: {
-			            	 number:tagImgErro
-			             },
-			             cpf: { cnpj: tagImgErro,
-			            	 required: tagImgErro}
+			             }
 		          },
 		          
 		          submitHandler:function(form) {
@@ -252,7 +222,7 @@ $("#email").blur(function(){
 		
 	
 });
-
+/*
 $("#cpf").blur(function(){
 	var cpf = $("#cpf").val();
 	var und = cpf.indexOf("_"); //listando underline's da string, que vêm no mask do campo
@@ -344,6 +314,7 @@ $("#cnpj").keyup(function(){
 		}
 	}
 });
+*/
 
 function verificaCampoCpfCnpj(){
 	if($("#campo_oculto").val() == "1"){

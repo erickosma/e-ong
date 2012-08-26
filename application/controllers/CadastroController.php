@@ -7,14 +7,14 @@ class CadastroController extends Zend_Controller_Action
     {
 		$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
 		$this->view->headLink()->appendStylesheet('public/css/geral.css')
-		->appendStylesheet('public/css/forms.css')
-		->appendStylesheet('public/css/cadastro/cadaastro.css');
+			->appendStylesheet('public/css/forms.css')
+			->appendStylesheet('public/css/cadastro/cadaastro.css');
 		$this->view->headScript()->appendFile('public/js/jquery/js/jquery-1.7.1.min.js')
-		->appendFile('public/js/jquery/js/jquery-ui-1.8.17.custom.min.js')
-		->appendFile('public/js/cadastro/validacao.js')
-		->appendFile('public/js/jquery/js/valida.js')
-		->appendFile('public/js/jquery/js/jquery.mask.js')
-		->appendFile('public/js/cadastro/cadastro.js');
+			->appendFile('public/js/jquery/js/jquery-ui-1.8.17.custom.min.js')
+			->appendFile('public/js/cadastro/validacao.js')
+			->appendFile('public/js/jquery/js/valida.js')
+			->appendFile('public/js/jquery/js/jquery.mask.js')
+			->appendFile('public/js/cadastro/cadastro.js');
     }
 
     public function indexAction()
@@ -194,15 +194,20 @@ class CadastroController extends Zend_Controller_Action
 				if($userLogin->checkEmail($request->getParam('email'))   )
     			{   
     				if($userLogin->checkUnique('login', $request->getParam('login')) ){		
-    					if($user->checkUnique('cpf_cnpj', $request->getParam('cpf'))){	
+    					//if($user->checkUnique('cpf_cnpj', $request->getParam('cpf'))){	
 			    			$data  = array(
 							        'nome'   	=> $request->getParam('nome'),
 						        	'sobrenome' => $request->getParam('sobrenome'),
-						        	'cpf_cnpj' 	=> $request->getParam('cpf'),
+						        	'cpf_cnpj' 	=> NULL,//$request->getParam('cpf'),
 						        	'tipo'		=> '2',
 						        	'status'	=> '1',
-						        	'create_at' => date("Y-m-d H:i:s")
+						        	'create_at' => date("Y-m-d H:i:s"),
+			    					'endereco_confidencial' 	=> '1',
+			    					'email_confidencial' 		=> '1',
+			    					'telefone_confidencial' 	=> '1',
+			    					'notificacoes_email' 		=> '1'
 			    		     );
+			    			//insere na tabela usuario
 			    			$userId= $user->insert($data);
 			    			$data  = array(
 									'id_usuario'   	=> $userId,
@@ -210,27 +215,24 @@ class CadastroController extends Zend_Controller_Action
 									'email' => $request->getParam('email'),
 									'senha' 	=> sha1($request->getParam('senha'))
 			    			);
+			    			//insere na tabela usuario_login
 			    			$userLogin->insert($data);
 			    			
-			    			$arrdate=  explode('/', $request->getParam('dataNacimento'));
-			    			$date=$arrdate[2]."-".$arrdate[1]."-".$arrdate[0];
+			    			//$arrdate=  explode('/', $request->getParam('dataNacimento'));
+			    			//$date=$arrdate[2]."-".$arrdate[1]."-".$arrdate[0];
 			    			$data  = array(
 									'id_usuario'   		=> $userId,
 									'sexo'   			=> $request->getParam('sexo'),
-									'data_nascimento'	 => $date,
-									'endereco' 			=> $request->getParam('endereco')." N° ".$request->getParam('numero') ,
-			    					'complemento' 		=> $request->getParam('complemento'),
-					    			'bairro' 			=> $request->getParam('bairro'),
-					    			'cep' 				=> $request->getParam('cep'),
+									'data_nascimento'	 => NULL,
+									'endereco' 			=>  NULL, //$request->getParam('endereco')." N° ".$request->getParam('numero') ,
+			    					'complemento' 		=> NULL,//$request->getParam('complemento'),
+					    			'bairro' 			=> NULL, //$request->getParam('bairro'),
+					    			'cep' 				=> NULL, //$request->getParam('cep'),
 					    			'id_cidade' 		=> $request->getParam('cidade'),
 				    				'id_pais' 			=> '76',
-					    			'objetivos' 		=> 'NULL',
-					    			'horario_disp' 		=> 'NULL',
-					    			'endereco_confidencial' 	=> '1',
-					    			'email_confidencial' 		=> '1',
-					    			'telefone_confidencial' 	=> '1',
-					    			'notificacoes_email' 		=> '1'
-							);
+					    			'objetivos' 		=> 'NULL'
+			    					);
+			    			//insere na tabela usuario_profissional
 			    			$usuarioProfissional->insert($data);
 		
 			    			$login = $request->getParam('login');
@@ -240,12 +242,12 @@ class CadastroController extends Zend_Controller_Action
 			    				 Application_Model_Auth::login($login, $senha);
 			    			} catch (Exception $e) {
 			    				echo $e->getMessage();
-			    			}
+			    			}//deu tudo certo 
 			    			echo $this->view->json(2);
-			    		}
+			    		/*}
     					else{
-    					echo $this->view->json(5);
-    					}
+    							echo $this->view->json(5);
+    					}*/
     				}//fim cpf
     				else{
     					echo $this->view->json(4);
@@ -282,14 +284,18 @@ class CadastroController extends Zend_Controller_Action
 				if($userLogin->checkEmail($request->getParam('email'))   )
     			{   
     				if($userLogin->checkUnique('login', $request->getParam('login')) ){		
-    					if($user->checkUnique('cpf_cnpj', $request->getParam('cnpj'))){	
+    					//if($user->checkUnique('cpf_cnpj', $request->getParam('cnpj'))){	
 			    			$data  = array(
 							        'nome'   	=> $request->getParam('nome'),
 						        	'sobrenome' => $request->getParam('sobrenome'),
-						        	'cpf_cnpj' 	=> $request->getParam('cnpj'),
+						        	'cpf_cnpj' 	=> NULL,//$request->getParam('cnpj'),
 						        	'tipo'		=> '1',
 						        	'status'	=> '1',
-						        	'create_at' => date("Y-m-d H:i:s")
+						        	'create_at' => date("Y-m-d H:i:s"),
+			    					'endereco_confidencial' 	=> '1',
+			    					'email_confidencial' 		=> '1',
+			    					'telefone_confidencial' 	=> '1',
+			    					'notificacoes_email' 		=> '1'
 			    		     );
 			    			$userId= $user->insert($data);
 			    			$data  = array(
@@ -303,19 +309,15 @@ class CadastroController extends Zend_Controller_Action
 			    			$data  = array(
 									'id_usuario'   		=> $userId,
 									'nome_fantasia'   	=> $request->getParam('fantasia'),
-									'razo_social'	 => $request->getParam('razao'),
-									'desc_ong' 			=> 'NULL',
-			    					'site' 				=> 'NULL',
-				    				'endereco' 			=> $request->getParam('endereco')." N° ".$request->getParam('numero') ,
-			    					'complemento' 		=> $request->getParam('complemento'),
-					    			'bairro' 			=> $request->getParam('bairro'),
-					    			'cep' 				=> 'NULL',
+									'razo_social'	 =>   $request->getParam('razao'),
+									'desc_ong' 			=> NULL,
+			    					'site' 				=> NULL,
+				    				'endereco' 			=> NULL,//$request->getParam('endereco')." N° ".$request->getParam('numero') ,
+			    					'complemento' 		=> NULL,//$request->getParam('complemento'),
+					    			'bairro' 			=> NULL,//$request->getParam('bairro'),
+					    			'cep' 				=> NULL,
 					    			'id_cidade' 		=> $request->getParam('cidade'),
-				    				'id_pais' 			=> '76',
-					    			'endereco_confidencial' 	=> '1',
-					    			'email_confidencial' 		=> '1',
-					    			'telefone_confidencial' 	=> '1',
-					    			'notificacoes_email' 		=> '1'
+				    				'id_pais' 			=> '76'
 							);
 			    			$usuarioOng->insert($data);
 		
@@ -328,10 +330,10 @@ class CadastroController extends Zend_Controller_Action
 			    				echo $e->getMessage();
 			    			}
 			    			echo $this->view->json(2);
-			    		}
+			    		/*}
     					else{
-    					echo $this->view->json(5);
-    					}
+    						echo $this->view->json(5);
+    					}*/
     				}//fim cpf
     				else{
     					echo $this->view->json(4);

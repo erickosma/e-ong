@@ -163,9 +163,8 @@ class Application_Form_Cadastro extends Zend_Form
 					    	'Form'));
 		$this->addElements(array($nome,$sobreNome,$login, 
 								$passworf,$confirmPassworf,$email,
-								$radio, $dataNacimento,$cpf,
-								$endereco,$numero,$complemento,
-								$bairro,$cep,$state,$cities,
+								$radio, 
+								$state,$cities,
 								$submit));
 		
 		$translate = Zend_Registry::get('Zend_Translate');
@@ -193,7 +192,7 @@ class Application_Form_Cadastro extends Zend_Form
     	$rows=$citiesdb->loadCidadeByestado($estado);
     	$arr[0]= "Escolha cidade";
     	foreach ($rows as $est) {
-    		$arr[$est["chave"]]=$est["nome"];
+    		$arr[$est["chave"]]=utf8_decode($est["nome"]);
     	}
     	$elem = $this->getElement($field);
     	$elem->addMultiOptions($arr);
@@ -222,6 +221,29 @@ class Application_Form_Cadastro extends Zend_Form
     	->addFilter('StripTags')
     	->addDecorator('HtmlTag',
     	array('tag'=>'div', 'class'=>'campo'));
+    }
+    
+    public function addCpf()
+    {
+    	$cpf = new Zend_Form_Element_Text('cpf');
+    	$cpf->setLabel('CPF:')
+	    	->setRequired(true)
+	    	->setAttrib('alt', 'cpf')
+	    	->addFilter('StripTags')
+	    	->addValidator('Cpf')
+	    	->addFilter('StringTrim')
+	    	->addValidator('NotEmpty')
+	    	->addDecorator('HtmlTag',
+	    			array('tag'=>'div', 'class'=>'campoFim'));
+    	$this->addElements(array($cpf));
+    }
+    public function addDataNacimento()
+    {
+    	$dataNacimento = new Zend_Form_Element_Text("dataNacimento");
+    	$dataNacimento->setLabel('Data nascimento:')
+    	->addDecorator('HtmlTag',
+    			array('tag'=>'div', 'class'=>'campo'));
+    	$this->addElements(array($dataNacimento));
     }
 }
 

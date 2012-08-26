@@ -47,14 +47,24 @@ class PerfilController extends Zend_Controller_Action
 
     public function ongAction()
     {
-    	 
+    	$this->view->headScript()->appendFile('public/js/perfil/ong.js');
+    	$this->view->headTitle('Perfil Ong');
+    	$this->view->description = "Perfil ong";
+    	if(Application_Model_Auth::completo()){
+    		$this->view->completaDados = "";
+    	}
+    	else{
+    		$this->view->completaDtados = "Complete seu cadastro!";
+    	}
+    	// action bodyeaa
         // action body
     }
 
     public function profissionalAction()
     {
-    	$this->view->headTitle('Perfil profissional');
-    	$this->view->description = "Perfil profissional";
+    	$this->view->headScript()->appendFile('public/js/perfil/profissional.js');
+    	$this->view->headTitle('Perfil Ong');
+    	$this->view->description = "Perfil ong";
     	if(Application_Model_Auth::completo()){
     		$this->view->completaDados = "";
     	}
@@ -66,7 +76,49 @@ class PerfilController extends Zend_Controller_Action
 
     public function dadosPessoaisOngAction()
     {
+    	$this->view->headMeta()->appendHttpEquiv('Content-Type',
+    			'text/html; charset=utf-8');
+    	
     	$this->_helper->layout->disableLayout();
+    	$this->view->headTitle('Perfil ong ');
+    	$this->view->description = "Perfil ong  ";
+    	$this->view->keywords = "cadastro,ong,voluntarios,procura";
+    	$db_estado=new Application_Model_DbTable_SysEstado();
+    		
+    	$userData = new Application_Model_DbTable_Usuario();
+    	$form = new Application_Form_CadastroOng();
+    	
+    	$usuario = Zend_Auth::getInstance()->getIdentity();
+		$data=$userData->loadAllDataUser($usuario->getId());
+		if(Application_Model_Auth::completo($usuario->getId(), $usuario->getTipo())){
+			$this->view->completaDados = "";
+		}
+		else{
+			$this->view->completaDados = "Complete seu cadastro!";	
+		}
+	
+		if(isset($data))
+    	{
+    		$form->setDefault('nome',$data->nome);
+    		$form->setDefault('sobrenome',$data->sobrenome);
+    		$form->setDefault('login',$data->login);
+    		$form->campoOculto("login");
+    		$form->campoOculto('senha');
+    		$form->campoOculto('confirm_senha');
+    		$form->setDefault('email',$data->email);
+    		$form->lockField('email');
+    		$form->setDefault('cpf',$data->cpf_cnpj);
+    		$arrayEnd=explode("N?", $data->usuario_ong->endereco);
+    		$form->setDefault('endereco',$arrayEnd[0]);
+    		$form->setDefault('numero',$arrayEnd[1]);
+    		$form->setDefault('complemento',$data->usuario_ong->complemento);
+    		$form->setDefault('bairro',$data->usuario_ong->bairro);
+    		$form->setDefault('estado',$data->cidade_estado->estado);
+    		$form->loadCidades($data->cidade_estado->estado);
+    		$form->setDefault('cidade', $data->cidade_estado->chave);
+    		$form->campoOculto('submit');
+    	}
+    	$this->view->form = $form;
     	
     	// action body
     }
@@ -101,17 +153,26 @@ class PerfilController extends Zend_Controller_Action
     		$form->campoOculto('confirm_senha');
     		$form->setDefault('email',$data->email);
     		$form->lockField('email');
+			$form->addCpf();
     		$form->setDefault('cpf',$data->cpf_cnpj);
-    		$form->lockField('cpf');
+			
+    		$form->addDataNacimento();
     		$nasc=explode("-",$data->usuario_profissional->data_nascimento);
-    		$form->setDefault('dataNacimento',$nasc[2]."/".$nasc[1]."/".$nasc[0]);
+    		if(isset($nasc[2]))
+    		{
+    			$form->setDefault('dataNacimento',$nasc[2]."/".$nasc[1]."/".$nasc[0]);
+    		}
+    		else
+    		{
+    			$form->setDefault('dataNacimento',"");
+    		}
     		$arrayEnd=explode("N?", $data->usuario_profissional->endereco);
     		$form->setDefault('sexo',$data->usuario_profissional->sexo);
     		$form->setDefault('endereco',$arrayEnd[0]);
     		$form->setDefault('numero',$arrayEnd[1]);
     		$form->setDefault('complemento',$data->usuario_profissional->complemento);
     		$form->setDefault('bairro',$data->usuario_profissional->bairro);
-    		$form->setDefault('estado',$data->cidade_estado->estado);
+    		$form->setDefault('estado', $data->cidade_estado->estado);
     		$form->loadCidades($data->cidade_estado->estado);
     		$form->setDefault('cidade', $data->cidade_estado->chave);
     		$form->campoOculto('submit');
