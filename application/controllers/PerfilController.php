@@ -8,9 +8,11 @@ class PerfilController extends Zend_Controller_Action
     	$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
 		$this->view->headLink()->appendStylesheet('public/css/geral.css')
 			->appendStylesheet('public/css/forms.css')
+			->appendStylesheet('public/css/perfil/menu.css')
 			->appendStylesheet('public/css/perfil/perfil.css');
 		$this->view->headScript()->appendFile('public/js/jquery/js/jquery-1.7.1.min.js')
 			->appendFile('public/js/jquery/js/jquery-ui-1.8.17.custom.min.js')
+			->appendFile('public/js/jquery/js/numeric.js')
 			->appendFile('public/js/cadastro/validacao.js')
 			->appendFile('public/js/jquery/js/valida.js')
 			->appendFile('public/js/jquery/js/jquery.mask.js')
@@ -63,8 +65,9 @@ class PerfilController extends Zend_Controller_Action
     public function profissionalAction()
     {
     	$this->view->headScript()->appendFile('public/js/perfil/profissional.js');
-    	$this->view->headTitle('Perfil Ong');
-    	$this->view->description = "Perfil ong";
+    	
+    	$this->view->headTitle('Perfil Profissional');
+    	$this->view->description = "Perfil Profissional";
     	if(Application_Model_Auth::completo()){
     		$this->view->completaDados = "";
     	}
@@ -79,7 +82,7 @@ class PerfilController extends Zend_Controller_Action
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
     			'text/html; charset=utf-8');
     	
-    	$this->_helper->layout->disableLayout();
+    	//$this->_helper->layout->disableLayout();
     	$this->view->headTitle('Perfil ong ');
     	$this->view->description = "Perfil ong  ";
     	$this->view->keywords = "cadastro,ong,voluntarios,procura";
@@ -125,9 +128,12 @@ class PerfilController extends Zend_Controller_Action
 
     public function dadosPessoaisProfissionalAction()
     {
-    	$this->_helper->layout->disableLayout();
-    	$this->view->headTitle('Perfil profissional ');
-    	$this->view->description = "Cadastro de profissional ";
+    	//$this->_helper->layout->disableLayout();
+    	$this->view->headScript()->appendFile('public/js/perfil/profissional.js')
+    							->appendFile('public/js/perfil/dados-pessoais-profissional.js');
+    	 
+    	$this->view->headTitle('Perfil profissional - Dados pessoais ');
+    	$this->view->description = "Perfil de profissional - Dados pessoais";
     	$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
     	$db_estado=new Application_Model_DbTable_SysEstado();
     		
@@ -145,6 +151,10 @@ class PerfilController extends Zend_Controller_Action
 	
 		if(isset($data))
     	{
+    		$form->addElement('text', 'id_usuario');
+    		$form->setDefault('id_usuario',$data->id_usuario);
+    		$form->campoOculto("id_usuario");
+    		
     		$form->setDefault('nome',$data->nome);
     		$form->setDefault('sobrenome',$data->sobrenome);
     		$form->setDefault('login',$data->login);
@@ -153,9 +163,9 @@ class PerfilController extends Zend_Controller_Action
     		$form->campoOculto('confirm_senha');
     		$form->setDefault('email',$data->email);
     		$form->lockField('email');
-			$form->addCpf();
-    		$form->setDefault('cpf',$data->cpf_cnpj);
-			
+    		if(!isset($data->cpf_cnpj) && $data->cpf_cnpj != "" || $data->cpf_cnpj != " "){
+    			$form->addCpf();
+    		}
     		$form->addDataNacimento();
     		$nasc=explode("-",$data->usuario_profissional->data_nascimento);
     		if(isset($nasc[2]))
@@ -166,17 +176,24 @@ class PerfilController extends Zend_Controller_Action
     		{
     			$form->setDefault('dataNacimento',"");
     		}
-    		$arrayEnd=explode("N?", $data->usuario_profissional->endereco);
     		$form->setDefault('sexo',$data->usuario_profissional->sexo);
-    		$form->setDefault('endereco',$arrayEnd[0]);
-    		$form->setDefault('numero',$arrayEnd[1]);
-    		$form->setDefault('complemento',$data->usuario_profissional->complemento);
-    		$form->setDefault('bairro',$data->usuario_profissional->bairro);
+
     		$form->setDefault('estado', $data->cidade_estado->estado);
     		$form->loadCidades($data->cidade_estado->estado);
     		$form->setDefault('cidade', $data->cidade_estado->chave);
-    		$form->campoOculto('submit');
+    		
+    		$arrayEnd=explode("N?", $data->usuario_profissional->endereco);
+    		$form->addEndereco();
+    		$form->setDefault('endereco',$arrayEnd[0]);
+    		$form->addNumero();
+    		$form->setDefault('numero',(int)$arrayEnd[1]);
+    		$form->addComplemento();
+    		$form->setDefault('complemento',$data->usuario_profissional->complemento);
+    		$form->addBairro();
+    		$form->setDefault('bairro',$data->usuario_profissional->bairro);
     		$form->formObjetivos();
+    		$form->setDefault('objetivo',$data->usuario_profissional->objetivos);
+    		
     	}
     	$this->view->form = $form;
     }
@@ -211,26 +228,65 @@ class PerfilController extends Zend_Controller_Action
     	$this->view->headTitle('Perfil profissional');
     }
 
+    public function updateDadosProfissionalAction()
+    {
+        // action body
+    	$this->_helper->layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	header( 'Cache-Control: no-cache' );
+    	header( 'Content-type: application/json; charset="ISO-8859-1"', true );
+    	$request = $this->getRequest();
+    	if ( $request->isPost() )
+    	{
+    		try {
+    			$user= new Application_Model_DbTable_Usuario();
+    			$usuarioProfissional = new Application_Model_DbTable_UsuarioProfissional();
+    				if($user->checkUnique('cpf_cnpj', $request->getParam('cpf'))){
+    					$data  = array(
+    							'nome'   	=> $request->getParam('nome'),
+    							'sobrenome' => $request->getParam('sobrenome'),
+    							'update_at' => date("Y-m-d H:i:s"),
+    							'cpf_cnpj' 	=> $request->getParam('cpf')
+    			     	);
+    					$where = $user->getAdapter()->quoteInto('id_usuario = ?', (int)$request->getParam('id_usuario'));
+    					$user->update($data, $where);
+    					
+    					$arrdate=  explode('/', $request->getParam('dataNacimento',null));
+    					if(!is_null($arrdate)){
+    						$date=$arrdate[2]."-".$arrdate[1]."-".$arrdate[0];
+    					}
+    					else{
+    						$date = NULL;
+    					}
+    					$endereco =$request->getParam('endereco');
+    					$numero=$request->getParam('numero',null);
+    					if(!is_null($numero))
+    					{
+    						$endereco .=" N° ".$numero;
+    					}
+    					$data  = array(
+    							'sexo'   			=> $request->getParam('sexo'),
+    							'data_nascimento'	 => $date,
+    							'endereco' 			=>  $endereco ,
+    							'complemento' 		=> $request->getParam('complemento',null),
+    							'bairro' 			=> $request->getParam('bairro',null),
+    							'cep' 				=> $request->getParam('cep',null),
+    							'id_cidade' 		=> $request->getParam('cidade',null),
+    							'objetivos' 		=> $request->getParam('objetivo',null)
+    					);
+    					$usuarioProfissional->update($data, $where);
+    					echo $this->view->json(2);
+    					}
+    					else{
+    						echo $this->view->json(5);
+    					}
+    		}
+    		catch (Exception $e)
+    		{
+    			echo $e->getMessage();
+    		}
+    	}
+    }
+
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

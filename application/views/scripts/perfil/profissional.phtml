@@ -1,19 +1,7 @@
 <div class="abasPerfil">
 	<div id="tabs">
-		<ul>
-			<li><a href="#tabs-1">Perfil</a>
-			</li>
-			<li><a href="dados-pessoais-profissional" >Dados pessoais</a>
-			</li>
-			<li><a href="imagem">Imagem</a>
-			</li>
-			<li><a href="mensagem">Mensagem</a>
-			</li>
-			<li><a href="email">Configuração de email</a>
-			</li>
-			<li><a href="dados">Dados confidenciais</a>
-			</li>
-		</ul>
+	<?=$this->menu("/menu_perfil_profissional");?>
+	
 		<div id="tabs-1">
 		<div class="completaDados"><?php echo $this->completaDados;?></div>
 			<p>Proin elit arcu, rutrum commodo, vehicula tempus, commodo a, risus

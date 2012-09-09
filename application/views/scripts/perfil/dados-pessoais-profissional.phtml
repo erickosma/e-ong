@@ -1,5 +1,40 @@
-<div class="completaDados"><?php echo $this->completaDados;?></div>
-<h3 class="titile_form">Dados pessoais </h3>
-<?php echo $this->form; ?>
-<?php echo ( sizeof( $this->messages ) > 0 ) ? $this->messages[0] : ""; ?>
-<br><br><br><br><br>
+<div class="abasPerfil">
+	<div id="tabs">
+		<?=$this->menu("/menu_perfil_profissional");?>
+		<div id="tabs-1">
+			<div class="completaDados"><?php echo $this->completaDados;?></div>
+			<h3 class="titile_form">Dados pessoais </h3>
+				<form id="profissionalUpdate"  enctype="application/x-www-form-urlencoded" action="update-dados-profissional" method="<?= $this->escape($this->form->getMethod()); ?>">
+		  		<div class="zend_form">
+						<?= $this->form->nome ?>
+						<?= $this->form->sobrenome ?>
+						<?= $this->form->dataNacimento ?>
+						<?= $this->form->cpf ?>
+						<?= $this->form->email ?>
+						<?= $this->form->sexo ?>
+						
+						<?= $this->form->estado ?>
+						<?= $this->form->cidade ?>
+						<?= $this->form->endereco ?>
+						<?= $this->form->numero ?>
+						<?= $this->form->complemento ?>
+						<?= $this->form->bairro ?>
+						<?= $this->form->objetivo ?>
+		
+			
+						<?= $this->form->id_usuario ?>
+				<div>
+						<dd id="submit-element">
+							<input type="submit" name="submit" id="submitbutton" value=Atualizar>
+						</dd>		
+				</div>
+			
+			
+			
+			<?php //echo $this->form; ?>
+			<?php echo ( sizeof( $this->messages ) > 0 ) ? $this->messages[0] : ""; ?>
+			<br><br><br><br><br>
+		</div>
+	</div>
+
+</div>

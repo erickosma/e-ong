@@ -74,7 +74,7 @@ class Application_Form_Cadastro extends Zend_Form
 						array('tag'=>'div', 'class'=>'campo'));
 		
 		
-		$cpf = new Zend_Form_Element_Text('cpf');
+	/*	$cpf = new Zend_Form_Element_Text('cpf');
 		$cpf->setLabel('CPF:')
 			->setRequired(true)
 			->setAttrib('alt', 'cpf')
@@ -84,41 +84,7 @@ class Application_Form_Cadastro extends Zend_Form
 			->addValidator('NotEmpty')
 			->addDecorator('HtmlTag',
 						array('tag'=>'div', 'class'=>'campoFim'));
-   		
-		//endereço
-		$endereco = new Zend_Form_Element_Text('endereco');
-		$endereco->setLabel('Endereço:')
-			->setRequired(true)
-			->addFilter('StripTags')
-			->addDecorator('HtmlTag',
-			array('tag'=>'div', 'class'=>'campo'))
-			->addValidator("StringLength",false,array(4, 50 , 'messages'=> 'StringLength'))
-			->addValidator('NotEmpty');
-		$numero = new Zend_Form_Element_Text('numero');
-		$numero->setLabel('Nº:')
-				->setAttrib('size', 5)
-				->addDecorator('HtmlTag',
-		array('tag'=>'div', 'class'=>'campo'));
-		
-		
-		$complemento = new Zend_Form_Element_Text('complemento');
-		$complemento->setLabel('Complemento:')
-				->addFilter('StripTags')
-				->addDecorator('HtmlTag',
-				array('tag'=>'div', 'class'=>'campo'));
-		$bairro = new Zend_Form_Element_Text('bairro');
-		$bairro->setLabel('Bairro:')
-				->addFilter('StripTags')
-				->addDecorator('HtmlTag',
-				array('tag'=>'div', 'class'=>'campo'));
-		
-		$cep= new Zend_Form_Element_Text('bairro');
-		$cep->setLabel('Bairro:')
-				->addFilter('StripTags')
-				->addDecorator('HtmlTag',
-				array('tag'=>'div', 'class'=>'campo'));
-		
-		
+   		*/
 		$db_estado=new Application_Model_DbTable_SysEstado();
 		 
 		$state_array = $db_estado->fetchAll()->toArray();
@@ -202,8 +168,9 @@ class Application_Form_Cadastro extends Zend_Form
     	$obj= new Zend_Form_Element_Textarea('objetivo');
     	$obj->setLabel('Objetivo:')
 		    	->addFilter('StripTags')
-    			->setAttrib('rows', 2)
+    			->setAttrib('rows', 5)
     			->setAttrib('cols', 30)
+    			->setOrder(9)
 		    	->addDecorator('HtmlTag',
 						array('tag'=>'div', 'class'=>'campoTextArea')				
     					);
@@ -214,6 +181,7 @@ class Application_Form_Cadastro extends Zend_Form
     	$cities = new Zend_Form_Element_Select("cidade");
     	$cities->setLabel('Cidade:')
     	->setName("cidade")
+    	->setOrder(11)
     	->setOptions(array('RegisterInArrayValidator' => false))
     	->setRequired(true)
     	->addMultiOptions(array(
@@ -234,16 +202,69 @@ class Application_Form_Cadastro extends Zend_Form
 	    	->addFilter('StringTrim')
 	    	->addValidator('NotEmpty')
 	    	->addDecorator('HtmlTag',
-	    			array('tag'=>'div', 'class'=>'campoFim'));
+	    			array('tag'=>'div', 'class'=>'campo'));
     	$this->addElements(array($cpf));
     }
     public function addDataNacimento()
     {
     	$dataNacimento = new Zend_Form_Element_Text("dataNacimento");
     	$dataNacimento->setLabel('Data nascimento:')
+    				->setOrder(10)
     	->addDecorator('HtmlTag',
     			array('tag'=>'div', 'class'=>'campo'));
     	$this->addElements(array($dataNacimento));
+    }
+    
+    public function addEndereco(){
+    	//endereço
+    	$endereco = new Zend_Form_Element_Text('endereco');
+    	$endereco->setLabel('Endereço:')
+    	->setRequired(true)
+    	->addFilter('StripTags')
+    	->setOrder(12)
+    	->addDecorator('HtmlTag',
+    			array('tag'=>'div', 'class'=>'campo'))
+    			->addValidator("StringLength",false,array(4, 50 , 'messages'=> 'StringLength'))
+    			->addValidator('NotEmpty');
+    	$this->addElements(array($endereco));
+    }
+    public function addNumero(){
+    	$numero = new Zend_Form_Element_Text('numero');
+    	$numero->setLabel('Nº:')
+    	->setAttrib('size', 5)
+    	->addDecorator('HtmlTag',
+    			array('tag'=>'div', 'class'=>'campo'));
+    	$this->addElements(array($numero));
+    }
+    
+    public function addComplemento(){
+    	$complemento = new Zend_Form_Element_Text('complemento');
+		$complemento->setLabel('Complemento:')
+				->addFilter('StripTags')
+				->addDecorator('HtmlTag',
+				array('tag'=>'div', 'class'=>'campo'));
+		$this->addElements(array($complemento));
+    }
+    
+    public function addBairro(){
+    	$bairro = new Zend_Form_Element_Text('bairro');
+    	$bairro->setLabel('Bairro:')
+		    	->addFilter('StripTags')
+		    	->addDecorator('HtmlTag',
+    							array('tag'=>'div', 'class'=>'campo'));
+    	$this->addElements(array($bairro));
+    }
+
+
+    public function addCep()
+    {
+    	$cep= new Zend_Form_Element_Text('bairro');
+    	$cep->setLabel('Bairro:')
+    	->addFilter('StripTags')
+    	->addDecorator('HtmlTag',
+    			array('tag'=>'div', 'class'=>'campo'));
+    	$this->addElements(array($cep));
+    	
     }
 }
 
