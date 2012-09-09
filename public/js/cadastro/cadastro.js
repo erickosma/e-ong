@@ -1,29 +1,7 @@
 var urlImg ="http://"+window.location.host;
 var tagImgErro='<span id="status"> <img src="'+urlImg+'/public/images/geral/erro.jpg" width=15px; height=15px; /></span>';  
 $(document).ready(function() {
-	/*$("#dataNacimento").datepicker({
-    	dateFormat: 'dd/mm/yy',
-    	dayNames: [
-    	'Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'
-    	],
-    	dayNamesMin: [
-    	'D','S','T','Q','Q','S','S','D'
-    	],
-    	dayNamesShort: [
-    	'Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'
-    	],
-    	monthNames: [
-    	'Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro',
-    	'Outubro','Novembro','Dezembro'
-    	],
-    	monthNamesShort: [
-    	'Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set',
-    	'Out','Nov','Dez'
-    	],
-    	yearRange: '1970:2012' ,
-		changeMonth: true,
-		changeYear: true
-    });*/  
+
 	if(verificaCampoCpfCnpj()){
 		  // $("#cnpj").mask("99.999.999/9999-99");  
 		   $("#ong").validate({
