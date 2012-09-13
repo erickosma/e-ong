@@ -200,8 +200,57 @@ class PerfilController extends Zend_Controller_Action
 
     public function imagemAction()
     {
-        $this->_helper->layout->disableLayout();
-    	$this->view->headTitle('Perfil profissional');
+    	$this->view->headScript()->appendFile('public/js/perfil/profissional.js')
+    			->appendFile('public/js/perfil/dados-pessoais-profissional.js');
+    	$this->view->headTitle('Perfil profissional - Imagem ');
+    	$this->view->description = "Perfil de profissional - Imagem";
+    	$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
+    	$form = new Application_Form_Imagem();
+    	$usuarioImagem = new Application_Model_DbTable_UsuarioImg();
+    	$usuario = Zend_Auth::getInstance()->getIdentity();
+    	$select=$usuarioImagem->select()
+    						->where('id_usuario = ?',(int)$usuario->getId());
+    	$rows = $usuarioImagem->fetchRow($select);
+    	if($rows){
+    		$possuiImagem=true;
+    	}
+    	else{
+    		$possuiImagem=false;
+    		 
+    	}
+    		
+    	if($this->getRequest()->isPost() ){
+    		$upload = new Application_Model_Upload();
+    		$file=$upload->upload($usuario->getId());
+    		if(!$file)
+    		{
+    			$dadosFormulario = $this->getRequest()->getPost();
+    			$form->populate( $dadosFormulario );
+    		}
+    		else
+    		{
+    			if($possuiImagem){
+    				$data = array("nome" => $file);
+    				$where = $usuarioImagem->getAdapter()->quoteInto('id_usuario = ?', (int)$usuario->getId());
+    				$usuarioImagem->update($data, $where);
+    			}
+    			else{
+	    			$data = array("id_usuario" => $usuario->getId(),
+	    					"nome" => $file);
+	    			$usuarioImagem->insert($data);
+    			}
+    		}
+    	}
+    	$this->view->form =$form;
+    	if($possuiImagem){
+    		$this->view->nome = $rows->nome;
+    		$this->view->path= "../data/uploads/imagem/profissional/";
+    	}
+    	else{
+    		$this->view->nome ="ele.jpg";
+    		$this->view->path="public/images/geral/";
+    		
+    	}
     }
 
     public function mensagemAction()

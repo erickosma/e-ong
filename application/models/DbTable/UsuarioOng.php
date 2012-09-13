@@ -13,7 +13,21 @@ class Application_Model_DbTable_UsuarioOng extends Application_Model_DbTable_Usu
 						    	->where('id_usuario =  ?', $id)
 						    	);
     	$arr=$row->toArray();
-    	if($arr["desc"]!= 0 && $arr["site"]!= 0  && $arr["endereco"]!= 0)
+    	if($this->checkTermo($arr["desc"]) && $this->checkTermo($arr["site"])  && $this->checkTermo($arr["endereco"]))
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;
+    	}
+    }
+    
+    
+    protected function checkTermo($termo)
+    {
+    	 
+    	if(isset($termo) && $termo != ""  && $termo != " "  && $termo != "0")
     	{
     		return true;
     	}

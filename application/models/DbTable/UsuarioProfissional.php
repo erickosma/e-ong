@@ -17,7 +17,7 @@ class Application_Model_DbTable_UsuarioProfissional extends Application_Model_Db
     								->where('id_usuario =  ?', $id)
 				);
     	$arr=$row->toArray();
-    	if($arr["objetivo"]!= 0 && $arr["data_nascimento"]!= 0   && $arr["endereco"]!= 0)
+    	if($this->checkTermo($arr["objetivo"])  && $this->checkTermo($arr["data_nascimento"])   &&  $this->checkTermo($arr["endereco"]))
     	{
     		return true;
     	}
@@ -25,8 +25,21 @@ class Application_Model_DbTable_UsuarioProfissional extends Application_Model_Db
     	{
     		return false;	
     	}
-    	exit;
+    	return false;
     }
     
+    
+    protected function checkTermo($termo)
+    {
+    	
+    	if(isset($termo) && $termo != ""  && $termo != " " && $termo != "0")
+    	{
+    		return true;
+    	}
+    	else
+    	{
+    		return false;	
+    	}
+    }
 }
 
