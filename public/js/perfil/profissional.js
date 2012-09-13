@@ -41,5 +41,8 @@ function marcaDivMenu(){
 		case "dados-pessoais-profissional":
 			$("#dadosPessoaisProfissional").addClass("ui-state-active");
  			break;
+		case "imagem":
+			$("#imagem").addClass("ui-state-active");
+ 			break;
 	}
 }
