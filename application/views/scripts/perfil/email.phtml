@@ -1,8 +1,14 @@
-
-<div id="view-content">
-<h3>Email ativo</h3>
-<?php echo $this->email;?> &nbsp;	<button style="width: 70px;font-size: 12px;">Editar</button>	
-<br>
-
-
+<div class="abasPerfil">
+	<div id="tabs">
+		<?=$this->menu("/menu_perfil_profissional");?>
+		<div id="tabs-1">
+			<div id="view-content" style="margin-left: auto;margin-right: auto;width: 800px;">
+				<h3>Email ativo</h3>
+				<?php echo $this->email;?> &nbsp;	
+				<!-- <button style="width: 70px;font-size: 12px;">Editar</button>	
+			 	-->
+			<br>
+			</div>
+		</div>
+	</div>
 </div>

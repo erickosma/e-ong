@@ -179,6 +179,6 @@ function updateForm(form){
 			$("#loading").css('background', 'red'); 
 			$('#loading').html(txt);
 		}
-	})
+	});
 	return false;
 }

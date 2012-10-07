@@ -44,5 +44,15 @@ function marcaDivMenu(){
 		case "imagem":
 			$("#imagem").addClass("ui-state-active");
  			break;
+		case "mensagem":
+			$("#mensagem").addClass("ui-state-active");
+ 			break;
+		case "email":
+			$("#email").addClass("ui-state-active");
+ 			break;	
+		case "dados":
+			$("#dados").addClass("ui-state-active");
+ 			break;	
+ 		
 	}
 }

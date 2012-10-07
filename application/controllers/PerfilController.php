@@ -249,22 +249,27 @@ class PerfilController extends Zend_Controller_Action
     	else{
     		$this->view->nome ="ele.jpg";
     		$this->view->path="public/images/geral/";
-    		
     	}
+    	
     }
 
     public function mensagemAction()
     {
     	
         // action body
-    	$this->_helper->layout->disableLayout();
-    	$this->view->headTitle('Perfil profissional');
+    	$this->view->headTitle('Perfil profissional - Mensagem ');
+    	$this->view->description = "Perfil de profissional - Mensagem";
+    	$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
+    	$this->view->headScript()->appendFile('public/js/perfil/profissional.js');
     }
 
     public function emailAction()
     {
-        $this->_helper->layout->disableLayout();
-    	$this->view->headTitle('Perfil profissional');
+       // $this->_helper->layout->disableLayout();
+    	$this->view->headTitle('Perfil profissional - Email ');
+    	$this->view->description = "Perfil de profissional - Email";
+    	$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
+    	$this->view->headScript()->appendFile('public/js/perfil/profissional.js');
     	$usuario = Zend_Auth::getInstance()->getIdentity();
     	$this->view->usuario = $usuario;
     	$this->view->email = $usuario->getEmail();
@@ -273,8 +278,13 @@ class PerfilController extends Zend_Controller_Action
 
     public function dadosAction()
     {
-        $this->_helper->layout->disableLayout();
-    	$this->view->headTitle('Perfil profissional');
+     //   $this->_helper->layout->disableLayout();
+    	$this->view->headTitle('Perfil profissional - Dados confidenciais ');
+    	$this->view->description = "Perfil de profissional - Dados confidenciais";
+    	$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
+    	$this->view->headScript()->appendFile('public/js/perfil/profissional.js');
+    	$this->view->headScript()->appendFile('public/js/perfil/dados.js');
+    	
     }
 
     public function updateDadosProfissionalAction()
@@ -337,5 +347,81 @@ class PerfilController extends Zend_Controller_Action
     	}
     }
 
+    public function updateDadosConfidenciaisAction()
+    {
+    	$this->_helper->layout->disableLayout();
+    	$this->_helper->viewRenderer->setNoRender();
+    	header( 'Cache-Control: no-cache' );
+    	header( 'Content-type: application/json; charset="ISO-8859-1"', true );
+    	
+    	$request = $this->getRequest();
+    	if ( $request->isPost() )
+    	{
+    		
+    		try{
+    			$user= new Application_Model_DbTable_Usuario();
+    			$usuarioSession = Zend_Auth::getInstance()->getIdentity();
+    			$where = $user->getAdapter()->quoteInto('id_usuario = ?', (int)$usuarioSession->getId());
+    			if($request->getParam('email',false))
+    			{
+    				if((int)$request->getParam('email') == 1)
+    				{
+    					$conf=0;
+    				}
+    				else{
+    					$conf=1;
+    				}
+    				$data  = array(
+    						'email_confidencial'   	=>$conf
+    				);
+    				$user->update($data, $where);
+    				echo "1";
+    			}
+    			elseif($request->getParam('endereco',false))
+    			{
+    				if((int)$request->getParam('endereco') == 1)
+    				{
+    					$conf=0;
+    				}
+    				else{
+    					$conf=1;
+    				}
+    				$data  = array(
+    						'endereco_confidencial'   	=> $conf
+    				);
+    				$user->update($data, $where);
+    				echo "1";
+    			}
+    			elseif($request->getParam('tel',false))
+    			{
+    				if((int)$request->getParam('tel') == 1)
+    				{
+    					$conf=0;
+    				}
+    				else{
+    					$conf=1;
+    				}
+    				$data  = array(
+    						'telefone_confidencial'   	=> $conf
+    				);
+    				$user->update($data, $where);
+    				echo "1";
+    			}
+    			else{
+    				echo "0";
+    			}
+    		}
+    		catch (Exception $e){
+    			echo $e->getMessage();
+    		}
+    	}
+    	else
+    	{
+    		echo "0";
+    	}
+    }
+
 
 }
+
+

@@ -1,9 +1,14 @@
-<div id="view-content">
-<h3>Dados confidenciais </h3>
-<input type="checkbox" name="conf" value="1" > &nbsp; &nbsp; endereço confidencial	
-<br>
-<input type="checkbox" name="conf" value="1" > &nbsp; &nbsp; email confidencial
-<br>
-<input type="checkbox" name="conf" value="1" > &nbsp; &nbsp; telefone confidencial
-
+<div class="abasPerfil">
+	<div id="tabs">
+		<?=$this->menu("/menu_perfil_profissional");?>
+			<div id="view-content" style="margin-left: auto;margin-right: auto;width: 800px;">
+				<h3>Dados confidenciais </h3>
+				<input type="checkbox" name="endereco" id="endereco" value="1" onclick="atualizaDados(this.id);" > &nbsp; &nbsp; endereço confidencial	
+				<br>
+				<input type="checkbox" name="email" id="email" value="1" onclick="atualizaDados(this.id);"> &nbsp; &nbsp; email confidencial
+				<br>
+				<input type="checkbox" name="tel"id="tel" value="1" onclick="atualizaDados(this.id);" > &nbsp; &nbsp; telefone confidencial
+			</div>
 	</div>
+</div>
+	
