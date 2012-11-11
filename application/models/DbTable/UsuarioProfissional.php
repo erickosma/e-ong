@@ -4,7 +4,7 @@ class Application_Model_DbTable_UsuarioProfissional extends Application_Model_Db
 {
 
     protected $_name = 'usuario_profissional';
-    protected $_schema ="ong";
+   // protected $_schema ="ong";
     protected $_primary = 'id_usuario_profissional';
     
     

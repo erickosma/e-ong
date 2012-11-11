@@ -4,7 +4,7 @@ class Application_Model_DbTable_UsuarioLogin extends Application_Model_DbTable_U
 {
 
 	protected $_name = 'usuario_login';
-	protected $_schema ="ong";
+	//protected $_schema ="ong";
 
 
 	public function checkUnique($field,$value)

@@ -2,7 +2,7 @@
 // 'created_on'      => new Zend_Db_Expr('CURDATE()'),
 class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
 {
-	protected $_schema ="ong";
+	//protected $_schema ="ong";
     protected $_name = 'usuario';
     protected $_primary = 'id_usuario';
 

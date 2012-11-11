@@ -4,7 +4,7 @@ class Application_Model_DbTable_UsuarioOng extends Application_Model_DbTable_Usu
 {
 
     protected $_name = 'usuario_ong';
-    protected $_schema ="ong";
+  //  protected $_schema ="ong";
     protected $_primary = 'id_usuario_ong';
     
     public function cadastroCompleto($id){
