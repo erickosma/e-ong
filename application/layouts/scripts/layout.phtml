@@ -16,18 +16,41 @@ echo $this->doctype();
 	<meta name="keywords" content="<?php echo $this->keywords?>" />
 </head>
 <body>
-			<div class="divtopo" > 
-				<div style="margin-left:30px;  width: 200px; float: left;">	
-					<div class="logo" style="font-family: 'Berkshire Swash', cursive;    font-size: 50px;" >Ação </div>
-					<div class="logo" style=" font-family: 'Berkshire Swash', cursive;    font-size: 40px; margin-left: 60px; margin-top: -20px;" >Paralela</div>
+<div class="main">
+  <div class="header_resize">
+    <div class="header">
+      <div class="logo">
+    			  <div style="margin-left:30px;  width: 250px; padding-left:10px; float: left; background: #48c4e1;  -moz-box-shadow: 8px 8px 10px #404040;-webkit-box-shadow: 8px 16px 10px #004040;box-shadow: 8px 16px 10px #272727;">	
+					<a href="/" style="color:#FCFCFC; ">
+					 	<div class="logo" style="font-family: 'Berkshire Swash', cursive;    font-size: 50px;" >Ação </div>
+						<div class="logo" style=" font-family: 'Berkshire Swash', cursive;    font-size: 40px; margin-left: 60px; margin-top: -20px;" >Paralela</div>
+					</a>
 				</div>
-					<?=$this->menu("menu_topo");?>
-			</div>
-			<div class="conteudo"><?php echo $this->layout()->content; ?></div>
-       		<div class="rodape"> 
+      </div>
+      <div class="menu">
+      			<?=$this->menu("menu_topo");?>
+      </div>
+ 	  	<? $this->slide("slide");?>
+ 	   <div class="clr"></div>
+ 
+    </div>
+  </div>
+  
+  <div class="body">
+    <div class="body_resize">
+    	<?php echo $this->layout()->content; ?>
+    </div>
+  </div>
+  
+  <div class="clr"></div>
+  <div class="clr"></div>
+  <div class="footer">
+   			<div class="rodape"> 
        			<?=$this->menu("rodape");?>
        		</div>
        		<div id="loading"><img src="<?php echo BASE_URL;?>/public/images/geral/loading.gif" alt="" /> </div>
        		<?php 	echo $this->MyJavaScript();?>
+  </div>
+</div>
 </body>
 </html>

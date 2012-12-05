@@ -90,7 +90,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	{
 		$aclSetup = new Application_Acl_Setup();
 	}
-	
-
+	/*
+	protected function _initPlaceholders()
+	{
+		$this->bootstrap('View');
+		$view = $this->getResource('View');
+		$view->headLink()->appendStylesheet('public/css/geral.css');
+	}*/
 }
 

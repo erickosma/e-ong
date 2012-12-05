@@ -46,7 +46,7 @@ class Application_Acl_Setup
 		$this->_acl->allow( 'user', 'cadastro', array('index', 'save','profissional','ong') )
 					->allow( 'user', 'auth', 'logout' )
 					->allow( 'user', 'perfil', array('index', 'save', 'editar', 'update', 'imagem', 'welcome','ong','profissional','dados-pessoais-profissional','update-dados-profissional','dados-pessoais-ong'
-														,'mensagem','email','dados'));
+														,'mensagem','email','dados',"update-dados-confidenciais"));
 		$this->_acl->allow( 'admin', 'admin' );
 		
 	}
