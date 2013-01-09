@@ -70,7 +70,7 @@ class Application_Model_DbTable_Usuario extends Zend_Db_Table_Abstract
     
     
     
-   protected  function arrayToObject($array = array()) {
+   public  function arrayToObject($array = array()) {
     	if (!empty($array)) {
     		$data = false;
     		foreach ($array as $akey => $aval) {

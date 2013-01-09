@@ -10,12 +10,17 @@ class BuscarController extends Zend_Controller_Action
     							->appendStylesheet('public/css/forms.css');
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
     	                                   'text/html; charset=ISO-8859-1');
-    	$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
-    	
+		$this->view->headScript()->appendFile('public/js/jquery/js/jquery-1.7.1.min.js')
+			->appendFile('public/js/jquery/js/jquery-ui-1.8.17.custom.min.js')
+			->appendFile('public/js/buscar/pesquisa.js');
     }
 
     public function indexAction()
     {
+    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntários');	/* Initialize action controller here */
+    	$this->view->headTitle('Buscar - Ajude a ajudar');
+    	$this->view->description = "Busca por vonluntarios busca por ong";
+    	$this->view->keywords = "ong,profissionais,voluntarios,procura";
         // action body
     }
 
@@ -31,16 +36,38 @@ class BuscarController extends Zend_Controller_Action
 
     public function profissionaisAction()
     {
-    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntários');	/* Initialize action controller here */
-    	$this->view->headTitle('Buscar profissionais');
+    	
+        // action body
+    }
+
+    public function usuarioAction()
+    {
+        $this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntários');	/* Initialize action controller here */
+    	$this->view->headTitle('Buscar usuário');
     	$this->view->description = "Busca por vonluntarios busca por ong";
     	$this->view->keywords = "ong,profissionais,voluntarios,procura";
-    	 
-        // action body
+
+    }
+
+    public function termoAction()
+    {
+    	$this->_helper->layout->disableLayout();
+    	
+    	$request = $this->getRequest();
+    	$termo = $request->getParam("q");
+    	$Pesquisa =  new Application_Model_Pesquisa();
+    	$result = $Pesquisa->pesquisa($termo);
+		$this->view->pesquisa = $result;
+		$this->view->total = count($result);
+    	// action body
     }
 
 
 }
+
+
+
+
 
 
 

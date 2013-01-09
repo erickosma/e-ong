@@ -1,0 +1,18 @@
+<div style="margin-left: 10px; font-size: 12px; margin-bottom: 10px;">Foram  encontrados: <?php echo $this->total;?></div>
+
+<?php
+	if($this->pesquisa)
+	{
+?>
+<?php
+		foreach ($this->pesquisa as $ajuda)
+		{
+?>
+			<div style="margin-left: 10px;">
+				<div id="titulo"   ><a href="<?php echo $this->baseUrl($ajuda["url"])?>" style="font-size: 20px; font-weight: bold;"> <?php echo $ajuda["titulo"]?></a> </div>
+				<div id="texto" ><?php echo $ajuda["descricao"]?></div>
+			</div>
+<?php 			
+		}	
+	}
+?>

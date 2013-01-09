@@ -1,21 +1,37 @@
 $(function() {
-	$( "#tabs" ).tabs({
-		ajaxOptions: {
-			error: function( xhr, status, index, anchor ) {
-				$( anchor.hash ).html(
-					"Couldn't load this tab. We'll try to fix this as soon as possible. " +
-					"If this wouldn't be a demo." );
-			},
-			success: function(){
-			
-			}
-		}
-	});
+
+	marcaDivMenu();
 });
 
 
 
-$("#tabs a").click(function () {
-	document.title = $(this).html();
-});
+function nomePagina(){
+	var loc = $(location).attr('href');
+	var separado = loc.split("/");
+	return separado[4];
+}
 
+function marcaDivMenu(){
+	switch(nomePagina())
+	{
+		case "ong":
+			$("#home").addClass("ui-state-active");
+			break;
+		case "dados-pessoais-ong":
+			$("#dadosPessoaisOng").addClass("ui-state-active");
+ 			break;
+		case "imagem":
+			$("#imagem").addClass("ui-state-active");
+ 			break;
+		case "mensagem":
+			$("#mensagem").addClass("ui-state-active");
+ 			break;
+		case "email":
+			$("#email").addClass("ui-state-active");
+ 			break;	
+		case "dados":
+			$("#dados").addClass("ui-state-active");
+ 			break;	
+ 		
+	}
+}

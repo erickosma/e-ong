@@ -17,8 +17,8 @@ class Zend_View_Helper_Slide extends Zend_View_Helper_Abstract
     public function slide($slide="slide")
     {
     	$this->view->slide=0;
- 
-    	if(Zend_Controller_Front::getInstance()->getRequest()->getControllerName() == "index")
+ 		$controller =Zend_Controller_Front::getInstance()->getRequest()->getControllerName();
+    	if($controller == "index" || $controller = "sobre-nos")
 	    {
 	    	$this->view->slide=1;
 	    }

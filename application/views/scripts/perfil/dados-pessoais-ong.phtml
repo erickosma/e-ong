@@ -1,5 +1,14 @@
-<div class="completaDados"><?php echo $this->completaDados;?></div>
-<h3 class="titile_form">Dados pessoais </h3>
-<?php echo $this->form; ?>
-<?php echo ( sizeof( $this->messages ) > 0 ) ? $this->messages[0] : ""; ?>
-<br><br><br><br><br>
+<div class="abasPerfil">
+	<div id="tabs">
+		<?=$this->menu("/menu_perfil_ong");?>
+		<div id="tabs-1">
+
+			<div class="completaDados"><?php echo $this->completaDados;?></div>
+			<h3 class="titile_form">Dados pessoais </h3>
+			<?php echo $this->form; ?>
+			<?php echo ( sizeof( $this->messages ) > 0 ) ? $this->messages[0] : ""; ?>
+			<br><br><br><br><br>
+		</div>
+
+</div>
+</div>

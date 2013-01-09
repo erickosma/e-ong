@@ -49,7 +49,7 @@ class PerfilController extends Zend_Controller_Action
 
     public function ongAction()
     {
-    	$this->view->headScript()->appendFile('public/js/perfil/ong.js');
+  	    $this->view->headScript()->appendFile('public/js/perfil/ong.js');
     	$this->view->headTitle('Perfil Ong');
     	$this->view->description = "Perfil ong";
     	if(Application_Model_Auth::completo()){
@@ -79,9 +79,10 @@ class PerfilController extends Zend_Controller_Action
 
     public function dadosPessoaisOngAction()
     {
-    	$this->view->headMeta()->appendHttpEquiv('Content-Type',
+    	/*$this->view->headMeta()->appendHttpEquiv('Content-Type',
     			'text/html; charset=utf-8');
-    	
+    	*/
+    	$this->view->headScript()->appendFile('public/js/perfil/ong.js');
     	//$this->_helper->layout->disableLayout();
     	$this->view->headTitle('Perfil ong ');
     	$this->view->description = "Perfil ong  ";
