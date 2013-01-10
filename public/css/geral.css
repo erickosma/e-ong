@@ -1,4 +1,4 @@
-@charset "utf-8";
+
 body { margin:0; padding:0; width:100%; background:#474747; }
 html { padding:0; margin:0; }
 .main2 { margin:0 auto; padding:0; background:#474747 }
@@ -25,7 +25,7 @@ html { padding:0; margin:0; }
 
 
 /*menu*/
-.menu { padding:63px 0 0 0; margin:0; width:410px; float:right; }
+.menu { padding:63px 0 0 0; margin:0; width:460px; float:right; }
 .menu ul { text-align:right; padding:0; margin:0; list-style:none; border:0; float:right; }
 .menu ul li { float:left; margin:0; padding:0 5px; border:0; }
 .menu ul li a { float:left; margin:0; padding:12px; color:#d7d7d7; font:bold 12px Arial, Helvetica, sans-serif; text-decoration:none; border-left:1px solid #3c3c3c; }
@@ -53,7 +53,7 @@ html { padding:0; margin:0; }
 
 
 /* FBG */
-.FBG { margin:0 auto; padding:5px 0; width:960px; }
+.FBG { margin:0 auto; padding:0px 0; width:1024px; }
 .FBG h2 { font:bold 14px Arial, Helvetica, sans-serif; color:#c7c7c7; padding:5px 0; margin:0; }
 .FBG ul { list-style:none; margin:0; padding:0; }
 .FBG li { background:url(/public/images/geral//fbg_ul_li.gif) left no-repeat; padding:1px 0 1px 15px; margin:0; }
@@ -61,8 +61,8 @@ html { padding:0; margin:0; }
 .FBG li a:hover { text-decoration:none; color:#fff; }
 .FBG p { font:normal 11px Arial, Helvetica, sans-serif; color:#969696; line-height:1.5em; padding:5px 0; margin:0; }
 .FBG img { margin:5px; padding:0; float:left; }
-.FBG .blog { width:250px; float:left; margin:0; padding:15px 25px; }
-.FBG .blog2 { width:130px; float:left; margin:0; padding:15px 25px; }
+.FBG .blog { width:250px; float:left; margin:0; padding:15px 20px; }
+.FBG .blog2 { width:150px; float:left; margin:0; padding:15px 20px; }
 
 
 
@@ -101,9 +101,9 @@ li.bg,
 
 
 .rodape{
-	margin-left: auto;margin-right: auto; width: 900px;
+	margin-left: auto;margin-right: auto; width: 1024px;
 	height: 150px;
-	padding-left:20px;
+	padding-left:40px;
 	position:relative;
 	z-index:1;
 	font-weight: bold;
