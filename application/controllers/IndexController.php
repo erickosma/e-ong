@@ -28,7 +28,6 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-    
     	/*
     	$date     = new Zend_Date();
     	$currency = new Zend_Currency();
@@ -39,8 +38,43 @@ class IndexController extends Zend_Controller_Action
     	/* Camada de Visualiza��o 
     	$this->view->hoje  = $hoje;
     	$this->view->saldo = $saldo;*/
+    	$this->view->pesquisa =  $this->view->render("index/box-pesquisa.phtml");
+    	$this->view->ultimas =  $this->view->render("index/ultimas.phtml");
+    	
+    	
+    	$this->view->esquerda = $this->view->render("index/esquerda.phtml");
+    	$this->view->direita =  $this->view->render("index/direita.phtml");
+    	 
     }
 
+    public function esquerdaAction()
+    {
+    	$this->_helper->layout->disableLayout();
+        // action body
+    }
 
+    public function direitaAction()
+    {
+    	$this->_helper->layout->disableLayout();
+        // action body
+    }
+
+    public function boxPesquisaAction()
+    {
+    	$this->_helper->layout->disableLayout();
+        // action body
+    }
+
+	protected function ultmas($count){
+		
+		
+		return $this->view->render("index/ultimas.phtml");
+	}
 }
+
+
+
+
+
+
 

@@ -25,7 +25,7 @@ html { padding:0; margin:0; }
 
 
 /*menu*/
-.menu { padding:63px 0 0 0; margin:0; width:460px; float:right; }
+.menu { padding:63px 0 0 0; margin:0; width:480px; float:right; }
 .menu ul { text-align:right; padding:0; margin:0; list-style:none; border:0; float:right; }
 .menu ul li { float:left; margin:0; padding:0 5px; border:0; }
 .menu ul li a { float:left; margin:0; padding:12px; color:#d7d7d7; font:bold 12px Arial, Helvetica, sans-serif; text-decoration:none; border-left:1px solid #3c3c3c; }
