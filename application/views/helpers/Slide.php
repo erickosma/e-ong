@@ -27,11 +27,11 @@ class Zend_View_Helper_Slide extends Zend_View_Helper_Abstract
 	    }
        if($slide != "" || !is_null($slide))
        {
-       		echo $this->view->render ($slide.".phtml");
+       		echo   $this->view->render ($slide.".phtml");
        }
        else
        {
-    	   echo  $this->view->render("slide.phtml");
+    	   echo   $this->view->render("slide.phtml");
        }
     }
    

@@ -3,60 +3,32 @@
 class Application_Model_Pesquisa
 {
 
+	
 	public function __construct()
 	{
-		
+	
 	}
 	
 	
-	public function pesquisa($termo)
+	
+	public function pesquisa()
 	{
-		if($this->checkTermo($termo))
-		{
-			$oportunidade = new Application_Model_DbTable_Oportunidade();
-			$select  = $oportunidade->select()
-								->from(array("o"=> 'oportunidade'),	
-											array("o.titulo","o.descricao","o.url"))
-								->where('titulo LIKE ?', '%'.$termo.'%');
-			$rows = $oportunidade->fetchAll($select);
-			if($rows->count() > 0)
-			{
-				$rowsetArray = $rows->toArray();
-				return $rowsetArray;
+		$oportunidade = new Application_Model_DbTable_Oportunidade();
+		$select  = $oportunidade->select()
+		->where('titulo LIKE ?', '%teste%');
+		$rows = $oportunidade->fetchAll($select);
+		if($rows->count() > 0){
+			$rowsetArray = $rows->toArray();
+				
+			foreach ($rowsetArray as $rowArray) {
+				foreach ($rowArray as $column => $value) {
+					echo "\t$column => $value\n";
+				}
 			}
+	
 		}
-		else
-		{
-			return false;
-		}
-	}
+		exit;
 	
-	
-	protected function checkTermo($termo)
-	{
-	
-		if(isset($termo) && $termo != ""  && $termo != " "  && $termo != "0")
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
-	
-	public function trataAreaAtuacao(){
-		//manul 
-		//sistema
-		//retorna nome
-	}
-	
-	public function trataData(){
-		
-	}
-	
-	public function trataUrl(){
-			
 	}
 }
 
