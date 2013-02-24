@@ -15,6 +15,9 @@ class CadastroController extends Zend_Controller_Action
 			->appendFile('public/js/jquery/js/valida.js')
 			->appendFile('public/js/jquery/js/jquery.mask.js')
 			->appendFile('public/js/cadastro/cadastro.js');
+		$this->view->headMeta()->appendHttpEquiv('Content-Type',
+												'text/html; charset=utf-8');
+		
     }
 
     public function indexAction()
@@ -22,8 +25,6 @@ class CadastroController extends Zend_Controller_Action
 		$this->view->headTitle('Cadasro- Escolha o seu ');
 		$this->view->description = "Cadastro de profissional e ong";
 		$this->view->keywords = "cadastro,ong,profissionais,voluntarios,procura";
-		$this->view->headMeta()->appendHttpEquiv('Content-Type',
-  												'text/html; charset=ISO-8859-1');
     }
 
     public function profissionalAction()
@@ -31,8 +32,6 @@ class CadastroController extends Zend_Controller_Action
 		$this->view->headTitle('Cadasro - profissional ');
 		$this->view->description = "Cadastro de profissional ";
 		$this->view->keywords = "cadastro,profissionais,voluntarios,procura";
-		$this->view->headMeta()->appendHttpEquiv('Content-Type',
-  												'text/html; charset=ISO-8859-1');
 		$form = new Application_Form_Cadastro();
 		$this->view->form = $form;
     }
@@ -42,8 +41,6 @@ class CadastroController extends Zend_Controller_Action
 		$this->view->headTitle('Cadasro - Ong ');
 		$this->view->description = "Cadastro de  ong";
 		$this->view->keywords = "cadastro,ong,voluntarios,procura";
-		$this->view->headMeta()->appendHttpEquiv('Content-Type',
-  												'text/html; charset=ISO-8859-1');
 		$form = new Application_Form_CadastroOng();
 		$this->view->form = $form;
     }
@@ -179,7 +176,7 @@ class CadastroController extends Zend_Controller_Action
     	$this->_helper->layout->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	header( 'Cache-Control: no-cache' );
-    	header( 'Content-type: application/json; charset="ISO-8859-1"', true );
+    	header( 'Content-type: application/json; charset="utf-8"', true );
     	$request = $this->getRequest();
     	if ( $request->isPost() ) 
     	{
@@ -224,7 +221,7 @@ class CadastroController extends Zend_Controller_Action
 									'id_usuario'   		=> $userId,
 									'sexo'   			=> $request->getParam('sexo'),
 									'data_nascimento'	 => NULL,
-									'endereco' 			=>  NULL, //$request->getParam('endereco')." N° ".$request->getParam('numero') ,
+									'endereco' 			=>  NULL, //$request->getParam('endereco')." Nï¿½ ".$request->getParam('numero') ,
 			    					'complemento' 		=> NULL,//$request->getParam('complemento'),
 					    			'bairro' 			=> NULL, //$request->getParam('bairro'),
 					    			'cep' 				=> NULL, //$request->getParam('cep'),
@@ -269,7 +266,7 @@ class CadastroController extends Zend_Controller_Action
         $this->_helper->layout->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	header( 'Cache-Control: no-cache' );
-    	header( 'Content-type: application/json; charset="ISO-8859-1"', true );
+    	header( 'Content-type: application/json; charset="utf-8"', true );
     	$request = $this->getRequest();
     	if ( $request->isPost() ) 
     	{
@@ -312,7 +309,7 @@ class CadastroController extends Zend_Controller_Action
 									'razo_social'	 =>   $request->getParam('razao'),
 									'desc_ong' 			=> NULL,
 			    					'site' 				=> NULL,
-				    				'endereco' 			=> NULL,//$request->getParam('endereco')." N° ".$request->getParam('numero') ,
+				    				'endereco' 			=> NULL,//$request->getParam('endereco')." Nï¿½ ".$request->getParam('numero') ,
 			    					'complemento' 		=> NULL,//$request->getParam('complemento'),
 					    			'bairro' 			=> NULL,//$request->getParam('bairro'),
 					    			'cep' 				=> NULL,

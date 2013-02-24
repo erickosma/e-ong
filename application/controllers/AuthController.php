@@ -8,13 +8,13 @@ class AuthController extends Zend_Controller_Action
     	
     	
 		$this->view->headLink()->appendStylesheet('public/css/geral.css')
-    							->appendStylesheet('public/css/forms.css');
-    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntários');	/* Initialize action controller here */
+								->appendStylesheet('public/css/forms.css');
+    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntï¿½rios');	/* Initialize action controller here */
     	$this->view->headTitle('Login');
     	$this->view->description = "Busca por vonluntarios busca por ong";
     	$this->view->keywords = "ong,profissionais,voluntarios,procura";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
-    	                                   'text/html; charset=ISO-8859-1');
+    	                                   'text/html; charset=utf-8');
     	$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
     	
     }
@@ -38,7 +38,7 @@ class AuthController extends Zend_Controller_Action
 		//Verifica se existem dados de POST
         if ( $this->getRequest()->isPost() ) {
             $data = $this->getRequest()->getPost();
-            //Formulário corretamente preenchido?
+            //Formulï¿½rio corretamente preenchido?
             if ( $form->isValid($data) ) {
                 $login = $form->getValue('login');
                 $senha = $form->getValue('senha');
@@ -48,12 +48,12 @@ class AuthController extends Zend_Controller_Action
                     //Redireciona para o Controller protegido
                     return $this->_helper->redirector->goToRoute( array('controller' => 'perfil'), null, true);
                 } catch (Exception $e) {
-                    //Dados inválidos
+                    //Dados invï¿½lidos
                     $this->_helper->FlashMessenger($e->getMessage());
                     $this->_redirect('/auth/login');
                 }
             } else {
-                //Formulário preenchido de forma incorreta
+                //Formulï¿½rio preenchido de forma incorreta
                 $form->populate($data);
             }
         }
