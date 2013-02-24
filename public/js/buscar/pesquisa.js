@@ -9,16 +9,9 @@ $(function() {
 function pesquisa()
 {
 	var termo = $("#buscar").val();
-	if(termo.length > 0)
+	if(termo.length > 3)
 	{
-		var  params = termo;
-		$.ajax({
-			type: 'POST',
-			url: "/buscar/termo/q/"+termo,
-			data: params,
-			success: function(txt){
-				$("#resultado").html(txt);
-			}
-		});
+		alert(termo.length);
+		window.location = "/encontre/termo";
 	}
 }

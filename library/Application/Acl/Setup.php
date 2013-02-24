@@ -31,6 +31,7 @@ class Application_Acl_Setup
 	{
 		$this->_acl->addResource( new Zend_Acl_Resource('auth') );
 		$this->_acl->addResource( new Zend_Acl_Resource('index') );
+		$this->_acl->addResource( new Zend_Acl_Resource('encontre') );
 		$this->_acl->addResource( new Zend_Acl_Resource('buscar') );
 		$this->_acl->addResource( new Zend_Acl_Resource('error') );
 		$this->_acl->addResource( new Zend_Acl_Resource('cadastro') );
@@ -42,7 +43,9 @@ class Application_Acl_Setup
 	{
 		$this->_acl->allow(null, 'auth', array('index', 'login') )
 					->allow(null, 'cadastro', array('index', 'save','profissional','ong'))
-					->allow( null, 'index', array('index') );
+					->allow( null, 'index', array('index'))
+					->allow(null, 'encontre', array('index', 'ong', 'voluntario', 'termo', 'ajuda') )
+		;
 		$this->_acl->allow( 'user', 'cadastro', array('index', 'save','profissional','ong') )
 					->allow( 'user', 'auth', 'logout' )
 					->allow( 'user', 'perfil', array('index', 'save', 'editar', 'update', 'imagem', 'welcome','ong','profissional','dados-pessoais-profissional','update-dados-profissional','dados-pessoais-ong'

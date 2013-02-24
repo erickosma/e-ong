@@ -1,0 +1,92 @@
+.buscar {
+	height: 35px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	border: 3px solid #CCCCC0;
+	font-size: 14px;
+	font-size: 16px;
+	width: 570px;
+	margin-bottom: 20px;
+}
+
+.buttonRedondo {
+   background: #0095c2;
+   background: -webkit-gradient(linear, left top, left bottom, from(#63ceff), to(#0095c2));
+   background: -webkit-linear-gradient(top, #63ceff, #0095c2);
+   background: -moz-linear-gradient(top, #63ceff, #0095c2);
+   background: -ms-linear-gradient(top, #63ceff, #0095c2);
+   background: -o-linear-gradient(top, #63ceff, #0095c2);
+   padding: 9px 18px;
+   -webkit-border-radius: 18px;
+   -moz-border-radius: 18px;
+   border-radius: 18px;
+ 
+ 
+   color: white;
+   font-size: 20px;
+   font-family: Georgia, Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   margin-left: 40px;
+   cursor: pointer;
+   
+   }
+.buttonRedondo:hover {
+ background: -webkit-gradient(linear, left top, left bottom, from(#6FcFff), to(#0F9FcF));
+   background: -webkit-linear-gradient(top, #6FcFff, #0F9FcF);
+   background: -moz-linear-gradient(top, #63ceff, #0095c2);
+   background: -ms-linear-gradient(top, #63ceff, #0095c2);
+   background: -o-linear-gradient(top, #63ceff, #0095c2);
+   color: white;
+   }
+.buttonRedondo:active {
+   background: #1b435e;
+   }
+   
+   
+.buttonQuadrado {
+   background: #0095c2;
+   background: -webkit-gradient(linear, left top, left bottom, from(#63ceff), to(#0095c2));
+   background: -webkit-linear-gradient(top, #63ceff, #0095c2);
+   background: -moz-linear-gradient(top, #63ceff, #0095c2);
+   background: -ms-linear-gradient(top, #63ceff, #0095c2);
+   background: -o-linear-gradient(top, #63ceff, #0095c2);
+   padding: 9px 18px;
+   -webkit-border-radius: 18px;
+   -moz-border-radius: 18px;
+   border-radius: 18px;
+ 
+ 
+   color: white;
+   font-size: 20px;
+   font-family: Georgia, Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   margin-left: 40px;
+   cursor: pointer;
+   
+   }
+.buttonQuadrado:hover {
+ background: -webkit-gradient(linear, left top, left bottom, from(#6FcFff), to(#0F9FcF));
+   background: -webkit-linear-gradient(top, #6FcFff, #0F9FcF);
+   background: -moz-linear-gradient(top, #63ceff, #0095c2);
+   background: -ms-linear-gradient(top, #63ceff, #0095c2);
+   background: -o-linear-gradient(top, #63ceff, #0095c2);
+   color: white;
+   }
+.buttonQuadrado:active {
+   background: #1b435e;
+   }
+      
+   
+.pesquisaDiv{
+	margin-top: 0px;
+	padding-left:43px; 
+	padding-top:15px;
+	min-height: 300px; 
+	background-repeat:no-repeat; 	
+	background-image: url('/public/images/busca/topo1.png'); 
+	position: relative;
+	
+}
