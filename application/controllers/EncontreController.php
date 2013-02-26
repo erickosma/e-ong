@@ -33,7 +33,12 @@ class EncontreController extends Zend_Controller_Action
 
     public function termoAction()
     {
-        // action body
+    	$Pesquisa  = new Application_Model_Pesquisa();
+    	
+    	$request = $this->getRequest();
+    	$termo = $Pesquisa->checkParam($request);
+    	if($termo){
+    		$Pesquisa->pesquisa();   	}
     }
 
     public function ajudeAction()
@@ -42,6 +47,7 @@ class EncontreController extends Zend_Controller_Action
     }
 
 
+	
 }
 
 
