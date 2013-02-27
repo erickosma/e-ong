@@ -27,8 +27,21 @@ class Application_Form_Login extends Zend_Form
 				->addValidator('NotEmpty');
 		 
 		$submit = new Zend_Form_Element_Submit('submit');
-		$submit->setLabel('Logar')
-				->setAttrib('id', 'submitbutton');
+		$submit->setLabel('logar')
+				->setAttrib('id', 'submitbutton')
+				->setAttrib('class', 'buttonQuadrado');
+		$cadastrar = new Zend_Form_Element_Button("cadastrar");
+		$cadastrar->setLabel('cadastrar')
+			->setAttrib('id', 'cadastrar')
+			->setAttrib('class', 'buttonQuadrado')
+			->setAttrib('onclick', 'window.location="/cadastro"');
+		
+	
+				
+	
+		
+		
+		
 		// We want to display a 'failed authentication' message if necessary;
 		// we'll do that with the form 'description', so we need to add that
 		// decorator.

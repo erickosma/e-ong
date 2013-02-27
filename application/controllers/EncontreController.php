@@ -15,7 +15,8 @@ class EncontreController extends Zend_Controller_Action
     	
     	$this->view->headLink()->appendStylesheet('public/css/index/index.css')
     							->appendStylesheet('public/css/encontre/pesquisa.css')
-    							->appendStylesheet('public/css/geral.css');
+    							->appendStylesheet('public/css/geral.css')
+    							->appendStylesheet('public/css/forms.css');
     	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,volunt�rios');	/* Initialize action controller here */
     	$this->view->headTitle('Ação paralela');
     	$this->view->description = "Encontre  vonluntarios e ong";
@@ -38,7 +39,8 @@ class EncontreController extends Zend_Controller_Action
     	$request = $this->getRequest();
     	$termo = $Pesquisa->checkParam($request);
     	if($termo){
-    		$Pesquisa->pesquisa();   	}
+    		$Pesquisa->pesquisa();   
+    	}
     }
 
     public function ajudeAction()

@@ -66,10 +66,9 @@ class Application_Model_Pesquisa
 	
 		}
 		exit;
-	
 	}
 	
-	
+	//quando estiver no modulo ajude se a palavra chave for nula coloca alguma 
 	
 }
 
