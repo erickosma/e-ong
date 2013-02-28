@@ -167,3 +167,39 @@
 
 
 
+.buttonQuadradoVerde {
+   background: #009532;
+   background: -webkit-gradient(linear, left top, left bottom, from(#43ce6f), to(#009532));
+   background: -webkit-linear-gradient(top, #43ce6f, #009532);
+   background: -moz-linear-gradient(top, #43ce6f, #009532);
+   background: -ms-linear-gradient(top, #43ce6f, #009532);
+   background: -o-linear-gradient(top, #43ce6f, #009532);
+   padding: 8px 16px;
+  
+ 
+   color: white;
+   font-size: 18px;
+   font-family: Georgia, Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   margin-left: 40px;
+   cursor: pointer;
+   
+   }
+.buttonQuadradoVerde:hover {
+ background: -webkit-gradient(linear, left top, left bottom, from(#4FcF6f), to(#0F9F3F));
+   background: -webkit-linear-gradient(top, #4FcF6f, #0F9F3F);
+   background: -moz-linear-gradient(top, #4FcF6f, #0F9F3F);
+   background: -ms-linear-gradient(top, #4FcF6f, #0F9F3F);
+   background: -o-linear-gradient(top, #4FcF6f, #0F9F3F);
+   color: white;
+   }
+.buttonQuadradoVerde:active {
+   background: #1b431e;
+   }
+
+
+
+
+
+

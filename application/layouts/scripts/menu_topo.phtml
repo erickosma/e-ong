@@ -9,11 +9,19 @@
 			Encontre ong
 		</a>
 	</li>
-		
-	<?php 
-		if(isset($this->usuario))
-		{
-	?>
+	<li>
+		<?php if(isset($this->usuario)){?>
+			<a href="<?php echo $this->url(array('controller' => 'cadastro', 'action' => 'ajuda', 'module' => 'default'), '', true); ?>">
+				Nova ajuda
+			</a>
+		<?php } else {?>
+		<a href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'index', 'module' => 'default'), '', true); ?>">
+			Nova ajuda
+		</a>
+		<?php }?>
+	</li>
+	
+	<?php 	if(isset($this->usuario)){ ?>
 	<li>
 		<?php //if profissional 
 			if($this->usuario->getTipo() == 1){
@@ -32,10 +40,7 @@
 			Logout
 		</a>
 	</li>
-	<?php
-		}
-	    else{
-	?>
+	<?php } else{ ?>
 	<li>
 		<a href="<?php echo $this->url(array('controller' => 'cadastro', 'action' => 'index', 'module' => 'default'), '', true); ?>">
 			Cadastre-se

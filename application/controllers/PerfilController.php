@@ -20,7 +20,7 @@ class PerfilController extends Zend_Controller_Action
 			->appendFile('public/js/perfil/perfil.js');
     	/* Initialize action controller here */
 		$this->view->headMeta()->appendHttpEquiv('Content-Type',
-		    	  												'text/html; charset=ISO-8859-1');
+		    	  												'text/html; charset=utf-8');
 		
 	
     }
@@ -30,8 +30,9 @@ class PerfilController extends Zend_Controller_Action
        	$this->view->headTitle('Perfil');
     	$this->view->description = "Perfil ";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
-    	  												'text/html; charset=ISO-8859-1');
- 
+    	  												'text/html; charset=utf-8');
+    	$usuario = Zend_Auth::getInstance()->getIdentity();
+    	$this->view->usuario = $usuario;
     }
 
     public function addAction()
@@ -322,7 +323,7 @@ class PerfilController extends Zend_Controller_Action
     					$numero=$request->getParam('numero',null);
     					if(!is_null($numero))
     					{
-    						$endereco .=" N° ".$numero;
+    						$endereco .=" Nï¿½ ".$numero;
     					}
     					$data  = array(
     							'sexo'   			=> $request->getParam('sexo'),

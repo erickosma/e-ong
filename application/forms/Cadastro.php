@@ -158,7 +158,7 @@ class Application_Form_Cadastro extends Zend_Form
     	$rows=$citiesdb->loadCidadeByestado($estado);
     	$arr[0]= "Escolha cidade";
     	foreach ($rows as $est) {
-    		$arr[$est["chave"]]=utf8_decode($est["nome"]);
+    		$arr[$est["chave"]]=($est["nome"]);
     	}
     	$elem = $this->getElement($field);
     	$elem->addMultiOptions($arr);
@@ -216,9 +216,9 @@ class Application_Form_Cadastro extends Zend_Form
     }
     
     public function addEndereco(){
-    	//endereço
+    	//endereï¿½o
     	$endereco = new Zend_Form_Element_Text('endereco');
-    	$endereco->setLabel('Endereço:')
+    	$endereco->setLabel('Endereï¿½o:')
     	->setRequired(true)
     	->addFilter('StripTags')
     	->setOrder(12)
@@ -230,7 +230,7 @@ class Application_Form_Cadastro extends Zend_Form
     }
     public function addNumero(){
     	$numero = new Zend_Form_Element_Text('numero');
-    	$numero->setLabel('Nº:')
+    	$numero->setLabel('Nï¿½:')
     	->setAttrib('size', 5)
     	->addDecorator('HtmlTag',
     			array('tag'=>'div', 'class'=>'campo'));

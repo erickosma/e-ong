@@ -28,15 +28,12 @@ class Application_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 
 	
 	/**
-	 * Comtroller com permição abertos
+	 * Comtroller com permiï¿½ï¿½o abertos
 	 * 
 	 * @var unknown_type
 	 */
 	protected $_opemController = array( "index",
-        								"cadastro",
-        								"auth",
         								"error",
-        								"buscar",
 										"sobre-nos"
 	);
 	public function __construct()

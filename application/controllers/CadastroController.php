@@ -258,6 +258,7 @@ class CadastroController extends Zend_Controller_Action
     		{
     			echo $e->getMessage();
     		}
+    	
     	}
     }
 
@@ -348,8 +349,26 @@ class CadastroController extends Zend_Controller_Action
     
     }
 
+    public function ajudaAction()
+    {
+        // action body
+        $usuario = Zend_Auth::getInstance()->getIdentity();
+        $this->view->usuario = $usuario;
+        $db_estado=new Application_Model_DbTable_SysEstado();
+        $state_array = $db_estado->fetchAll()->toArray();
+        $arr[0]= "--Escolha estado--";
+        foreach ($state_array as $est) {
+        	$arr[]=($est["nome"]);
+        }
+        unset($arr[29]);
+        unset($arr[28]);
+        $this->view->estado = $arr;
+    }
+
 
 }
+
+
 
 
 

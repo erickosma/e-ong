@@ -72,7 +72,7 @@ class Application_Form_CadastroOng extends Zend_Form
 				->addValidator('NotEmpty');
 		
 		$razao = new Zend_Form_Element_Text('razao');
-		$razao->setLabel("Razão Social:")
+		$razao->setLabel("Razï¿½o Social:")
 				->setRequired(true)
 				->addDecorator('HtmlTag',
 				array('tag'=>'div', 'class'=>'campo'))
@@ -92,9 +92,9 @@ class Application_Form_CadastroOng extends Zend_Form
 			->addDecorator('HtmlTag',
 						array('tag'=>'div', 'class'=>'campoFim'));
    		//------------------
-		//endereço
+		//endereï¿½o
 		$endereco = new Zend_Form_Element_Text('endereco');
-		$endereco->setLabel('Endereço:')
+		$endereco->setLabel('Endereï¿½o:')
 			->setRequired(true)
 			->addFilter('StripTags')
 			->addDecorator('HtmlTag',
@@ -102,7 +102,7 @@ class Application_Form_CadastroOng extends Zend_Form
 			->addValidator("StringLength",false,array(4, 50 , 'messages'=> 'StringLength'))
 			->addValidator('NotEmpty');
 		$numero = new Zend_Form_Element_Text('numero');
-		$numero->setLabel('Nº:')
+		$numero->setLabel('Nï¿½:')
 				->setAttrib('size', 5)
 				->addDecorator('HtmlTag',
 		array('tag'=>'div', 'class'=>'campo'));
@@ -131,7 +131,7 @@ class Application_Form_CadastroOng extends Zend_Form
 		$state_array = $db_estado->fetchAll()->toArray();
 		$arr[0]= "Escolha estado";
 		foreach ($state_array as $est) {
-			$arr[]=utf8_decode($est["nome"]);
+			$arr[]=($est["nome"]);
 		}
 		unset($arr[29]);
 		unset($arr[28]);

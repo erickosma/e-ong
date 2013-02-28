@@ -2,6 +2,14 @@
 class AuthController extends Zend_Controller_Action
 {
 
+	
+	public function preDispatch()
+	{
+		Application_Model_Redirect::saveRequestUri();
+		// redirect to login action
+	}
+	
+	
     public function init()
     {
     	$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
@@ -21,7 +29,9 @@ class AuthController extends Zend_Controller_Action
 
     public function indexAction()
     {
-		return $this->_helper->redirector('login');
+    	
+    	
+		//return $this->_helper->redirector('login');
 		// action body
     }
 
@@ -35,6 +45,11 @@ class AuthController extends Zend_Controller_Action
 		$this->view->form = $form;
 		//Verifica se existem dados de POST
 	
+		//if possui usuario 
+		if(Zend_Auth::getInstance()->getIdentity()){
+			return $this->_helper->redirector->goToRoute( array('controller' => 'perfil'), null, true);
+		}
+		
 		//Verifica se existem dados de POST
         if ( $this->getRequest()->isPost() ) {
             $data = $this->getRequest()->getPost();
@@ -44,9 +59,11 @@ class AuthController extends Zend_Controller_Action
                 $senha = $form->getValue('senha');
  
                 try {
-                    Application_Model_Auth::login($login, $senha);
+                     Application_Model_Auth::login($login, $senha);
                     //Redireciona para o Controller protegido
-                    return $this->_helper->redirector->goToRoute( array('controller' => 'perfil'), null, true);
+                     Application_Model_Redirect::redirect();
+                     return;
+                    //  return $this->_helper->redirector->goToRoute( array('controller' => 'perfil'), null, true);
                 } catch (Exception $e) {
                     //Dados inv�lidos
                     $this->_helper->FlashMessenger($e->getMessage());
