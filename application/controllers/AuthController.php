@@ -5,7 +5,9 @@ class AuthController extends Zend_Controller_Action
 	
 	public function preDispatch()
 	{
-		Application_Model_Redirect::saveRequestUri();
+		if(!Application_Model_Redirect::hasRequestUri()){
+			Application_Model_Redirect::saveRequestUri();
+		}
 		// redirect to login action
 	}
 	

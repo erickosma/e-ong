@@ -48,7 +48,7 @@ class Application_Model_Redirect
 	public static function setSession($session)
 	{
 		self::$_session = $session;
-		return $this;
+		return self;
 	}
 	
 	/**

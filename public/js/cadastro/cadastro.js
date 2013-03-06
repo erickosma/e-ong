@@ -123,6 +123,10 @@ $(function(){
 			type: 'POST',
 			url: "/cadastro/cidades",
 			data: params,
+			beforeSend: function(){
+				var options = '<option value="0">Aguarde.....</option>';
+				$('#cidade').html(options).show();
+			},
 			success: function(j){
 				var options = '<option value="0">--- Selecione---</option>';
 				for (var i = 0; i < j.length; i++) {
@@ -203,7 +207,7 @@ $("#email").blur(function(){
 /*
 $("#cpf").blur(function(){
 	var cpf = $("#cpf").val();
-	var und = cpf.indexOf("_"); //listando underline's da string, que vêm no mask do campo
+	var und = cpf.indexOf("_"); //listando underline's da string, que vï¿½m no mask do campo
 	if(cpf != 0)
 	{
 		if(cpf.length == 14 && und == -1)
@@ -226,7 +230,7 @@ $("#cpf").blur(function(){
 
 $("#cnpj").blur(function(){
 	var cnpj = $("#cnpj").val();
-	var und = cnpj.indexOf("_"); //listando underline's da string, que vêm no mask do campo
+	var und = cnpj.indexOf("_"); //listando underline's da string, que vï¿½m no mask do campo
 	if(cnpj != 0)
 	{
 		if(cnpj.length == 18 && und == -1)
@@ -250,7 +254,7 @@ $("#cnpj").blur(function(){
 
 $("#cpf").keyup(function(){
 	var cpf = $("#cpf").val();
-	var und = cpf.indexOf("_"); //listando underline's da string, que vêm no mask do campo
+	var und = cpf.indexOf("_"); //listando underline's da string, que vï¿½m no mask do campo
 	if(cpf != 0)
 	{
 		if(cpf.length == 14 && und == -1)
@@ -272,7 +276,7 @@ $("#cpf").keyup(function(){
 });
 $("#cnpj").keyup(function(){
 	var cnpj = $("#cnpj").val();
-	var und = cnpj.indexOf("_"); //listando underline's da string, que vêm no mask do campo
+	var und = cnpj.indexOf("_"); //listando underline's da string, que vï¿½m no mask do campo
 	if(cnpj != 0)
 	{
 		if(cnpj.length == 18 && und == -1)
@@ -312,7 +316,7 @@ function submitFormCadastro(form){
           type: 'POST',
           // this.action pega o script para onde vai ser enviado os dados
           url: form.action,
-          // os dados que pegamos com a função serialize()
+          // os dados que pegamos com a funï¿½ï¿½o serialize()
           data: params,
           // Antes de enviar
           beforeSend: function(){
@@ -320,33 +324,33 @@ function submitFormCadastro(form){
               $('#loading').show();
           },
           success: function(txt){
-              // Ativo o botão usando a função attr()
+              // Ativo o botï¿½o usando a funï¿½ï¿½o attr()
         	  if(txt == '1' || txt == '2'){
               	$('#loading').hide();
                  window.location='/perfil/welcome';
               }
               else if(txt == '3' ){
             	  $("#loading").css('background', '#D3D0D0'); 
-              	  $('#loading').html("Jé existe um usuario com este email!");
+              	  $('#loading').html("Jï¿½ existe um usuario com este email!");
               	  $('#loading').delay(1500).fadeOut(5000);
               	  bordaInputError("#email");
               }
               else if(txt == '4' ){
             	  $("#loading").css('background', '#D3D0D0'); 
-              	  $('#loading').html("Jé existe um usuario com este login!");
+              	  $('#loading').html("Jï¿½ existe um usuario com este login!");
               	  $('#loading').delay(1500).fadeOut(5000);
               	  bordaInputError("#login");
               }
               else if(txt == '5' ){
             	  $("#loading").css('background', '#D3D0D0'); 
-            	  $('#loading').html("Jé existe um usuario com este cpf!");
+            	  $('#loading').html("Jï¿½ existe um usuario com este cpf!");
                   $('#loading').delay(1500).fadeOut(5000);
               	  bordaInputError("#cpf");
               }
         	  $('input[type=submit]', form).attr('disabled', false);
                 
           },
-          // Se acontecer algum erro é executada essa função
+          // Se acontecer algum erro ï¿½ executada essa funï¿½ï¿½o
           error: function(txt){
            	$("#loading").css('background', 'red'); 
               $('#loading').html(txt);

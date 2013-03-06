@@ -362,8 +362,12 @@ class CadastroController extends Zend_Controller_Action
     public function ajudaAction()
     {
      	$this->view->headScript()->appendFile('public/js/cadastro/ajuda.js');
+     	$this->view->headLink()->appendStylesheet('public/css/cadastro/ajuda.css');
         $usuario = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuario = $usuario;
+		//redirecionamento
+        Application_Model_Redirect::saveRequestUri();
+        
         $db_estado=new Application_Model_DbTable_SysEstado();
         $state_array = $db_estado->fetchAll()->toArray();
         $arr[0]= "--Escolha estado--";
@@ -377,7 +381,26 @@ class CadastroController extends Zend_Controller_Action
 
     public function newAjudaAction()
     {
-      
+    	$this->_helper->layout->disableLayout();
+    	//$this->_helper->viewRenderer->setNoRender();
+    	
+    	$request = $this->getRequest();
+    	if ( $request->isPost() )
+    	{
+    		try {
+    			
+    			
+    			//depois de cadastrar
+    			$this->view->titulo = trim($request->getParam("titulo"));
+    			$this->view->descricao =  nl2br(trim($request->getParam("descricao")));
+    			$this->view->cidade = $request->getParam("cidade");
+    			$this->view->estado = $request->getParam("estado");
+    		}
+    		catch (Exception $e)
+    		{
+    			echo $e->getMessage();
+    		}
+    	}
     }
 
 

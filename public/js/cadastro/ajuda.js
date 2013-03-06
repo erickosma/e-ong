@@ -8,43 +8,66 @@
 			             	 	required: true,
 			             	 	minlength: 3
 			         	 	},
-			     	 	login: {
+		         	 	estado: {
 			         	 	required: true,
 			         	    },
-			     	 	 senha: {
+		         	   cidade: {
 			                 required: true
-			             },
-			             confirm_senha:{
-			                 required: true,
-			                 equalTo: "#senha"
-			             },
-			             email: {
-			                    required: true,
-			                    email: true
-			                }
-		          },
-		          messages: {
-		        	  nome: {required: tagImgErro,
-		        		  	 minlength: tagImgErro
-		    		  	 },
-		    		  	sobrenome: {required: tagImgErro,
-		        		  	 minlength: tagImgErro
-		    		  	 },
-		    		  	login: {required: tagImgErro,
-		    		  		minlength: tagImgErro
-		   		  	 	},
-		    		  	senha: {required: tagImgErro
-		        		 },
-		    		  	confirm_senha: {required: tagImgErro,
-		    		  					equalTo: tagImgErro
-		   		  	 	},
-			   		  	 email: {
-			                 required: tagImgErro,
-			                 email: tagImgErro
 			             }
 		          },
-		          
+		          messages: {
+		        	  titulo: {required: tagImgErro,
+		        		  	 minlength: tagImgErro
+		    		  	 },
+		    		  	descricao: {required: tagImgErro,
+		        		  	 minlength: tagImgErro
+		    		  	 },
+		    		  	estado: {required: tagImgErro,
+		    		  		minlength: tagImgErro
+		   		  	 	},
+		   		  	 	cidade: {required: tagImgErro
+		        		 }
+		          },
 		          submitHandler:function(form) {
-		        	  submitFormCadastro(form);
+		        	  submitFormAjuda(form);
 		          }
 			 });
+   
+   
+   function submitFormAjuda(form){
+	   form.action = "/cadastro/new-ajuda"
+	    var $button =  $('input[type=submit]', form).attr('disabled', 'disabled');
+	      var params = $(form.elements).serialize();
+	      var self = form;
+	      $.ajax({
+	          type: 'POST',
+	          url: form.action,
+	          data: params,
+	          beforeSend: function(){
+	              $('#loading').show();
+	          },
+	          success: function(txt){
+	        	  var cidade =$("#cidade option:selected").text();
+	        	  var estado =$("#estado option:selected").text();
+	        	  cidade = ucfirst(cidade);
+	        	  $('#loading').hide();
+	              $('input[type=submit]', form).attr('disabled', false);
+	              $("#view-content").html(txt);
+	              $("#newEstado").text(estado);
+	              $("#newCidade").text(cidade);
+	          },
+	          error: function(txt){
+	           	$("#loading").css('background', 'red'); 
+	              $('#loading').html(txt);
+	          }
+	      })
+	      return false;
+	}
+   
+   
+   function ucfirst (str) {
+	   str = str.toLowerCase().replace(/\b[a-z]/g, function(letter) {
+		    return letter.toUpperCase();
+		});
+	   return str;
+	 }

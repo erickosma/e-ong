@@ -4,3 +4,6 @@
 <logEntry><timestamp>2013-02-27T23:51:38+01:00</timestamp><message>Action Helper by name Menu not found&#13;
 </message><priority>7</priority><priorityName>DEBUG</priorityName></logEntry>
 
+<logEntry><timestamp>2013-03-06T03:52:29+01:00</timestamp><message>SQLSTATE[HY093]: Invalid parameter number: no parameters were bound&#13;
+</message><priority>7</priority><priorityName>DEBUG</priorityName></logEntry>
+

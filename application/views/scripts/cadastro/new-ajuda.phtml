@@ -1,4 +1,53 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Cadastro</b> and script/action name <b>newAjuda</b></p>
+
+<h3 class="titile_form" style="margin-left: 40px;">Obrigado!</h3>
+<div
+	style="margin-top: -18px; margin-bottom: 10px; height: 1px; border-bottom: 1px solid #EEEEEE; width: 100%">
 </div>
+<div class="resultAjuda">
+
+	<table>
+		<tr>
+			<td valign="top" ><label for="titulo" class="required">Titulo:</label></td>
+			<td>
+				<div class="campo">
+					<?php echo $this->titulo;?>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" ><label for="descricao" class="required" id="label-descricao">Descrição:</label>
+			</td>
+			<td>
+				<div class="campo" style="width: 200px;">
+					<?php echo $this->descricao;?>
+					
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" ><label for="estado" class="required" id="label-estado">Estado:</label>
+			</td>
+			<td>
+				<div class="campo" id="newEstado">
+					<?php echo $this->estado;?>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" ><label for="cidade" class="required" id="label-cidade">Cidade:</label>
+			</td>
+			<td>
+				<div class="campo" id="newCidade">
+					<?php echo $this->cidade;?>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<dt id="submit-label">&nbsp;</dt>
+	<dd id="submit-element">
+		<input type="submit" name="submit" id="submitbutton"
+			value="continuaar" class="buttonQuadrado">
+	</dd>
+</div>
+<br>
+

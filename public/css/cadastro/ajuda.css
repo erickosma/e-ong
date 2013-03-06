@@ -1,0 +1,14 @@
+.resultAjuda{
+	width:700px;
+	margin-right:auto;
+	margin-left:auto;
+	
+}
+.resultAjuda label{
+	float: left;
+	font-family: Tahoma, Arial, Helvetica, Sans-serif;
+	font-weight:bolder;
+	margin-right:10px;
+	width:100px;
+	text-align:left;
+}
