@@ -42,7 +42,8 @@ class Application_Acl_Setup
 	protected function _setupPrivileges()
 	{
 		$this->_acl->allow(null, 'auth', array('index', 'login') )
-					->allow(null, 'cadastro', array('index', 'save','profissional','ong'))
+					->allow(null, 'cadastro', 
+							array('index', 'save','profissional','ong','cidades','validaCp','validaCnpj','validaEmail','validaUserName','newProfissional','newOngA'))
 					->allow( null, 'index', array('index'))
 					->allow(null, 'encontre', array('index', 'ong', 'voluntario', 'termo', 'ajuda') )
 		;

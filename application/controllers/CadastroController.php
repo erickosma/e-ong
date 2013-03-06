@@ -60,15 +60,24 @@ class CadastroController extends Zend_Controller_Action
 		$col = $db->fetchAll(
 		$citiesdb->select()
 		->where('estado = ?', $cod_estados)
+		->order('capital desc')
 		->order('nome')
 		);
 		$i=0;
 		foreach($col as $cities)
 		{
+			if($i == 1){
+				$cidades[$i] = array(
+						'chave'         => "0",
+						'nome'          => "----------------------------------"
+				);
+				$i++;
+			}
 			$cidades[$i] = array(
     					'chave'         => $cities['chave'],
     					'nome'          => $cities['nome']
 			);
+		
 			$i++;
 		}
 		echo $this->view->json($cidades);
@@ -261,6 +270,7 @@ class CadastroController extends Zend_Controller_Action
     	
     	}
     }
+    
 
     public function newOngAction()
     {
@@ -351,7 +361,7 @@ class CadastroController extends Zend_Controller_Action
 
     public function ajudaAction()
     {
-        // action body
+     	$this->view->headScript()->appendFile('public/js/cadastro/ajuda.js');
         $usuario = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuario = $usuario;
         $db_estado=new Application_Model_DbTable_SysEstado();
@@ -365,8 +375,15 @@ class CadastroController extends Zend_Controller_Action
         $this->view->estado = $arr;
     }
 
+    public function newAjudaAction()
+    {
+      
+    }
+
 
 }
+
+
 
 
 

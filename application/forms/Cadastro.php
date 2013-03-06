@@ -90,7 +90,7 @@ class Application_Form_Cadastro extends Zend_Form
 		$state_array = $db_estado->fetchAll()->toArray();
 		$arr[0]= "Escolha estado";
 		foreach ($state_array as $est) {
-			$arr[]=utf8_decode($est["nome"]);
+			$arr[]=($est["nome"]);
 		}
 		unset($arr[29]);
 		unset($arr[28]);

@@ -1,9 +1,6 @@
-<logEntry><timestamp>2013-02-24T21:03:11+01:00</timestamp><message>script 'esquerda.phtml' not found in path (C:/php/workspace/e-ong/application/views\scripts/)&#13;
+<logEntry><timestamp>2013-02-27T23:51:36+01:00</timestamp><message>Action Helper by name Menu not found&#13;
 </message><priority>7</priority><priorityName>DEBUG</priorityName></logEntry>
 
-<logEntry><timestamp>2013-02-24T21:03:14+01:00</timestamp><message>script 'esquerda.phtml' not found in path (C:/php/workspace/e-ong/application/views\scripts/)&#13;
-</message><priority>7</priority><priorityName>DEBUG</priorityName></logEntry>
-
-<logEntry><timestamp>2013-02-24T21:04:47+01:00</timestamp><message>script 'esquerda.phtml' not found in path (C:/php/workspace/e-ong/application/views\scripts/)&#13;
+<logEntry><timestamp>2013-02-27T23:51:38+01:00</timestamp><message>Action Helper by name Menu not found&#13;
 </message><priority>7</priority><priorityName>DEBUG</priorityName></logEntry>
 
