@@ -19,7 +19,7 @@ class ErrorController extends Zend_Controller_Action
                 // 404 error -- controller or action not found
                 $this->getResponse()->setHttpResponseCode(404);
                 $priority = Zend_Log::NOTICE;
-                $this->view->message = 'Page not found';
+                $this->view->message = '<h1>Ops!</h1>  Não conseguimos encontrar o que vc procura';
                 break;
             default:
                 // application error
@@ -27,7 +27,7 @@ class ErrorController extends Zend_Controller_Action
             	 
                 $this->getResponse()->setHttpResponseCode(500);
                 $priority = Zend_Log::CRIT;
-                $this->view->message = 'Application error';
+                $this->view->message = '<h2>Encontramos algum erro por aqui!<h2>';
                 break;
         }
         
@@ -58,6 +58,13 @@ class ErrorController extends Zend_Controller_Action
     public function forbiddenAction()
     {
         // action body
+    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,volunt�rios');	/* Initialize action controller here */
+    	$this->view->headTitle('Ação paralela 404');
+    	$this->view->description = "Encontre  vonluntarios e ong";
+    	$this->view->keywords = "ong,profissionais,voluntarios,procura,encontre";
+    	
+    	$this->view->headMeta()->appendHttpEquiv('Content-Type',
+    			'text/html; charset=utf-8');
     	$this->view->headLink()->appendStylesheet('public/css/geral.css');	 
     }
     protected function saveLog($errors){

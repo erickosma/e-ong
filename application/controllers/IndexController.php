@@ -20,7 +20,7 @@ class IndexController extends Zend_Controller_Action
     	$this->view->description = "Encontre  vonluntarios e ong";
     	$this->view->keywords = "ong,profissionais,voluntarios,procura,encontre";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
-    	                                   'text/html; utf-8');
+    	                                   'text/html;charset=utf-8');
     	$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
     	
     	

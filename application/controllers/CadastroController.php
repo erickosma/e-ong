@@ -23,7 +23,7 @@ class CadastroController extends Zend_Controller_Action
     public function indexAction()
     {
 		$this->view->headTitle('Cadasro- Escolha o seu ');
-		$this->view->description = "Cadastro de profissional e ong";
+		$this->view->description = "Cadastro de voluntario e ong";
 		$this->view->keywords = "cadastro,ong,profissionais,voluntarios,procura";
     }
 
@@ -361,6 +361,9 @@ class CadastroController extends Zend_Controller_Action
 
     public function ajudaAction()
     {
+    	$this->view->description = "Cadastre uma nova ajuda";
+    	$this->view->keywords = "ong,voluntários,voluntarios,procura,encontre,profissionais.ajuda,doe";
+    	 
      	$this->view->headScript()->appendFile('public/js/cadastro/ajuda.js');
      	$this->view->headLink()->appendStylesheet('public/css/cadastro/ajuda.css');
         $usuario = Zend_Auth::getInstance()->getIdentity();

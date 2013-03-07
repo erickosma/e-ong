@@ -15,14 +15,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 	}
 
 	/**
-	 * FunÁ„o faz a conex„o com o banco de dados e registra a vari·vel $db para
-	 * que ela esteja disponÌvel em toda a aplicaÁ„o.
+	 * FunÔøΩÔøΩo faz a conexÔøΩo com o banco de dados e registra a variÔøΩvel $db para
+	 * que ela esteja disponÔøΩvel em toda a aplicaÔøΩÔøΩo.
 	 */
 	protected function _initConnection()
 	{
 
 		/**
-		 * ObtÈm os resources(recursos).
+		 * ObtÔøΩm os resources(recursos).
 		 */
 		$options    = $this->getOption('resources');
 		$db_adapter = $options['db']['adapter'];
@@ -31,23 +31,23 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		try{
 
 			/**
-			 * Este mÈtodo carrega dinamicamente a classe adptadora
+			 * Este mÔøΩtodo carrega dinamicamente a classe adptadora
 			 * usando Zend_Loader::loadClass().
 			 */
 			$db = Zend_Db::factory($db_adapter, $params);
 
 			/**
-			 * Este mÈtodo retorna um objeto para a conex„o representada por uma
-			 * respectiva extens„o de banco de dados.
+			 * Este mÔøΩtodo retorna um objeto para a conexÔøΩo representada por uma
+			 * respectiva extensÔøΩo de banco de dados.
 			 */
 			$db->getConnection();
-			// Registra a $db para que se torne acessÌvel em toda app
+			// Registra a $db para que se torne acessÔøΩvel em toda app
 			$registry = Zend_Registry::getInstance();
 			$registry->set('db', $db);
 			$select = new Zend_Db_Select($db);
 
 		}catch( Zend_Exception $e){
-			echo "Estamos sem conex„o ao banco de dados neste momento. Tente mais tarde por favor.";
+			echo "Ficamos sem conex√£o <br /> tente mais tarde.";
 			exit;
 		}
 
