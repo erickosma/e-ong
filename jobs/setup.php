@@ -1,50 +1,69 @@
 <?php
-//define var
-$env      = null;
+$time = microtime(true);
+$memory = memory_get_usage();
 
-// INI sets
-//ini_set('memory_limit', '1G');
+// Define path to application directory
+defined('APPLICATION_PATH')
+|| define('APPLICATION_PATH', realpath(dirname(__FILE__) . '/../application'));
 
-// should be removed starting from PHP version >= 5.3.0
-defined('__DIR__') || define('__DIR__', dirname(__FILE__));
-
-// initialize the application path, library and autoloading
-defined('APPLICATION_PATH') ||
-define('APPLICATION_PATH', realpath(__DIR__ . '/../application'));
+// Define application environment
+defined('APPLICATION_ENV')
+|| define('APPLICATION_ENV', 'development');
 
 // Ensure library/ is on include_path
 set_include_path(implode(PATH_SEPARATOR, array(
 		realpath(APPLICATION_PATH . '/../library'),
-		realpath(APPLICATION_PATH . '/../library/Janrain'),
-		realpath(APPLICATION_PATH . '/../application/modules/default/models'),
 		get_include_path(),
 )));
 
-// Set $_SERVER params
-$_SERVER['DOCUMENT_ROOT'] = __DIR__;
-$_SERVER['REMOTE_ADDR']   = '';
-$_SERVER['HTTP_USER_AGENT'] = 'robot dusya';
-$_SERVER['REQUEST_URI']     = '/en/';
-$_SERVER['REMOTE_ADDR']     = '127.0.0.1';
+/** Zend_Application */
+require_once 'Zend/Application.php';
 
-require_once 'Zend/Loader/Autoloader.php';
-$loader = Zend_Loader_Autoloader::getInstance();
-
-// we need this custom namespace to load our custom class
-$loader->registerNamespace('Application_');
-
-
-// initialize values based on presence or absence of CLI options
-defined('APPLICATION_ENV')
-|| define('APPLICATION_ENV', (null === $env) ? 'production' : $env);
-
-
-// initialize Zend_Application
-$application = new Zend_Application (
+// Create application, bootstrap, and run
+$application = new Zend_Application(
 		APPLICATION_ENV,
 		APPLICATION_PATH . '/configs/application.ini'
 );
+$application->bootstrap();
 
+register_shutdown_function('__shutdown');
 
-//only load resources we need for script, in this case db and mail
-$application->getBootstrap()->bootstrap(array('db'));
+function bytesToSize($bytes, $precision = 2)
+{  
+    $kilobyte = 1024;
+    $megabyte = $kilobyte * 1024;
+    $gigabyte = $megabyte * 1024;
+    $terabyte = $gigabyte * 1024;
+   
+    if (($bytes >= 0) && ($bytes < $kilobyte)) {
+        return $bytes . ' B';
+ 
+    } elseif (($bytes >= $kilobyte) && ($bytes < $megabyte)) {
+        return round($bytes / $kilobyte, $precision) . ' KB';
+ 
+    } elseif (($bytes >= $megabyte) && ($bytes < $gigabyte)) {
+        return round($bytes / $megabyte, $precision) . ' MB';
+ 
+    } elseif (($bytes >= $gigabyte) && ($bytes < $terabyte)) {
+        return round($bytes / $gigabyte, $precision) . ' GB';
+ 
+    } elseif ($bytes >= $terabyte) {
+        return round($bytes / $terabyte, $precision) . ' TB';
+    } else {
+        return $bytes . ' B';
+    }
+}
+
+function __shutdown() {
+	global $time, $memory;
+	$endTime = microtime(true);
+	$endMemory = memory_get_usage();
+	$duration = ($endTime - $time) ;
+	$hours = (int)($duration/60/60);
+	$minutes = (int)($duration/60)-$hours*60;
+	$seconds = (int)$duration-$hours*60*60-$minutes*60;
+	
+	$totalMemory = bytesToSize( ($endMemory - $memory) );
+	echo '
+	Time [' . $hours. ":" . $minutes . ":" . $seconds . '] Memory ['. $totalMemory . ']';
+}
