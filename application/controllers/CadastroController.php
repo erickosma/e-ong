@@ -53,11 +53,10 @@ class CadastroController extends Zend_Controller_Action
 		header( 'Content-type: application/xml; charset="utf-8"', true );
 
 
-		$db = Zend_Registry::get("db");
 		$cod_estados = $_POST["estado"];
 		$citiesdb = new Application_Model_DbTable_SysCidade();
 			
-		$col = $db->fetchAll(
+		$col = $citiesdb->fetchAll(
 		$citiesdb->select()
 		->where('estado = ?', $cod_estados)
 		->order('capital desc')
@@ -361,15 +360,15 @@ class CadastroController extends Zend_Controller_Action
 
     public function ajudaAction()
     {
+    	Application_Model_Redirect::saveRequestUri();
     	$this->view->description = "Cadastre uma nova ajuda";
     	$this->view->keywords = "ong,voluntários,voluntarios,procura,encontre,profissionais.ajuda,doe";
-    	 
+
      	$this->view->headScript()->appendFile('public/js/cadastro/ajuda.js');
      	$this->view->headLink()->appendStylesheet('public/css/cadastro/ajuda.css');
         $usuario = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuario = $usuario;
 		//redirecionamento
-        Application_Model_Redirect::saveRequestUri();
         
         $db_estado=new Application_Model_DbTable_SysEstado();
         $state_array = $db_estado->fetchAll()->toArray();
@@ -386,18 +385,46 @@ class CadastroController extends Zend_Controller_Action
     {
     	$this->_helper->layout->disableLayout();
     	//$this->_helper->viewRenderer->setNoRender();
-    	
+    	//$date = new Zend_Date();
+    	//	echo $date->get('YYYY-MM-dd HH:m:s') ;exit;
+    	  
     	$request = $this->getRequest();
     	if ( $request->isPost() )
     	{
     		try {
-    			
-    			
-    			//depois de cadastrar
-    			$this->view->titulo = trim($request->getParam("titulo"));
-    			$this->view->descricao =  nl2br(trim($request->getParam("descricao")));
-    			$this->view->cidade = $request->getParam("cidade");
-    			$this->view->estado = $request->getParam("estado");
+    			$Ajuda = new Application_Model_Ajuda();
+    			$usuario = Zend_Auth::getInstance()->getIdentity();
+    			if($usuario)
+    			{
+    				$Ajuda->setTitulo(trim($request->getParam("titulo")));
+    				$Ajuda->setDescricao(nl2br(trim($request->getParam("descricao"))));
+    				$Ajuda->setCreateAt($request->getParam("cidade"));
+    				$Ajuda->setStatus(1);
+    				$date = new Zend_Date();
+    				$Ajuda->setCreateAt($date->get('yyyy-MM-dd HH:mm:ss'));
+    				$Ajuda->setCidade($request->getParam("cidade"));
+    				$Ajuda->setUsuario($usuario);
+    				//salva
+    				$id = $Ajuda->newAjuda();
+    				if($id){
+    					//depois de cadastrar
+    					$this->view->id = $id;
+    					$this->view->titulo = $Ajuda->getTitulo();
+    					$this->view->descricao =  $Ajuda->getDescricao();
+    					$this->view->cidade = $Ajuda->getCidade();
+    					$this->view->estado = $request->getParam("estado");
+    				}
+    				else{
+    					$this->_helper->viewRenderer->setNoRender();
+    					echo "0";
+    				}
+    				 
+    				
+    			}
+    			else{
+    				Application_Model_Redirect::redirectUrl("/auth/login");
+    			}
+    	
     		}
     		catch (Exception $e)
     		{
@@ -408,28 +435,3 @@ class CadastroController extends Zend_Controller_Action
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,19 +7,27 @@
 
 	<table>
 		<tr>
+			<td valign="top" ><label for="titulo" class="required">Código:</label></td>
+			<td>
+				<div class="campo" id="codigo">
+					<?php echo $this->id; ?>
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<td valign="top" ><label for="titulo" class="required">Titulo:</label></td>
 			<td>
-				<div class="campo">
-					<?php echo $this->titulo;?>
-				</div>
+				<div>
+					<?php echo $this->titulo; ?>
+				</div>	
 			</td>
 		</tr>
 		<tr>
 			<td valign="top" ><label for="descricao" class="required" id="label-descricao">Descrição:</label>
 			</td>
 			<td>
-				<div class="campo" style="width: 200px;">
-					<?php echo $this->descricao;?>
+				<div class="campo" style="width: 400px;">
+					<?php echo $this->descricao; ?>
 					
 				</div>
 			</td>
@@ -45,8 +53,9 @@
 	</table>
 	<dt id="submit-label">&nbsp;</dt>
 	<dd id="submit-element">
-		<input type="submit" name="submit" id="submitbutton"
-			value="continuaar" class="buttonQuadrado">
+		<input type="submit" name="submit" id="continueButton" value="continuaar" class="buttonQuadradoVerde">
+		<button name="novaAjuda" id="novaAjuda" type="button" class="buttonQuadrado" >nova ajuda</button>
+	
 	</dd>
 </div>
 <br>

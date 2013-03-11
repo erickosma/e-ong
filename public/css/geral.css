@@ -133,3 +133,31 @@ div#slideshow { float:left; width:100%; height:318px; padding:0; margin:0; }
 	font-size: 14px;
 	font-weight: bold;
 }
+
+
+
+/*pagina de erro*/
+ 
+ 
+.conteudo{
+	margin-left: auto;margin-right: auto; width: 900px;
+	background-color: #FCFFFC; 
+}
+.forbidden {
+	font-size: 20px;
+	width:700px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:20px;
+	min-height:200px;
+}
+.forbidden  .ops{
+	font-size: 42px;
+	font-weight: bold;
+}
+
+.forbidden .ops font{
+	font-size: 62px;
+	font-weight: bold;
+}
+ */

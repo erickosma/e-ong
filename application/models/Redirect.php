@@ -138,5 +138,9 @@ class Application_Model_Redirect
 	{
 		self::redirect();
 	}
+	
+	public static function redirectUrl($url){
+		self::_getRedirector()->gotoUrl($url);
+	}
 }
 
