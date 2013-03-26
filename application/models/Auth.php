@@ -22,7 +22,7 @@ class Application_Model_Auth
         $result = $auth->authenticate($authAdapter);
         //Verifica se o login foi efetuado com sucesso
         if ( $result->isValid() ) {
-            //Recupera o objeto do usu·rio, sem a senha
+            //Recupera o objeto do usuÔøΩrio, sem a senha
             $info = $authAdapter->getResultRowObject(null, 'senha');
  
             $usuario = new Application_Model_Usuario();
@@ -66,7 +66,7 @@ class Application_Model_Auth
         	$result = $auth->authenticate($authAdapter);
         	//Verifica se o login foi efetuado com sucesso
         	if ( $result->isValid() ) {
-        		//Recupera o objeto do usu·rio, sem a senha
+        		//Recupera o objeto do usuÔøΩrio, sem a senha
         		$info = $authAdapter->getResultRowObject(null, 'senha');
         	
         		$usuario = new Application_Model_Usuario();
@@ -92,7 +92,7 @@ class Application_Model_Auth
         		return true;
         	} 
         }
-        throw new Exception('<div id="erroLogin">Nome de usu·rio ou senha inv·lida</div>');
+        throw new Exception('<div id="erroLogin">Nome de usu√°rio ou senha inv√°lida</div>');
     }
     
     public static function completo($id=null,$tipo=null){

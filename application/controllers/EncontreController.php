@@ -39,10 +39,22 @@ class EncontreController extends Zend_Controller_Action
     	$request = $this->getRequest();
     	$termo = $Pesquisa->checkParam($request);
     	if($termo){
-    		$Pesquisa->pesquisa();   
+    		$result = $Pesquisa->pesquisa();   
+    		$this->view->numFound = $Pesquisa->getNumFound();
+    		$this->view->time = $Pesquisa->getTime();
+    		$this->view->termo = urldecode($Pesquisa->getTermo());
+    		$this->view->qtdPesquisa = $Pesquisa->qtdPesuisa;
+    		if($result){
+    			$this->view->result = $result;
+    		}
     	}
     }
 
+    
+    
+    
+    
+    
     public function ajudeAction()
     {
         // action body

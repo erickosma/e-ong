@@ -1,12 +1,8 @@
 $(document).ready(function() {
-	$("#continueButton").click(function() {
-		 window.location = "/perfil/minhhas-ajudas";
-	});
-	$("#novaAjuda").click(function() {
-		 window.location = "/cadastro/ajuda";
-	});
 	
 });
+
+
 
 $("#ajuda").validate({
 	rules: {
@@ -85,4 +81,10 @@ function ucfirst (str) {
 		return letter.toUpperCase();
 	});
 	return str;
+}
+
+
+function continueClick(url){
+	window.location =url;	 
+	
 }

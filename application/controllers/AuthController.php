@@ -5,9 +5,10 @@ class AuthController extends Zend_Controller_Action
 	
 	public function preDispatch()
 	{
-		if(!Application_Model_Redirect::hasRequestUri()){
-			Application_Model_Redirect::saveRequestUri();
-		}
+		//if(!Application_Model_Redirect::hasRequestUri()){
+	//		Application_Model_Redirect::saveRequestUri();
+		//}
+		
 		// redirect to login action
 	}
 	
@@ -39,7 +40,7 @@ class AuthController extends Zend_Controller_Action
 
     public function loginAction()
     {
-		// action body
+    	// action body
 		//menssagem de erro
 		$this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
 		$this->view->messages = $this->_flashMessenger->getMessages();
@@ -83,6 +84,7 @@ class AuthController extends Zend_Controller_Action
     {
 		$auth = Zend_Auth::getInstance();
 	    $auth->clearIdentity();
+	    Application_Model_Redirect::destroy();
 	    return $this->_helper->redirector('index',"index");
     }
 

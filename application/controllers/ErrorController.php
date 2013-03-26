@@ -8,7 +8,7 @@ class ErrorController extends Zend_Controller_Action
         $errors = $this->_getParam('error_handler');
         
         if (!$errors || !$errors instanceof ArrayObject) {
-            $this->view->message = 'You have reached the error page';
+            $this->view->message = 'Aconteceu algum erro! <br>';
             return;
         }
         
@@ -24,7 +24,7 @@ class ErrorController extends Zend_Controller_Action
             default:
                 // application error
             	$this->saveLog($errors);
-            	 
+            	$this->saveLogBD($errors);
                 $this->getResponse()->setHttpResponseCode(500);
                 $priority = Zend_Log::CRIT;
                 $this->view->message = '<h2>Encontramos algum erro por aqui!<h2>';
@@ -77,8 +77,40 @@ class ErrorController extends Zend_Controller_Action
     	$exception = $errors->exception;
     	$exception->getTraceAsString();
     	$logger->debug($exception->getMessage()."\r\n");
-      }
+    }
 
+    
+    
+    protected function saveLogBD($errors){
+    
+    	$config = new Zend_Config_Ini('application/configs/application.ini', 'staging');
+		$params = array ('host'     => $config->resources->db->params->host,
+				'username' => $config->resources->db->params->username,
+				'password' => $config->resources->db->params->password,
+				'dbname'   => "estatisticas",
+				'charset'   => $config->resources->db->params->charset,
+				);
+		$db = Zend_Db::factory('PDO_MYSQL', $params);
+		
+		$columnMapping = array(
+				    'message'   => 'message',
+					'file'   => 'file',
+					'line'   => 'line',
+				    'url'     => 'url',
+				    'date'  => 'date',
+				);
+		$writer = new Zend_Log_Writer_Db($db, 'erro_log', $columnMapping);
+		$logger   = new Zend_Log($writer);
+		$exception = $errors->exception;
+		$exception->getTraceAsString();
+		
+		$logger->setEventItem('message',$exception->getMessage());
+		$logger->setEventItem('file',$errors->getFile());
+		$logger->setEventItem('line',$errors->getLine());
+		$logger->setEventItem('url' , $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+		$logger->setEventItem('date', new Zend_Db_Expr('NOW()'));
+		$logger->info("Erros");
+    }
     
 }
 

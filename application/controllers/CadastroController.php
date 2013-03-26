@@ -2,7 +2,7 @@
 
 class CadastroController extends Zend_Controller_Action
 {
-
+	
     public function init()
     {
 		$this->view->addHelperPath('ZendX/JQuery/View/Helper/', 'ZendX_JQuery_View_Helper');
@@ -360,7 +360,6 @@ class CadastroController extends Zend_Controller_Action
 
     public function ajudaAction()
     {
-    	Application_Model_Redirect::saveRequestUri();
     	$this->view->description = "Cadastre uma nova ajuda";
     	$this->view->keywords = "ong,voluntários,voluntarios,procura,encontre,profissionais.ajuda,doe";
 

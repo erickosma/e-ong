@@ -291,7 +291,7 @@ class PerfilController extends Zend_Controller_Action
 
     public function updateDadosProfissionalAction()
     {
-        // action body
+    	// action body
     	$this->_helper->layout->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	header( 'Cache-Control: no-cache' );
@@ -302,64 +302,65 @@ class PerfilController extends Zend_Controller_Action
     		try {
     			$user= new Application_Model_DbTable_Usuario();
     			$usuarioProfissional = new Application_Model_DbTable_UsuarioProfissional();
-    				if($user->checkUnique('cpf_cnpj', $request->getParam('cpf'))){
-    					$data  = array(
-    							'nome'   	=> $request->getParam('nome'),
-    							'sobrenome' => $request->getParam('sobrenome'),
-    							'update_at' => date("Y-m-d H:i:s"),
-    							'cpf_cnpj' 	=> $request->getParam('cpf')
-    			     	);
-    					$where = $user->getAdapter()->quoteInto('id_usuario = ?', (int)$request->getParam('id_usuario'));
-    					$user->update($data, $where);
+    			if($user->checkUnique('cpf_cnpj', $request->getParam('cpf'))){
+    				$data  = array(
+    						'nome'   	=> $request->getParam('nome'),
+    						'sobrenome' => $request->getParam('sobrenome'),
+    						'update_at' => date("Y-m-d H:i:s"),
+    						'cpf_cnpj' 	=> $request->getParam('cpf')
+    				);
+    				$where = $user->getAdapter()->quoteInto('id_usuario = ?', (int)$request->getParam('id_usuario'));
+    				$user->update($data, $where);
     					
-    					$arrdate=  explode('/', $request->getParam('dataNacimento',null));
-    					if(!is_null($arrdate)){
-    						$date=$arrdate[2]."-".$arrdate[1]."-".$arrdate[0];
-    					}
-    					else{
-    						$date = NULL;
-    					}
-    					$endereco =$request->getParam('endereco');
-    					$numero=$request->getParam('numero',null);
-    					if(!is_null($numero))
-    					{
-    						$endereco .=" N� ".$numero;
-    					}
-    					$data  = array(
-    							'sexo'   			=> $request->getParam('sexo'),
-    							'data_nascimento'	 => $date,
-    							'endereco' 			=>  $endereco ,
-    							'complemento' 		=> $request->getParam('complemento',null),
-    							'bairro' 			=> $request->getParam('bairro',null),
-    							'cep' 				=> $request->getParam('cep',null),
-    							'id_cidade' 		=> $request->getParam('cidade',null),
-    							'objetivos' 		=> $request->getParam('objetivo',null)
-    					);
-    					$usuarioProfissional->update($data, $where);
-    					echo $this->view->json(2);
-    					}
-    					else{
-    						echo $this->view->json(5);
-    					}
+    				$arrdate=  explode('/', $request->getParam('dataNacimento',null));
+    				if(!is_null($arrdate)){
+    					$date=$arrdate[2]."-".$arrdate[1]."-".$arrdate[0];
+    				}
+    				else{
+    					$date = NULL;
+    				}
+    				$endereco =$request->getParam('endereco');
+    				$numero=$request->getParam('numero',null);
+    				if(!is_null($numero))
+    				{
+    					$endereco .=" N� ".$numero;
+    				}
+    				$data  = array(
+    						'sexo'   			=> $request->getParam('sexo'),
+    						'data_nascimento'	 => $date,
+    						'endereco' 			=>  $endereco ,
+    						'complemento' 		=> $request->getParam('complemento',null),
+    						'bairro' 			=> $request->getParam('bairro',null),
+    						'cep' 				=> $request->getParam('cep',null),
+    						'id_cidade' 		=> $request->getParam('cidade',null),
+    						'objetivos' 		=> $request->getParam('objetivo',null)
+    				);
+    				$usuarioProfissional->update($data, $where);
+    				echo $this->view->json(2);
+    			}
+    			else{
+    				echo $this->view->json(5);
+    			}
     		}
     		catch (Exception $e)
     		{
     			echo $e->getMessage();
     		}
+    		 
     	}
     }
-
+    
     public function updateDadosConfidenciaisAction()
     {
     	$this->_helper->layout->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	header( 'Cache-Control: no-cache' );
     	header( 'Content-type: application/json; charset="ISO-8859-1"', true );
-    	
+    	 
     	$request = $this->getRequest();
     	if ( $request->isPost() )
     	{
-    		
+
     		try{
     			$user= new Application_Model_DbTable_Usuario();
     			$usuarioSession = Zend_Auth::getInstance()->getIdentity();
@@ -420,10 +421,18 @@ class PerfilController extends Zend_Controller_Action
     	else
     	{
     		echo "0";
+    		 
     	}
+    }
+
+    public function minhasAjudasAction()
+    {
+        // action body
     }
 
 
 }
+
+
 
 

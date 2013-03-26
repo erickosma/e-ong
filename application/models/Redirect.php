@@ -64,6 +64,10 @@ class Application_Model_Redirect
 		return self::$_session;
 	}
 	
+	public static function destroy(){
+		Zend_Session::namespaceUnset(self::getNamespace());
+	}
+	
 	/**
 	 * Enter description here...
 	 *
@@ -124,9 +128,11 @@ class Application_Model_Redirect
 	public static function redirect()
 	{
 		if (null === ($lastRequestUri = self::getRequestUri())) {
-			self::_getRedirector()->gotoUrl('/');
+			self::_getRedirector()->gotoUrl('/perfil');
+			//self::destroy();
 		} else {
 			self::_getRedirector()->gotoUrl($lastRequestUri);
+			//self::destroy();
 		}
 	}
 	
