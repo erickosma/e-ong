@@ -47,7 +47,7 @@ class Application_Acl_Setup
 					->allow( null, 'index', array('index'))
 					->allow(null, 'encontre', array('index', 'ong', 'voluntario', 'termo', 'ajuda') )
 		;
-		$this->_acl->allow( 'user', 'cadastro', array('index', 'save','profissional','ong','ajuda','new-ajuda') )
+		$this->_acl->allow( 'user', 'cadastro', array('index', 'save','profissional','ong','ajuda','new-ajuda','minhhas-ajudas') )
 					->allow( 'user', 'auth', 'logout' )
 					->allow( 'user', 'perfil', array('index', 'save', 'editar', 'update', 'imagem', 'welcome','ong','profissional','dados-pessoais-profissional','update-dados-profissional','dados-pessoais-ong'
 														,'mensagem','email','dados',"update-dados-confidenciais"));

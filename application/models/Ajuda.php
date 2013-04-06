@@ -132,7 +132,7 @@ class Application_Model_Ajuda
 		$id = $novaAjuda->save();
 		$this->setIdOportunidade($id);
 		if(isset($id)){
-			$url =$this->formataUrl(). "-" .$id;
+			$url =$this->formataUrl(). "-" .Application_Model_Util::encodeNumUrl($id);
 			$data = array("url" =>$url );
 			$where = $Oportunidade->getAdapter()->quoteInto('id_oportunidade = ?', (int)$id);
 			$Oportunidade->update($data, $where);

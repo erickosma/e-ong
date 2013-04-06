@@ -15,19 +15,32 @@ class Application_Model_Util
 		if(!is_array($array)) {
 			return $array;
 		}
-		$object = new stdClass();
-		if (is_array($array) && count($array) > 0) {
-			foreach ($array as $name=>$value) {
-				$name = strtolower(trim($name));
-				if (!empty($name)) {
-					$object->$name = self::arrayToObject($value);
+		if(count($array) > 1){
+			$object = new stdClass();
+			if (is_array($array)) {
+				foreach ($array as $name=>$value) {
+					$name = strtolower(trim($name));
+					if (!empty($name)) {
+						$object->$name = self::arrayToObject($value);
+					}
 				}
+				return $object;
 			}
-			return $object;
+			else {
+				return FALSE;
+			}
 		}
-		else {
-			return FALSE;
+		else{
+			if (!empty($array)) {
+				$data = false;
+				foreach ($array as $akey => $aval) {
+					$data -> {$akey} = $aval;
+				}
+				return $data;
+			}
+			return false;
 		}
+	
 	}
 	
 	/**
@@ -138,6 +151,17 @@ class Application_Model_Util
 		$logger->info("Erros");
 		
 	}
+	
+	
+	public static function encodeNumUrl($url){
+		return base64_encode(gzcompress($url));
+	}
+	
+	public static function decodeNumUrl($url){
+		return  @gzuncompress( base64_decode( $url ) );
+	}
+	
+	
 
 }
 

@@ -27,6 +27,9 @@ class Application_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 	);
 
 	
+	protected $_moRedirect = array("index","auth");
+	
+	
 	/**
 	 * Comtroller com permi��o abertos
 	 * 
@@ -58,6 +61,10 @@ class Application_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 		}*/
 		 if (!$this->_isAuthorized($request->getControllerName(),$request->getActionName())  ) {
 		 	if(!$this->_auth->hasIdentity()){
+		 		if(! in_array($request->getControllerName(), $this->_moRedirect))
+		 		{
+		 			Application_Model_Redirect::saveRequestUri("/".$request->getControllerName()."/".$request->getActionName());
+		 		}
 		 		$controller = $this->_notLoggedRoute['controller'];
 		 		$action     = $this->_notLoggedRoute['action'];
 		 		$module     = $this->_notLoggedRoute['module'];

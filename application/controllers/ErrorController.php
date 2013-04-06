@@ -24,9 +24,10 @@ class ErrorController extends Zend_Controller_Action
             default:
                 // application error
             	$this->saveLog($errors);
-            	$this->saveLogBD($errors);
                 $this->getResponse()->setHttpResponseCode(500);
                 $priority = Zend_Log::CRIT;
+                $this->saveLogBD($errors);
+                
                 $this->view->message = '<h2>Encontramos algum erro por aqui!<h2>';
                 break;
         }

@@ -15,6 +15,7 @@ class Application_Model_Pesquisa
 	
 	
 	private $oportunidade;
+	private $ong;
 	
 	public function __construct()
 	{
@@ -79,6 +80,23 @@ class Application_Model_Pesquisa
 		return $termo;
 	}
 	
+	public function checkDigit($request)
+	{
+		$digit = false;
+		$arr = explode("-", $request->getRequestUri());
+		
+		if(isset($arr[count($arr)-1]))
+		{
+			$digit= $arr[count($arr)-1];
+			$digit = Application_Model_Util::decodeNumUrl($arr[count($arr)-1]);
+			if(is_numeric($digit)){
+				return $digit;
+			}
+		}
+	
+		return $digit;
+	}
+	
 	
 	protected function duration(){
 		$this->end = microtime(true);
@@ -126,7 +144,7 @@ class Application_Model_Pesquisa
 				if($this->getNumFound() > 0)
 				{
 					$this->duration();
-					$this->qtdPesuisa=2;
+					$this->qtdPesuisa=3;
 					return $this->getResult();
 				}
 				else{
@@ -144,12 +162,18 @@ class Application_Model_Pesquisa
 	 * Processa um select 
 	 * @param unknown_type $select
 	 */
-	protected function processPesquisa($select){
+	protected function processPesquisa($select,$obj=true){
 		$rows = $this->oportunidade->fetchAll($select);
 		$this->setNumFound($rows->count());
 		if($this->getNumFound() > 0){
-			$this->setResult(Application_Model_Util::arrayToObject($rows->toArray()));
+			if($obj){
+				$this->setResult(Application_Model_Util::arrayToObject($rows->toArray()));
+			}
+			else {
+				$this->setResult($rows->toArray());
+			}
 		}
+		
 	}
 	
 	
@@ -194,7 +218,47 @@ class Application_Model_Pesquisa
 	}
 	
 	
-	//quando estiver no modulo ajude se a palavra chave for nula coloca alguma 
+	public function findById($id)
+	{
+		try{
+			$this->oportunidade = new Application_Model_DbTable_Oportunidade();
+			$select  = $this->oportunidade->select()
+							->setIntegrityCheck(false)
+							->from(array("o"=>"oportunidade"))
+							->joinInner(array('sc'=>'sys_cidade'),'sc.chave = o.cidade',
+									array('sc.nome'))
+							->joinInner(array('ou'=>'oportunidade_usuario'),'ou.id_oportunidade = o.id_oportunidade',
+									array('ou.id_usuario','ou.tipo',))
+							->joinInner(array('se'=>'sys_estado'),'se.chave = sc.estado',
+									array('estado_nome'=>'se.nome','se.sigla'))
+							->where('o.id_oportunidade = ?', $id );
+			$this->processPesquisa($select,false);
+			if($this->getNumFound() > 0)
+			{
+				$this->duration();
+				return $this->getResult();
+			}
+			else{
+				return false;
+			}
+		
+		}
+		catch (Exception $e)
+		{
+			Application_Model_Util::saveLogDB($e);
+		}
+	}
+	
+	
+	public function pesquisaOng()
+	{
+		//listar ongs 
+		//listar oportunidades de uma ong 
+		
+	}
+	
+	
+	
 	
 }
 

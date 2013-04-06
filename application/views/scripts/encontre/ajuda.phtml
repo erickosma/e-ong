@@ -1,0 +1,46 @@
+
+<div id="view-content" class="pesquisaDiv" style="position: relative;"  >
+	<h1 > Encontre alguem que precisa de sua ajuda , Encontre alguem que  quer te ajudar </h1>
+	<div>
+		<div style="float: left;	">
+			<input   type="text" name="buscar" id="buscar" value="<?php echo $this->termo;?>" class="buscar" 
+				placeholder=" Encontre alguem que precisa de sua ajuda , Encontre alguem que  quer te ajudar" >
+		</div>
+		<div style="margin-top: -5px;width: 100px;float: left;">
+		 <input type="button" class="buttonRedondo" value="Pesquisar" id="pesquisaTermo" /> 
+		</div>
+	</div>
+	<br style="clear: both;">
+	<div style="" id="resultado" >
+		<?php if( $this->numFound > 0){?>
+			<div  class="tituloAjuda" ><h3 > <?php echo ucfirst($this->ajuda->titulo);?> </h3></div>
+			<div class="localAjuda">
+							<?php echo Application_Model_Util::trataCidadeEstado( $this->ajuda->nome,$this->ajuda->sigla,"-"); ?> 
+							 &nbsp;<?php echo   Application_Model_Util::trataData($this->ajuda->create_at,"portal");?>
+			</div>
+			<div  > 
+				<p>	<?php echo $this->ajuda->descricao; ?></p>
+						<!-- 	<td width="80">Código: </td>
+							<td width="510">	<?php //echo $this->ajuda->id_oportunidade;?> </td>
+					 -->
+			</div>
+		<div style="width: 550px;  background-color : #EFEFEF; margin-top: 20px; padding: 10px;">
+		<strong style="color: #666666;" ><?php echo $this->textoAjuda;?></strong><br><br>
+		<?php  if($this->logado) {  ?>
+		<textarea rows="10" cols="60"  id='ajudaTexarea'></textarea>
+
+		<?php } else {?>
+			<div id="view-content" style="margin-left: auto; margin-right: auto; width: 60%;">
+				<button name="cadastrar" id="cadastrar" type="button" class="buttonQuadradoVerde" onclick="window.location=&quot;/cadastro&quot;">cadastrar</button>
+				<button name="cadastrar" id="logar" type="button" class="buttonQuadrado"	onclick="window.location=&quot;/auth/login&quot;">logar</button>
+				<br /> <br />
+			</div>
+			<?php } ?>			
+		</div>
+		<?php }//fim if?>		
+
+
+<br><br><br><br>
+
+	</div>
+</div>

@@ -20,3 +20,30 @@
 	position: relative;
 	
 }
+
+.pesquisaDiv h1{
+	font-size: 20px; margin-top:-3px; color:#404053;  text-align: center;
+}
+
+
+.pesquisaDiv #resultado{
+	width: 590px;  margin-top: 20px; margin-bottom: 20px;
+}
+
+.pesquisaDiv .tituloAjuda {
+	font-size: 18px; margin-bottom: 10px; margin-top:10px; font-weight: bold;
+}
+
+.pesquisaDiv .localAjuda{
+	font-size: 14px; font-weight: bold;color: #48c4e1; margin-bottom: 10px; 
+}
+.pesquisaDiv .local{
+	font-size: 14px; font-weight: bold;color: #48c4e1; margin-bottom: 10px; margin-top:20px; 
+}
+.pesquisaDiv .local a{
+	font-size: 18px; margin-bottom: 10px; font-weight: bold;
+}
+.pesquisaDiv .local a:hover{
+	text-decoration:underline;
+}
+
