@@ -16,7 +16,7 @@ class IndexController extends Zend_Controller_Action
     	$this->view->headLink()->appendStylesheet('public/css/index/index.css')
     							->appendStylesheet('public/css/geral.css');
     	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,volunt�rios');	/* Initialize action controller here */
-    	$this->view->headTitle('Ação paralela');
+    	$this->view->headTitle('Açãoo paralela');
     	$this->view->description = "Encontre  vonluntarios e ong";
     	$this->view->keywords = "ong,profissionais,voluntarios,procura,encontre";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
