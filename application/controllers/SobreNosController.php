@@ -15,12 +15,12 @@ class SobreNosController extends Zend_Controller_Action
     	
     	$this->view->headLink()->appendStylesheet('public/css/index/index.css')
     							->appendStylesheet('public/css/geral.css');
-    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,volunt�rios');	/* Initialize action controller here */
-    	$this->view->headTitle('Ong');
-    	$this->view->description = "Busca por vonluntarios busca por ong";
-    	$this->view->keywords = "ong,profissionais,voluntarios,procura";
+    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,volunt�rios');	/* Initialize action controller here */
+    	$this->view->headTitle('Ação  Paralela - Sobre nós ');
+    	$this->view->description = "Ação  Paralela - Sobre nós ";
+    	$this->view->keywords = "ong,profissionais,voluntarios,procura,busca,acao paralela,ação paralela,sobre";
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
-    	                                   'text/html; charset=ISO-8859-1');
+    	                                   'text/html; charset=UTF-8');
     	
     }
 
