@@ -86,8 +86,11 @@ class EncontreController extends Zend_Controller_Action
 			$this->view->time = $Pesquisa->getTime();
 			$this->view->ajuda =  $result;
 			if($usuario = Zend_Auth::getInstance()->getIdentity()){
-				$this->view->logado =true;
+				$this->view->estaLogado =true;
 				$this->view->logado =$usuario;
+				if($result->id_usuario == $usuario->getId()){
+					$this->view->dono =true;
+				}
 				
 			}
 	

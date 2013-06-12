@@ -152,7 +152,6 @@ class Application_Model_Ajuda
 	}
 	
 
-		
 	protected function formataUrl($string=null)
 	{
 		if(!is_null($string))

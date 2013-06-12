@@ -19,6 +19,7 @@
 		<?php  foreach ($this->result as $ajuda){ 
 			//echo $ajuda->id_oportunidade;
 			//echo $ajuda->url;
+			
 		?>
 	
 			<div class="local" ><a href="/encontre/ajuda/<?php  echo $ajuda->url;?>" > <?php echo $ajuda->titulo;?> </a></div>
@@ -35,7 +36,7 @@
 				</table>
 			</div>
 			<div>
-				<p><?php echo Application_Model_Util::cortaString($ajuda->descricao, 300); ?></p>
+				<p><?php echo Application_Model_Util::cortaString($ajuda->descricao, 200); ?></p>
 			 </div>
 		<?php 
 		}//fim for 

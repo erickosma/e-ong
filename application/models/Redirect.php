@@ -1,6 +1,6 @@
 <?php
 
-class Application_Model_Redirect
+ class  Application_Model_Redirect
 {
 
 	/**

@@ -367,8 +367,7 @@ class CadastroController extends Zend_Controller_Action
      	$this->view->headLink()->appendStylesheet('public/css/cadastro/ajuda.css');
         $usuario = Zend_Auth::getInstance()->getIdentity();
         $this->view->usuario = $usuario;
-		//redirecionamento
-        
+		//redirecionamento  
         $db_estado=new Application_Model_DbTable_SysEstado();
         $state_array = $db_estado->fetchAll()->toArray();
         $arr[0]= "--Escolha estado--";

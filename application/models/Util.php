@@ -11,36 +11,28 @@ class Application_Model_Util
 	 * @param unknown_type $array
 	 * @return unknown|stdClass|boolean
 	 */
-	public static function arrayToObject($array) {
+
+	public static function arrayToObject(array $array ,$object = null) {
 		if(!is_array($array)) {
 			return $array;
 		}
-		if(count($array) > 1){
-			$object = new stdClass();
-			if (is_array($array)) {
-				foreach ($array as $name=>$value) {
-					$name = strtolower(trim($name));
-					if (!empty($name)) {
-						$object->$name = self::arrayToObject($value);
-					}
-				}
-				return $object;
-			}
-			else {
-				return FALSE;
-			}
+		if ($object == null) {
+			$object   = new stdClass();
 		}
-		else{
-			if (!empty($array)) {
-				$data = false;
-				foreach ($array as $akey => $aval) {
-					$data -> {$akey} = $aval;
-				}
-				return $data;
-			}
-			return false;
+		$object = new stdClass();
+		if (is_array($array) && count($array) > 0) {
+			 foreach ($array as $key => $val) {
+			 	if (is_array($val)) {
+			 		$object->$key = self::arrayToObject($val, new stdClass);
+			 	} else {
+			 		$object->$key = $val;
+			 	}
+			 }
+			 return $object;
 		}
-	
+		else {
+			return FALSE;
+		}
 	}
 	
 	/**

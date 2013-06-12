@@ -1,8 +1,13 @@
 
 <div id="view-content" style="margin: 20px;"  >
 <h2>Bem-vindo  ->
-<?php //if profissional 
-			if($this->usuario->getTipo() == 1){
+<?php 		//if profissional 
+			if(isset($this->uri) ){
+				echo '<a href="'.$this->uri.' ">';
+				echo "Continuaar";
+				echo "</a>";
+			}
+			else if($this->usuario->getTipo() == 1){
 				echo '<a href="'.$this->url(array('controller' => 'perfil', 'action' => 'ong', 'module' => 'default'), '', true).' ">';
 				echo "Continuaar";
 				echo "</a>";

@@ -32,6 +32,10 @@ class AuthController extends Zend_Controller_Action
 
     public function indexAction()
     {
+    	if($this->getRequest()->getParam("redirect") ){
+    		Application_Model_Redirect::saveRequestUri("/cadastro/ajuda");
+    	}
+    	
     	
     	
 		//return $this->_helper->redirector('login');

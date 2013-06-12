@@ -26,9 +26,12 @@
 			</div>
 		<div style="width: 550px;  background-color : #EFEFEF; margin-top: 20px; padding: 10px;">
 		<strong style="color: #666666;" ><?php echo $this->textoAjuda;?></strong><br><br>
-		<?php  if($this->logado) {  ?>
-		<textarea rows="10" cols="60"  id='ajudaTexarea'></textarea>
-
+		<?php  if($this->estaLogado) {  ?>
+			<?php if($this->dono){ ?>	
+				Ver menssagens enviadas
+			<?php	} else  {?>
+			<textarea rows="10" cols="60"  id='ajudaTexarea'></textarea>
+			<?php } ?>
 		<?php } else {?>
 			<div id="view-content" style="margin-left: auto; margin-right: auto; width: 60%;">
 				<button name="cadastrar" id="cadastrar" type="button" class="buttonQuadradoVerde" onclick="window.location=&quot;/cadastro&quot;">cadastrar</button>
