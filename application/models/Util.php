@@ -31,7 +31,7 @@ class Application_Model_Util
 			 return $object;
 		}
 		else {
-			return FALSE;
+			return false;
 		}
 	}
 	
