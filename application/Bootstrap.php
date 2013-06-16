@@ -47,7 +47,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 			$select = new Zend_Db_Select($db);
 
 		}catch( Zend_Exception $e){
-			echo "Ficamos sem conexão <br /> tente mais tarde.";
+			echo "<h2>Ops!</h2>  Ocorreu algum problema<br /> tente mais tarde.";
 			exit;
 		}
 
