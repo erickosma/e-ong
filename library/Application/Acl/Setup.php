@@ -43,13 +43,15 @@ class Application_Acl_Setup
 	{
 		$this->_acl->allow(null, 'auth', array('index', 'login') )
 					->allow(null, 'cadastro', 
-							array('index', 'save','profissional','ong','cidades','valida-cpf','valida-cnpj','valida-user-name','valida-email','new-profissional','new-ong'))
+										array('index', 'save','profissional','ong','cidades','valida-cpf','valida-cnpj','valida-user-name',
+												'valida-email','new-profissional','new-ong','ajuda'))
 					->allow( null, 'index', array('index'))
 					->allow(null, 'encontre', array('index', 'ong', 'voluntario', 'termo', 'ajuda') )
 		;
 		$this->_acl->allow( 'user', 'cadastro', array('index', 'save','profissional','ong','ajuda','new-ajuda','minhhas-ajudas') )
 					->allow( 'user', 'auth', 'logout' )
-					->allow( 'user', 'perfil', array('index', 'save', 'editar', 'update', 'imagem', 'welcome','ong','profissional','dados-pessoais-profissional','update-dados-profissional','dados-pessoais-ong'
+					->allow( 'user', 'perfil', 
+											array('index', 'save', 'editar', 'update', 'imagem', 'welcome','ong','profissional','dados-pessoais-profissional','update-dados-profissional','dados-pessoais-ong'
 														,'mensagem','email','dados',"update-dados-confidenciais"));
 		$this->_acl->allow( 'admin', 'admin' );
 		
