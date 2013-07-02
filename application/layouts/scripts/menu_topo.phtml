@@ -10,15 +10,9 @@
 		</a>
 	</li>
 	<li>
-		<?php if(isset($this->usuario)){?>
-			<a href="<?php echo $this->url(array('controller' => 'cadastro', 'action' => 'ajuda', 'module' => 'default'), '', true); ?>">
+		<a href="<?php echo $this->url($this->urlAjuda, '', true); ?>">
 				Nova ajuda
-			</a>
-		<?php } else {?>
-		<a href="<?php echo $this->url(array('controller' => 'auth', 'action' => 'index', 'module' => 'default' , 'redirect' => 1), '', true); ?>">
-			Nova ajuda
 		</a>
-		<?php }?>
 	</li>
 	
 	<?php 	if(isset($this->usuario)){ ?>
