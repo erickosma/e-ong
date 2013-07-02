@@ -131,7 +131,12 @@
 			self::_getRedirector()->gotoUrl('/perfil');
 			//self::destroy();
 		} else {
-			self::_getRedirector()->gotoUrl($lastRequestUri);
+			if($lastRequestUri == "/favicon.ico/index"){
+				self::_getRedirector()->gotoUrl('/perfil');
+			}
+			else{
+				self::_getRedirector()->gotoUrl($lastRequestUri);
+			}
 			//self::destroy();
 		}
 	}

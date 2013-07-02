@@ -84,7 +84,7 @@ class ErrorController extends Zend_Controller_Action
     
     protected function saveLogBD($errors){
     
-    	$config = new Zend_Config_Ini('application/configs/application.ini', 'staging');
+    	$config = new Zend_Config_Ini('application/configs/application.ini', APPLICATION_ENV);
 		$params = array ('host'     => $config->resources->db->params->host,
 				'username' => $config->resources->db->params->username,
 				'password' => $config->resources->db->params->password,

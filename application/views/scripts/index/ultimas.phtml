@@ -1,12 +1,21 @@
   <h2><br />
           O que há de novo <br />
           <span></span></h2>
-        <p><a href="#">12 Dec 2015 | 0 comments</a><br />
-          <span>Duis nec porttitor lorem</span><br />
-          Mauris et nisi urna nonfaucibus lacus magna. <br />
-          Integer lacus ante then ante ullamcorper ut vulputate..</p>
-        <p><a href="#">18 Dec 2015 | 5 comments</a><br />
-          <span> Aenean interdum</span><br />
-          Vestibulum ante ipsum primis into faucibus orci <br />
-          luctus ultrices antene posuere.</p>
-        <p><a href="#"><strong>more news »</strong></a></p>
+   <?php if( $this->numFound > 0){?>
+		<?php 	 foreach ($this->ultimosResultados as $ajuda){ ?>
+				<p>
+					<a href="/encontre/ajuda/<?php  echo $ajuda->url;?>">
+						 <?php echo   Application_Model_Util::trataData($ajuda->create_at,"portal");?>
+					</a>
+					<br /> 
+					<span><?php echo $ajuda->titulo;?></span>
+					<br /> 
+					<?php echo Application_Model_Util::cortaString($ajuda->descricao, 100); ?>
+				</p>
+		<?php }?>
+	<?php } else {?>
+			<p>
+				<a href="<?php echo $this->url($this->url, '', true); ?>">Nova ajuda	</a>
+			<p>
+	<?php }?>
+	

@@ -249,6 +249,29 @@ class Application_Model_Pesquisa
 		}
 	}
 	
+	public function ultimasAjudas($conunt)
+	{
+		try{
+			$this->oportunidade = new Application_Model_DbTable_Oportunidade();
+			$select  = $this->oportunidade->ultimas((int)$conunt);
+			$this->processPesquisa($select,true);
+			if($this->getNumFound() > 0)
+			{
+				$this->duration();
+				return $this->getResult();
+			}
+			else{
+				return false;
+			}
+
+		}
+		catch (Exception $e)
+		{
+			Application_Model_Util::saveLogDB($e);
+		}
+	}
+
+	
 	
 	public function pesquisaOng()
 	{

@@ -39,10 +39,8 @@ class IndexController extends Zend_Controller_Action
     	$this->view->hoje  = $hoje;
     	$this->view->saldo = $saldo;*/
     	$this->view->pesquisa =  $this->view->render("index/box-pesquisa.phtml");
-    	$this->view->ultimas =  $this->view->render("index/ultimas.phtml");
-    	
-    	
-    	$this->view->esquerda = $this->view->render("index/esquerda.phtml");
+    	$this->view->ultimas =  $this->ultmas();
+		$this->view->esquerda = $this->view->render("index/esquerda.phtml");
     	$this->view->direita =  $this->view->render("index/direita.phtml");
     	 
     }
@@ -55,6 +53,8 @@ class IndexController extends Zend_Controller_Action
 
     public function direitaAction()
     {
+    	
+    	
     	$this->_helper->layout->disableLayout();
         // action body
     }
@@ -65,9 +65,15 @@ class IndexController extends Zend_Controller_Action
         // action body
     }
 
-	protected function ultmas($count){
+	protected function ultmas(){
 		
-		
+		$Pesquisa  = new Application_Model_Pesquisa();
+		$this->view->ultimosResultados = $Pesquisa->ultimasAjudas(2);
+		$url = $_SESSION["URL"];
+		if(!empty($url["urlAjuda"])){
+			$this->view->url = $url["urlAjuda"];
+		}
+		$this->view->numFound = $Pesquisa->getNumFound();
 		return $this->view->render("index/ultimas.phtml");
 	}
 }
