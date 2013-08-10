@@ -29,7 +29,22 @@ class EncontreController extends Zend_Controller_Action
 
 	public function indexAction()
 	{
-		// action body
+		$Pesquisa  = new Application_Model_Pesquisa();
+
+		$result = $Pesquisa->pesquisaVasia();
+		$this->view->numFound = $Pesquisa->getNumFound();
+		$this->view->time = $Pesquisa->getTime();
+		$this->view->termo = "";
+		$this->view->qtdPesquisa = $Pesquisa->qtdPesuisa;
+		if($result){
+			$this->view->result = $result;
+		}
+		$this->view->headTitle()->setSeparator(' - ');
+		$this->view->headTitle()->prepend('Encontre  vonluntarios e ong');
+		
+		 //colocar aqui algo que grave os resultados
+		 //para usar no futuro por usuário 
+		
 	}
 
 	public function termoAction()
@@ -47,10 +62,20 @@ class EncontreController extends Zend_Controller_Action
 			if($result){
 				$this->view->result = $result;
 			}
+			$this->view->headTitle()->setSeparator(' - ');
+			$this->view->headTitle()->prepend('Encontre  vonluntarios e ong - '.$termo);
+			
+			$this->view->description = "Encontre  vonluntarios e ong -".$termo;
+			$this->view->keywords = "ong,profissionais,voluntarios,procura,encontre,".$termo;
+			
 			 //colocar aqui algo que grave os resultados
 			 //para usar no futuro por usuário 
 		}
 		else{
+			$this->view->headTitle()->setSeparator(' - ');
+			$this->view->headTitle()->prepend('Encontre  vonluntarios e ong');
+			$this->view->description = "Encontre  vonluntarios e ong -".$termo;
+			$this->view->keywords = "ong,profissionais,voluntarios,procura,encontre,".$termo;
 			$this->view->numFound=0;
 			 
 		}

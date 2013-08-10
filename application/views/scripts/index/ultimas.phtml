@@ -8,7 +8,9 @@
 						 <?php echo   Application_Model_Util::trataData($ajuda->create_at,"portal");?>
 					</a>
 					<br /> 
-					<span><?php echo $ajuda->titulo;?></span>
+					<span style="cursor: pointer;"  onclick="window.location='/encontre/ajuda/<?php  echo $ajuda->url;?>'" >
+							<?php echo $ajuda->titulo;?>
+					</span>
 					<br /> 
 					<?php echo Application_Model_Util::cortaString($ajuda->descricao, 100); ?>
 				</p>

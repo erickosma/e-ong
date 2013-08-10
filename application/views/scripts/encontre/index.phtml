@@ -1,4 +1,4 @@
-
+<!--
 <div id="view-content" class="pesquisaDiv" >
 	<h1  style="font-size: 20px; margin-top:-3px; color:#404053;  text-align: center;"> Encontre alguem que precisa de sua ajuda , Encontre alguem que  quer te ajudar </h1>
 	<div>
@@ -13,4 +13,56 @@
 	<div style="width: 600px;" id="resultado">
 		
 	</div>
+</div>
+-->
+
+
+<div id="view-content" class="pesquisaDiv" style="position: relative;"  >
+	<h1  > Encontre alguem que precisa de sua ajuda , Encontre alguem que  quer te ajudar </h1>
+	<div>
+	<div style="float: left;	">
+		<input   type="text" name="buscar" id="buscar" value="<?php echo $this->termo;?>" class="buscar" 
+			placeholder=" Encontre alguem que precisa de sua ajuda , Encontre alguem que  quer te ajudar" >
+	</div>
+	<div style="margin-top: -5px;width: 100px;float: left;">
+	 <input type="button" class="buttonRedondo" value="Pesquisar" id="pesquisaTermo" /> 
+	</div>
+	</div>
+	<div style="" id="resultado" >
+
+	<div>
+		Resultados encontrados: <?php echo $this->numFound; ?>
+	</div>
+	<?php if( $this->numFound > 0){?>
+		<?php  foreach ($this->result as $ajuda){ 
+			//echo $ajuda->id_oportunidade;
+			//echo $ajuda->url;
+			
+		?>
+	
+			<div class="local" ><a href="/encontre/ajuda/<?php  echo $ajuda->url;?>" > <?php echo $ajuda->titulo;?> </a></div>
+			<div  style="font-size: 12px;"> 
+				<table>
+					<tr>
+						<td width="50">Local: </td>
+						<td width="110">	<?php echo Application_Model_Util::trataCidadeEstado( $ajuda->nome,$ajuda->sigla); ?>  </td>
+					</tr>
+					<tr>
+						<td>Data:</td>
+						<td> <?php echo   Application_Model_Util::trataData($ajuda->create_at,"portal");?></td>
+					</tr>
+				</table>
+			</div>
+			<div>
+				<p><?php echo Application_Model_Util::cortaString($ajuda->descricao, 200); ?></p>
+			 </div>
+		<?php 
+		}//fim for 
+	}//fim if
+	?>
+		
+		
+		<br><br><br><br>
+
+</div>
 </div>

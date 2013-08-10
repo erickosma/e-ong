@@ -158,6 +158,27 @@ class Application_Model_Pesquisa
 		}
 	}
 	
+	
+	public function pesquisaVasia(){
+		$this->oportunidade = new Application_Model_DbTable_Oportunidade();
+		try {
+			$this->pesquisaTodos();
+			if($this->getNumFound() > 0)
+			{
+				$this->duration();
+				$this->qtdPesuisa=1;
+				return $this->getResult();
+			}
+			else{
+				return false;
+			}
+			
+		}
+		catch (Exception $e)
+		{
+			Application_Model_Util::saveLogDB($e);
+		}
+	}
 	/**
 	 * Processa um select 
 	 * @param unknown_type $select
@@ -192,6 +213,20 @@ class Application_Model_Pesquisa
 		//echo $select->__toString();
 		$this->processPesquisa($select);
 	}
+	
+	
+	public function pesquisaTodos(){
+		$select  = $this->oportunidade->select()
+		->setIntegrityCheck(false)
+		->from(array("o"=>"oportunidade"))
+		->joinInner(array('sc'=>'sys_cidade'),'sc.chave = o.cidade',
+				array('sc.nome'))
+				->joinInner(array('se'=>'sys_estado'),'se.chave = sc.estado',
+						array('estado_nome'=>'se.nome','se.sigla'));
+		//echo $select->__toString();exit;
+		$this->processPesquisa($select);
+	}
+	
 	
 	public function pesquisaCidade(){
 		$select  = $this->oportunidade->select()
