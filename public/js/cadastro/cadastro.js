@@ -337,13 +337,13 @@ function submitFormCadastro(form){
               }
               else if(txt == '4' ){
             	  $("#loading").css('background', '#D3D0D0'); 
-              	  $('#loading').html("J� existe um usuario com este login!");
+              	  $('#loading').html("Já existe um usuario com este login!");
               	  $('#loading').delay(1500).fadeOut(5000);
               	  bordaInputError("#login");
               }
               else if(txt == '5' ){
             	  $("#loading").css('background', '#D3D0D0'); 
-            	  $('#loading').html("J� existe um usuario com este cpf!");
+            	  $('#loading').html("Já existe um usuario com este cpf!");
                   $('#loading').delay(1500).fadeOut(5000);
               	  bordaInputError("#cpf");
               }
