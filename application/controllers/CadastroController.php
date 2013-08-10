@@ -129,8 +129,7 @@ class CadastroController extends Zend_Controller_Action
 				$validatorEmail = new Zend_Validate_Db_NoRecordExists(
 					array(
 			    					        'table' => 'usuario_login',
-			    					        'field' => 'email',
-			    			    			'schema'=> 'ong'
+			    					        'field' => 'email'
 					)
 				);
 				if ($validatorEmail->isValid($email)) {
@@ -160,8 +159,7 @@ class CadastroController extends Zend_Controller_Action
 			$validator = new Zend_Validate_Db_NoRecordExists(
 			array(
 			        'table' => 'usuario_login',
-			        'field' => 'login',
-	    			'schema'=> 'ong'
+			        'field' => 'login'
 			)
 			);
 			if ($validator->isValid($login)) {

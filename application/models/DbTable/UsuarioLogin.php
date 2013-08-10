@@ -24,8 +24,8 @@ class Application_Model_DbTable_UsuarioLogin extends Application_Model_DbTable_U
 			$validatorEmail = new Zend_Validate_Db_NoRecordExists(
 			array(
     				    					        'table' => 'usuario_login',
-    				    					        'field' => 'email',
-    				    			    			'schema'=> 'ong'
+    				    					        'field' => 'email'
+    				    			    			
 			)
 			);
 			if ($validatorEmail->isValid($email)) {
