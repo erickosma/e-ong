@@ -33,8 +33,11 @@ class PerfilController extends Zend_Controller_Action
     	  												'text/html; charset=utf-8');
     	$usuario = Zend_Auth::getInstance()->getIdentity();
     	$this->view->usuario = $usuario;
-    	$uri =Application_Model_Redirect::getRequestUri();
-    	if(strlen($uri)){
+    	if(Application_Model_Redirect::hasRequestUri() ){
+    		$uri =Application_Model_Redirect::getRequestUri();
+    	}
+	
+    	if(strlen($uri) > 3 ){
     		$this->view->uri = Application_Model_Redirect::getRequestUri();
     	}
     	

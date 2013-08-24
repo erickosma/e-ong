@@ -2,7 +2,7 @@
 <div id="view-content" style="margin: 20px;"  >
 <h2>Bem-vindo  ->
 <?php 		//if profissional 
-			if(isset($this->uri) ){
+			if(!empty($this->uri) ){
 				echo '<a href="'.$this->uri.' ">';
 				echo "Continuaar";
 				echo "</a>";
