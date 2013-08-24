@@ -61,7 +61,7 @@ class Application_Plugin_Auth extends Zend_Controller_Plugin_Abstract
 		}*/
 		 if (!$this->_isAuthorized($request->getControllerName(),$request->getActionName())  ) {
 		 	if(!$this->_auth->hasIdentity()){
-		 		if(! in_array($request->getControllerName(), $this->_moRedirect))
+		 		if(! in_array($request->getControllerName(), $this->_moRedirect) && !Application_Model_Redirect::hasRequestUri() )
 		 		{
 		 			Application_Model_Redirect::saveRequestUri("/".$request->getControllerName()."/".$request->getActionName());
 		 		}
