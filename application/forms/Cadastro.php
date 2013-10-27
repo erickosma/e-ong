@@ -218,7 +218,7 @@ class Application_Form_Cadastro extends Zend_Form
     public function addEndereco(){
     	//endere�o
     	$endereco = new Zend_Form_Element_Text('endereco');
-    	$endereco->setLabel('Endere�o:')
+    	$endereco->setLabel('Endereço:')
     	->setRequired(true)
     	->addFilter('StripTags')
     	->setOrder(12)
@@ -230,7 +230,7 @@ class Application_Form_Cadastro extends Zend_Form
     }
     public function addNumero(){
     	$numero = new Zend_Form_Element_Text('numero');
-    	$numero->setLabel('N�:')
+    	$numero->setLabel('Não')
     	->setAttrib('size', 5)
     	->addDecorator('HtmlTag',
     			array('tag'=>'div', 'class'=>'campo'));

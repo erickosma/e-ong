@@ -1,7 +1,7 @@
 <div class="abasPerfil">
 	<div id="tabs">
 		<?=$this->menu("/menu_perfil_profissional");?>
-		<div id="tabs-1">
+		<div id="tabs-1" style="margin-left: auto; margin-right: auto;  width: 700px;">
 			<div class="completaDados"><?php echo $this->completaDados;?></div>
 			<h3 class="titile_form">Dados pessoais </h3>
 				<form id="profissionalUpdate"  enctype="application/x-www-form-urlencoded" action="update-dados-profissional" method="<?= $this->escape($this->form->getMethod()); ?>">
@@ -14,7 +14,9 @@
 						<?= $this->form->sexo ?>
 						
 						<?= $this->form->estado ?>
+						<div>&nbsp;</div>
 						<?= $this->form->cidade ?>
+						<div>&nbsp;</div>
 						<?= $this->form->endereco ?>
 						<?= $this->form->numero ?>
 						<?= $this->form->complemento ?>

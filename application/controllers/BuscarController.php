@@ -9,7 +9,7 @@ class BuscarController extends Zend_Controller_Action
     	$this->view->headLink()->appendStylesheet('public/css/geral.css')
     							->appendStylesheet('public/css/forms.css');
     	$this->view->headMeta()->appendHttpEquiv('Content-Type',
-    	                                   'text/html; charset=ISO-8859-1');
+    	                                   'text/html; charset=utf-8');
 		$this->view->headScript()->appendFile('public/js/jquery/js/jquery-1.7.1.min.js')
 			->appendFile('public/js/jquery/js/jquery-ui-1.8.17.custom.min.js')
 			->appendFile('public/js/buscar/pesquisa.js');
@@ -17,7 +17,7 @@ class BuscarController extends Zend_Controller_Action
 
     public function indexAction()
     {
-    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntários');	/* Initialize action controller here */
+    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntï¿½rios');	/* Initialize action controller here */
     	$this->view->headTitle('Buscar - Ajude a ajudar');
     	$this->view->description = "Busca por vonluntarios busca por ong";
     	$this->view->keywords = "ong,profissionais,voluntarios,procura";
@@ -26,7 +26,7 @@ class BuscarController extends Zend_Controller_Action
 
     public function ongAction()
     {
-    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntários');	/* Initialize action controller here */
+    	$this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntï¿½rios');	/* Initialize action controller here */
     	$this->view->headTitle('Buscar ongs');
     	$this->view->description = "Busca por vonluntarios busca por ong";
     	$this->view->keywords = "ong,profissionais,voluntarios,procura";
@@ -42,8 +42,8 @@ class BuscarController extends Zend_Controller_Action
 
     public function usuarioAction()
     {
-        $this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntários');	/* Initialize action controller here */
-    	$this->view->headTitle('Buscar usuário');
+        $this->view->headMeta()->appendName('keywords', 'ong, busca, profissionais,voluntï¿½rios');	/* Initialize action controller here */
+    	$this->view->headTitle('Buscar usuï¿½rio');
     	$this->view->description = "Busca por vonluntarios busca por ong";
     	$this->view->keywords = "ong,profissionais,voluntarios,procura";
 

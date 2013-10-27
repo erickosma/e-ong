@@ -303,7 +303,7 @@ class PerfilController extends Zend_Controller_Action
     	$this->_helper->layout->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	header( 'Cache-Control: no-cache' );
-    	header( 'Content-type: application/json; charset="ISO-8859-1"', true );
+    	header( 'Content-type: application/json; charset="utf-8"', true );
     	$request = $this->getRequest();
     	if ( $request->isPost() )
     	{
@@ -363,7 +363,7 @@ class PerfilController extends Zend_Controller_Action
     	$this->_helper->layout->disableLayout();
     	$this->_helper->viewRenderer->setNoRender();
     	header( 'Cache-Control: no-cache' );
-    	header( 'Content-type: application/json; charset="ISO-8859-1"', true );
+    	header( 'Content-type: application/json; charset="utf-8" ', true );
     	 
     	$request = $this->getRequest();
     	if ( $request->isPost() )
