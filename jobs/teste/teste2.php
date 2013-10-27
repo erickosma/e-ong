@@ -7,16 +7,17 @@ require_once $path.'/../setup.php';
 try {
 	$opts = new Zend_Console_Getopt('abc');
 	$opts->setOption('ignoreCase', true);
-	
 	$options = $opts->parse();
+	$new=argsToArray($options);
+	print_r($new);
 	if (isset($opts->a)) {
-		echo "I got the a option.\n";
+		echo "I got the a option ".$new["a"]." .\n";
 	}
 	if (isset($opts->b)) {
-		echo "I got the b option.\n";
+		echo "I got the b option  ".$new["b"].".\n";
 	}
 	if (isset($opts->c)) {
-		echo "I got the c option.\n";
+		echo "I got the c option  ".$new["c"]." .\n";
 	}
 } catch (Zend_Console_Getopt_Exception $e) {
 	echo $e->getUsageMessage();

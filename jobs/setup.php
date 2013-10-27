@@ -28,6 +28,24 @@ $application->bootstrap();
 
 register_shutdown_function('__shutdown');
 
+
+function argsToArray($options){
+	if(is_object($options)){
+		$new =array();
+		$pos = $options->getOptions();
+		$args = $options->getRemainingArgs();
+		for($i=0;$i < count($pos);$i++){
+			$new[$pos[$i]]=$args[$i];
+		}
+		return $new;
+	}
+	else{
+		return $options;
+	}
+
+	
+}
+
 function bytesToSize($bytes, $precision = 2)
 {  
     $kilobyte = 1024;
@@ -65,5 +83,5 @@ function __shutdown() {
 	
 	$totalMemory = bytesToSize( ($endMemory - $memory) );
 	echo '
-	Time [' . $hours. ":" . $minutes . ":" . $seconds . '] Memory ['. $totalMemory . '] ';
+	Time [' . $hours. ":" . $minutes . ":" . $seconds . '] Memory ['. $totalMemory . ']\n ';
 }
