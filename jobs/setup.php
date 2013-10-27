@@ -65,5 +65,5 @@ function __shutdown() {
 	
 	$totalMemory = bytesToSize( ($endMemory - $memory) );
 	echo '
-	Time [' . $hours. ":" . $minutes . ":" . $seconds . '] Memory ['. $totalMemory . ']';
+	Time [' . $hours. ":" . $minutes . ":" . $seconds . '] Memory ['. $totalMemory . '] ';
 }

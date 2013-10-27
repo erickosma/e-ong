@@ -1,5 +1,6 @@
 <?php
-require_once 'setup.php';
+$path = dirname(__FILE__);
+require_once $path.'/../setup.php';
 
 
 // get the options and run CLI
@@ -26,7 +27,7 @@ try {
 }
 
 $args = $opts->getRemainingArgs();
-for($i=0;$i < 9000000000;$i++){
+for($i=0;$i < 9000;$i++){
 
 }
 
