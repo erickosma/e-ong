@@ -27,9 +27,5 @@ try {
 	exit;
 }
 
-$args = $opts->getRemainingArgs();
-for($i=0;$i < 9000;$i++){
 
-}
 
-//}
