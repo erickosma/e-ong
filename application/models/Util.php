@@ -126,6 +126,7 @@ class Application_Model_Util
 				);
 		$db = Zend_Db::factory('PDO_MYSQL', $params);
 		
+		
 		$columnMapping = array(
 				    'message'   => 'message',
 					'file'   => 'file',
