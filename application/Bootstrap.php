@@ -97,5 +97,25 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$view = $this->getResource('View');
 		$view->headLink()->appendStylesheet('public/css/geral.css');
 	}*/
+	
+	protected function _initMail()
+	{
+		try {
+			$config = array(
+					'auth' => 'login',
+					'username' => 'contato@acaoparalela.com',
+					'password' => 'AsdQwe!23',
+					'ssl' => 'SSL',
+					'port' => 465
+			);
+	
+			$mailTransport = new Zend_Mail_Transport_Smtp('acaoparalela.com', $config);
+			Zend_Mail::setDefaultTransport($mailTransport);
+		} catch (Zend_Exception $e){
+			print_r($e);
+			//Do something with exception
+		}
+	}
+	
 }
 
