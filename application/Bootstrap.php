@@ -104,7 +104,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 			$config = array(
 					'auth' => 'login',
 					'username' => 'contato@acaoparalela.com',
-					'password' => 'AsdQwe!23',
+					'password' => 'Asd',
 					'ssl' => 'SSL',
 					'port' => 465
 			);
